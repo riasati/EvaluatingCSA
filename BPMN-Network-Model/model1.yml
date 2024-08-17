@@ -1,5 +1,74 @@
-rest:
-  url: "https://example.org/primenumbers/v1"
-  port: 8443
+BPMN:
+  ResourcePools:
+    ResourcePoolNumbers: 4
+    ResourcePool1:
+      Name: "DB"
+      ResourceNumbers: 1
+      Resource1:
+        Name: "DB"
+      Dependencies: []
+    SubnetNumber: 4
+    ResourcePool2:
+      Name: "Servers"
+      ResourceNumbers: 2
+      Resource1:
+        Name: "Server1"
+      Resource2:
+        Name: "Server2"
+      Dependencies: [ DB ]
+      SubnetNumber: 2
+    ResourcePool3:
+      Name: "NginxServer"
+      ResourceNumbers: 1
+      Resource1:
+        Name: "NGINX"
+      Dependencies: []
+      SubnetNumber: 1
+    ResourcePool4:
+      Name: "SMTPServer"
+      ResourceNumbers: 1
+      Resource1:
+        Name: "SMTP"
+      Dependencies: [ Servers ]
+      SubnetNumber: 3
+  Processes:
+    ProcessNumbers: 5
+    Process1:
+      Name: "ReceiveRequest"
+      ResourcePool: NginxServer
+    Process2:
+      Name: "Authenticate"
+      ResourcePool: Servers
+    Process3:
+      Name: "EmailUser"
+      ResourcePool: SMTPServer
+    Process4:
+      Name: "ProcessData"
+      ResourcePool: Servers
+    Process5:
+      Name: "SendResponse"
+      ResourcePool: NginxServer
+  WorkFlow:
+    ProcessesNumbers: 2
+    Processes1: [ "Start", ReceiveRequest, Authenticate ]
+    GateWays:
+      Type: "Parallel" #Exclusive and Inclusive
+      Condition: None
+      PathNumbers: 2
+      Path1:
+        ProcessesNumbers: 1
+        Processes1: [ ProcessData ]
+      Path2:
+        ProcessesNumbers: 1
+        Processes1: [ EmailUser ]
+    Processes2: [ SendResponse, "End" ]
 
-prime_numbers: [2, 3, 5, 7, 11, 13, 17, 19]
+Network:
+  SubnetsNumbers: 4
+  Subnets: [ 1, 2, 1, 1 ]
+  Topology:
+    Internet: [Subnet1]
+    Subnet1: [Internet, Subnet2]
+    Subnet2: [Subnet1, Subnet3, Subnet4]
+    Subnet3: [Subnet2]
+    Subnet4: [Subnet2]
