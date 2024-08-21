@@ -51,6 +51,7 @@ BPMN:
   WorkFlow:
     ProcessesNumbers: 2
     Processes1: [ "Start", ReceiveRequest, Authenticate ]
+    Priority: 3
     GateWays:
       Type: "Parallel" #Exclusive and Inclusive
       Condition: None
@@ -58,9 +59,11 @@ BPMN:
       Path1:
         ProcessesNumbers: 1
         Processes1: [ ProcessData ]
+        Priority: 4
       Path2:
         ProcessesNumbers: 1
         Processes1: [ EmailUser ]
+        Priority: 2
     Processes2: [ SendResponse, "End" ]
 
 Network:
@@ -72,3 +75,33 @@ Network:
     Subnet2: [Subnet1, Subnet3, Subnet4]
     Subnet3: [Subnet2]
     Subnet4: [Subnet2]
+
+  os: [linux, windows, mac]
+  services: [ssh, ftp, http, samba, smtp, dns, ntp, https, rdp, rpc, telnet, netbios, smtps, ftps]
+  processes: [tomcat, daclsvc, schtask, Apache, Nginx, Microsoft IIS, MySQL, PostgreSQL, SQL Server, Microsoft Exchange, Postfix, Sendmail, bittorrent, SMB (Server Message Block), NFS (Network File System), Active Directory, LDAP (Lightweight Directory Access Protocol)]
+  HostConfiguration:
+    (1, 0):
+      Os: linux:1.0
+      services: [ http:1.0, https:1.0, dns:1.0 ]
+      processes: [ Nginx:1.0 ]
+    (2, 0):
+      Os: linux:1.0
+      services: [ http:1.0, https:1.0, dns:1.0, ftp:1.0 ]
+      processes: [ Apache:1.0 ]
+    (2, 1):
+      Os: linux:1.0
+      services: [ http:1.0, https:1.0, dns:1.0, ftp:1.0 ]
+      processes: [ Apache:1.0 ]
+    (3, 0):
+      Os: windows:1.0
+      services: [ smtp:1.0, dns:1.0 ]
+      processes: [ Sendmail:1.0 ]
+    (4, 0):
+      Os: linux:1.0
+      services: [ http:1.0, https:1.0, dns:1.0, ftp:1.0 ]
+      processes: [ MySQL:1.0 ]
+
+  Vulnerability:
+
+
+
