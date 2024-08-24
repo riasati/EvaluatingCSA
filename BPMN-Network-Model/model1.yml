@@ -75,178 +75,62 @@ Network:
     Subnet2: [Subnet1, Subnet3, Subnet4]
     Subnet3: [Subnet2]
     Subnet4: [Subnet2]
-
-  os: [linux, windows, mac]
-  services: [ssh, ftp, http, samba, smtp, dns, ntp, https, rdp, rpc, telnet, netbios, smtps, ftps]
-  processes: [tomcat, daclsvc, schtask, Apache, Nginx, Microsoft IIS, MySQL, PostgreSQL, SQL Server, Microsoft Exchange, Postfix, Sendmail, SMB (Server Message Block), NFS (Network File System), Active Directory, LDAP (Lightweight Directory Access Protocol)]
   HostConfiguration:
     (1, 0):
-      Os: linux:1.0
-      services: [ http:1.0, https:1.0, dns:1.0 ]
-      processes: [ Nginx:1.0 ]
+      Os: linux
+      services: [ http, https, dns ]
+      processes: [ Nginx ]
+      securityFactor: 0.8
     (2, 0):
-      Os: linux:1.0
-      services: [ http:1.0, https:1.0, dns:1.0, ftp:1.0 ]
-      processes: [ Apache:1.0 ]
+      Os: linux
+      services: [ http, https, dns, ftp ]
+      processes: [ Apache ]
+      securityFactor: 0.9
     (2, 1):
-      Os: linux:1.0
-      services: [ http:1.0, https:1.0, dns:1.0, ftp:1.0 ]
-      processes: [ Apache:1.0 ]
+      Os: linux
+      services: [ http, https, dns, ftp ]
+      processes: [ Apache ]
+      securityFactor: 0.6
     (3, 0):
-      Os: windows:1.0
-      services: [ smtp:1.0, dns:1.0 ]
-      processes: [ Sendmail:1.0 ]
+      Os: windows
+      services: [ smtp, dns ]
+      processes: [ Sendmail ]
+      securityFactor: 0.5
     (4, 0):
-      Os: linux:1.0
-      services: [ http:1.0, https:1.0, dns:1.0, ftp:1.0 ]
-      processes: [ MySQL:1.0 ]
+      Os: linux
+      services: [ http, https, dns, ftp ]
+      processes: [ MySQL ]
+      securityFactor: 0.4
 
-  Vulnerabilities:
-    Vulnerability1:
-      Name: Weak ciphers
-      Services: [ssh, smtps, ftps, rdp]
-      processes: []
-    Vulnerability2:
-      Name: Weak authentication
-      Services: [ssh, telnet]
-      processes: [ ]
-    Vulnerability3:
-      Name: outdated implementations
-      Services: [ssh]
-      processes: [ ]
-    Vulnerability4:
-      Name: Cleartext transmission
-      Services: [ftp, telnet]
-      processes: [ ]
-    Vulnerability5:
-      Name: anonymous access
-      Services: [ ftp ]
-      processes: [ ]
-    Vulnerability6:
-      Name: command injection
-      Services: [ ftp, smtp ]
-      processes: [postfix, sendmail]
-    Vulnerability7:
-      Name: Cross-Site Scripting (XSS)
-      Services: [ http ]
-      processes: [ apache ]
-    Vulnerability8:
-      Name: SQL Injection
-      Services: [ http ]
-      processes: [ mysql, postgresql, sql server ]
-    Vulnerability9:
-      Name: CSRF
-      Services: [ http ]
-      processes: [ ]
-    Vulnerability10:
-      Name: insecure cookies
-      Services: [ http ]
-      processes: [ ]
-    Vulnerability11:
-      Name: Remote code execution
-      Services: [ samba ]
-      processes: [ tomcat, microsoft exchange ]
-    Vulnerability12:
-      Name: privilege escalation
-      Services: [ samba ]
-      processes: [ DACLsvc, Schtask, mysql, postgresql, sql server, Active Directory ]
-    Vulnerability13:
-      Name: misconfigurations
-      Services: [ samba, smtps, ftps ]
-      processes: [tomcat, apache, Microsoft IIS, sql server, nginx ]
-    Vulnerability15:
-      Name: Open relays
-      Services: [ smtp ]
-      processes: [ ]
-    Vulnerability16:
-      Name: email spoofing
-      Services: [ smtp ]
-      processes: [ ]
-    Vulnerability17:
-      Name: DNS amplification attacks
-      Services: [ dns ]
-      processes: [ ]
-    Vulnerability18:
-      Name: zone transfer
-      Services: [ dns ]
-      processes: [ ]
-    Vulnerability19:
-      Name: cache poisoning
-      Services: [ dns ]
-      processes: [ ]
-    Vulnerability20:
-      Name: NTP amplification attacks
-      Services: [ ntp ]
-      processes: [ ]
-    Vulnerability21:
-      Name: unauthorized access to configurations
-      Services: [ ntp ]
-      processes: [ ]
-    Vulnerability22:
-      Name: SSL/TLS vulnerabilities
-      Services: [ https ]
-      processes: [ ]
-    Vulnerability23:
-      Name: certificate validation issues
-      Services: [ https ]
-      processes: [ ]
-    Vulnerability24:
-      Name: BlueKeep
-      Services: [ rdp ]
-      processes: [ ]
-    Vulnerability25:
-      Name: credential theft
-      Services: [ rdp ]
-      processes: [ ]
-    Vulnerability26:
-      Name: Buffer overflows
-      Services: [ rpc ]
-      processes: [nginx, sendmail ]
-    Vulnerability27:
-      Name: improper access controls
-      Services: [ rpc ]
-      processes: [ DACLsvc ]
-    Vulnerability28:
-      Name: Name resolution vulnerabilities
-      Services: [ netbios ]
-      processes: [ ]
-    Vulnerability29:
-      Name: SMB relay attacks
-      Services: [ netbios ]
-      processes: [ ]
-    Vulnerability30:
-      Name: session fixation
-      Services: [ ]
-      processes: [tomcat]
-    Vulnerability31:
-      Name: Insecure task scheduling
-      Services: [ ]
-      processes: [ Schtask ]
-    Vulnerability32:
-      Name: Directory traversal
-      Services: [ ]
-      processes: [ apache, Microsoft IIS ]
-    Vulnerability33:
-      Name: WebDAV exploits
-      Services: [ ]
-      processes: [ Microsoft IIS ]
-    Vulnerability34:
-      Name: unauthorized access due to misconfiguration
-      Services: [ ]
-      processes: [ Microsoft Exchange, NFS, LDAP ]
-    Vulnerability35:
-      Name: EternalBlue
-      Services: [ ]
-      processes: [ smb ]
-    Vulnerability36:
-      Name: man-in-the-middle attacks
-      Services: [ ]
-      processes: [ smb ]
-    Vulnerability37:
-      Name: Kerberos ticket granting ticket (TGT) vulnerabilities
-      Services: [ ]
-      processes: [ Active Directory ]
-    Vulnerability38:
-      Name: LDAP injection
-      Services: [ ]
-      processes: [ LDAP ]
+Attack:
+  1:
+    ExploitName: Nginx Exploit
+    Vulnerability: Buffer overflows
+    Os: None
+    Service: None
+    Process: Nginx
+    SuccessRate: 0.8
+    Target: (1,0)
+    SuccessPath: 1-2
+    FailurePath: 1-1
+  1-1:
+    ExploitName: Misconfigurations Exploit
+    Vulnerability: misconfigurations
+    Os: None
+    Service: None
+    Process: Nginx
+    SuccessRate: 0.7
+    Target: (1,0)
+    SuccessPath: 1-1-2
+    FailurePath: None
+  1-2:
+    ExploitName: Privilege Escalation Exploit
+    Vulnerability: privilege escalation
+    Os: linux
+    Service: None
+    Process: None
+    SuccessRate: 0.6
+    Target: (1,0)
+    SuccessPath: 1-2-2
+    FailurePath: 1-2-1
+
