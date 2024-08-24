@@ -1,0 +1,195 @@
+os: [linux, windows, mac]
+services: [ssh, ftp, http, samba, smtp, dns, ntp, https, rdp, rpc, telnet, netbios, smtps, ftps]
+processes: [tomcat, daclsvc, schtask, Apache, Nginx, Microsoft IIS, MySQL, PostgreSQL, SQL Server, Microsoft Exchange, Postfix, Sendmail, SMB (Server Message Block), NFS (Network File System), Active Directory, LDAP (Lightweight Directory Access Protocol)]
+Vulnerabilities:
+  VulnerabilityNumbers: 39
+  Vulnerability1:
+    Name: Weak ciphers
+    os: []
+    Services: [ssh, smtps, ftps, rdp]
+    processes: []
+  Vulnerability2:
+    Name: Weak authentication
+    os: []
+    Services: [ssh, telnet]
+    processes: [ ]
+  Vulnerability3:
+    Name: outdated implementations
+    os: []
+    Services: [ssh]
+    processes: [ ]
+  Vulnerability4:
+    Name: Cleartext transmission
+    os: []
+    Services: [ftp, telnet]
+    processes: [ ]
+  Vulnerability5:
+    Name: anonymous access
+    os: []
+    Services: [ ftp ]
+    processes: [ ]
+  Vulnerability6:
+    Name: command injection
+    os: []
+    Services: [ ftp, smtp ]
+    processes: [postfix, sendmail]
+  Vulnerability7:
+    Name: Cross-Site Scripting (XSS)
+    os: []
+    Services: [ http ]
+    processes: [ apache ]
+  Vulnerability8:
+    Name: SQL Injection
+    os: []
+    Services: [ http ]
+    processes: [ mysql, postgresql, sql server ]
+  Vulnerability9:
+    Name: CSRF
+    os: []
+    Services: [ http ]
+    processes: [ ]
+  Vulnerability10:
+    Name: insecure cookies
+    os: []
+    Services: [ http ]
+    processes: [ ]
+  Vulnerability11:
+    Name: Remote code execution
+    os: [linux, mac]
+    Services: [ samba ]
+    processes: [ tomcat, microsoft exchange ]
+  Vulnerability12:
+    Name: privilege escalation
+    os: [linux, mac, windows]
+    Services: [ samba ]
+    processes: [ DACLsvc, Schtask, mysql, postgresql, sql server, Active Directory ]
+  Vulnerability13:
+    Name: misconfigurations
+    os: [linux, mac, windows]
+    Services: [ samba, smtps, ftps ]
+    processes: [tomcat, apache, Microsoft IIS, sql server, nginx ]
+  Vulnerability15:
+    Name: Open relays
+    os: []
+    Services: [ smtp ]
+    processes: [ ]
+  Vulnerability16:
+    Name: email spoofing
+    os: []
+    Services: [ smtp ]
+    processes: [ ]
+  Vulnerability17:
+    Name: DNS amplification attacks
+    os: []
+    Services: [ dns ]
+    processes: [ ]
+  Vulnerability18:
+    Name: zone transfer
+    os: []
+    Services: [ dns ]
+    processes: [ ]
+  Vulnerability19:
+    Name: cache poisoning
+    os: []
+    Services: [ dns ]
+    processes: [ ]
+  Vulnerability20:
+    Name: NTP amplification attacks
+    os: []
+    Services: [ ntp ]
+    processes: [ ]
+  Vulnerability21:
+    Name: unauthorized access to configurations
+    os: []
+    Services: [ ntp ]
+    processes: [ ]
+  Vulnerability22:
+    Name: SSL/TLS vulnerabilities
+    os: []
+    Services: [ https ]
+    processes: [ ]
+  Vulnerability23:
+    Name: certificate validation issues
+    os: []
+    Services: [ https ]
+    processes: [ ]
+  Vulnerability24:
+    Name: BlueKeep
+    os: []
+    Services: [ rdp ]
+    processes: [ ]
+  Vulnerability25:
+    Name: credential theft
+    os: []
+    Services: [ rdp ]
+    processes: [ ]
+  Vulnerability26:
+    Name: Buffer overflows
+    os: [linux, mac]
+    Services: [ rpc ]
+    processes: [nginx, sendmail ]
+  Vulnerability27:
+    Name: improper access controls
+    os: []
+    Services: [ rpc ]
+    processes: [ DACLsvc ]
+  Vulnerability28:
+    Name: Name resolution vulnerabilities
+    os: []
+    Services: [ netbios ]
+    processes: [ ]
+  Vulnerability29:
+    Name: SMB relay attacks
+    os: []
+    Services: [ netbios ]
+    processes: [ ]
+  Vulnerability30:
+    Name: session fixation
+    os: []
+    Services: [ ]
+    processes: [tomcat]
+  Vulnerability31:
+    Name: Insecure task scheduling
+    os: []
+    Services: [ ]
+    processes: [ Schtask ]
+  Vulnerability32:
+    Name: Directory traversal
+    os: []
+    Services: [ ]
+    processes: [ apache, Microsoft IIS ]
+  Vulnerability33:
+    Name: WebDAV exploits
+    os: []
+    Services: [ ]
+    processes: [ Microsoft IIS ]
+  Vulnerability34:
+    Name: unauthorized access due to misconfiguration
+    os: []
+    Services: [ ]
+    processes: [ Microsoft Exchange, NFS, LDAP ]
+  Vulnerability35:
+    Name: EternalBlue
+    os: []
+    Services: [ ]
+    processes: [ smb ]
+  Vulnerability36:
+    Name: man-in-the-middle attacks
+    os: []
+    Services: [ ]
+    processes: [ smb ]
+  Vulnerability37:
+    Name: Kerberos ticket granting ticket (TGT) vulnerabilities
+    os: []
+    Services: [ ]
+    processes: [ Active Directory ]
+  Vulnerability38:
+    Name: LDAP injection
+    os: []
+    Services: [ ]
+    processes: [ LDAP ]
+  Vulnerability39:
+    Name: Kernel Vulnerability
+    os: [ linux, mac, windows ]
+    Services: [ ]
+    processes: [ ]
