@@ -133,4 +133,26 @@ Attack:
     Target: (1,0)
     SuccessPath: 1-2-2
     FailurePath: 1-2-1
+  1-1-2:
+    ExploitName: Privilege Escalation Exploit
+    Vulnerability: privilege escalation
+    Os: linux
+    Service: None
+    Process: None
+    SuccessRate: 0.6
+    Target: (1,0)
+    SuccessPath: 1-2-2
+    FailurePath: 1-2-1
+  1-2-2:
+    ExploitName: Cross-Site Scripting (XSS) Exploit
+    Vulnerability: Cross-Site Scripting (XSS)
+    Os: None
+    Service: http
+    Process: Apache
+    SuccessRate: 0.7
+    Target: (2,0)
+    SuccessPath: 1-2-2-2
+    FailurePath: 1-2-2-1
+  1-2-1:
+
 
