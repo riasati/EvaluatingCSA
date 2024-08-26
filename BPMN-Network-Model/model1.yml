@@ -111,6 +111,7 @@ Attack:
     Process: Nginx
     SuccessRate: 0.8
     Target: (1,0)
+    AttackStage: [Reconnaissance, Initial Compromise]
     SuccessPath: 1-2
     FailurePath: 1-1
   1-1:
@@ -131,6 +132,7 @@ Attack:
     Process: None
     SuccessRate: 0.6
     Target: (1,0)
+    AttackStage: [Data Exfiltration]
     SuccessPath: 1-2-2
     FailurePath: 1-2-1
   1-1-2:
@@ -141,8 +143,20 @@ Attack:
     Process: None
     SuccessRate: 0.6
     Target: (1,0)
+    AttackStage: [Data Exfiltration]
     SuccessPath: 1-2-2
     FailurePath: 1-2-1
+  1-2-1:
+    ExploitName: Cross-Site Scripting (XSS) Exploit
+    Vulnerability: Cross-Site Scripting (XSS)
+    Os: None
+    Service: http
+    Process: Apache
+    SuccessRate: 0.7
+    Target: (2,1)
+    AttackStage: [Reconnaissance, Initial Compromise]
+    SuccessPath: 1-2-2-2
+    FailurePath: 1-2-2
   1-2-2:
     ExploitName: Cross-Site Scripting (XSS) Exploit
     Vulnerability: Cross-Site Scripting (XSS)
@@ -150,9 +164,95 @@ Attack:
     Service: http
     Process: Apache
     SuccessRate: 0.7
-    Target: (2,0)
+    Target: (2,1)
+    AttackStage: [Reconnaissance, Initial Compromise]
     SuccessPath: 1-2-2-2
     FailurePath: 1-2-2-1
-  1-2-1:
-
-
+  1-2-2-1:
+    ExploitName: Anonymous Access Exploit
+    Vulnerability: anonymous access
+    Os: None
+    Service: None
+    Process: ftp
+    SuccessRate: 0.6
+    Target: (2,1)
+    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    SuccessPath: 1-2-2-2
+    FailurePath: None
+  1-2-2-2:
+    ExploitName: Sql Injection Exploit
+    Vulnerability: Sql Injection
+    Os: None
+    Service: None
+    Process: mysql
+    SuccessRate: 0.7
+    Target: (4,0)
+    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    SuccessPath: 1-2-2-2-2
+    FailurePath: 1-2-2-2-1
+  1-2-2-2-1:
+    ExploitName: Command Injection Exploit
+    Vulnerability: command injection
+    Os: None
+    Service: smtp
+    Process: Sendmail
+    SuccessRate: 0.8
+    Target: (3,0)
+    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    SuccessPath: 1-2-2-2-1-2
+    FailurePath: None
+  1-2-2-2-2:
+    ExploitName: Privilege Escalation Exploit
+    Vulnerability: privilege escalation
+    Os: None
+    Service: None
+    Process: mysql
+    SuccessRate: 0.7
+    Target: (4,0)
+    AttackStage: [ Terminate Node ]
+    SuccessPath: 1-2-2-2-2-2
+    FailurePath: 1-2-2-2-2-1
+  1-2-2-2-1-2:
+    ExploitName: SSL/TLS vulnerabilities Exploit
+    Vulnerability: SSL/TLS vulnerabilities
+    Os: None
+    Service: https
+    Process: None
+    SuccessRate: 0.3
+    Target: (4,0)
+    AttackStage: [ Reconnaissance, Initial Compromise ]
+    SuccessPath: 1-2-2-2-1-2-2
+    FailurePath: None
+  1-2-2-2-2-1:
+    ExploitName: Command Injection Exploit
+    Vulnerability: command injection
+    Os: None
+    Service: smtp
+    Process: Sendmail
+    SuccessRate: 0.8
+    Target: (3,0)
+    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    SuccessPath: None
+    FailurePath: None
+  1-2-2-2-2-2:
+    ExploitName: Command Injection Exploit
+    Vulnerability: command injection
+    Os: None
+    Service: smtp
+    Process: Sendmail
+    SuccessRate: 0.8
+    Target: (3,0)
+    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    SuccessPath: None
+    FailurePath: None
+  1-2-2-2-1-2-2:
+    ExploitName: Command Injection Exploit
+    Vulnerability: Command Injection
+    Os: None
+    Service: ftp
+    Process: None
+    SuccessRate: 0.4
+    Target: (4,0)
+    AttackStage: [ Terminate Node ]
+    SuccessPath: None
+    FailurePath: None
