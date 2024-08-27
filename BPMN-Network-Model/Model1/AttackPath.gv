@@ -1,0 +1,60 @@
+digraph AttackPathModel {
+
+    #layout=dot
+    label = "Attack Path of Model1";
+    labelloc = "t"; // place the label at the top
+    #node [shape=record];
+
+	A [label = "Nginx Exploit\nBuffer overflows\n(1,0)\nInitial Compromise"]
+    B [label = "Misconfigurations Exploit\nMisconfigurations\n(1,0)\nInitial Compromise"]
+    C [label = "Privilege Escalation Exploit\nPrivilege Escalation\n(1,0)\nData Exfiltration"]
+    D [label = "Cross Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,1)\nInitial Compromise"]
+    E [label = "Cross Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,0)\nInitial Compromise"]
+    F [label = "Anonymous Access Exploit\nAnonymous Access\n(2,1)\nInitial Compromise, Data Exfiltration"]
+    G [label = "Sql Injection Exploit\nSql Injection\n(4,0)\nInitial Compromise, Data Exfiltration"]
+    H [label = "Command Injection Exploit\nCommand Injection \n(3,0)\nInitial Compromise, Data Exfiltration"]
+    I [label = "Privilege Escalation Exploit\nPrivilege Escalation\n(4,0)\nTerminate Node"]
+    J [label = "SSL/TLS vulnerabilities Exploit\nSSL/TLS vulnerabilities\n(4,0)\nInitial Compromise"]
+    K [label = "Command Injection Exploit\nCommand Injection\n(3,0)\nInitial Compromise, Data Exfiltration"]
+    L [label = "Command Injection Exploit\nCommand Injection\n(4,0)\nInitial Compromise, Data Exfiltration"]
+
+
+    T [label = "Terminal"]
+    
+	A -> B [color=red]
+    A -> C [color=blue]
+
+    B -> T [color=red]
+    B -> C [color=blue]
+
+    C -> D [color=red]
+    C -> E [color=blue]
+
+    D -> E [color=red]
+    D -> G [color=blue]
+
+    E -> F [color=red]
+    E -> G [color=blue]
+
+    F -> T [color=red]
+    F -> G [color=blue]
+
+    G -> H [color=red]
+    G -> I [color=blue]
+
+    H -> T [color=red]
+    H -> J [color=blue]
+
+    I -> K [color=red]
+    I -> K [color=blue]
+
+    J -> T [color=red]
+    J -> L [color=blue]
+
+    K -> T [color=red]
+    K -> T [color=blue]
+
+    L -> T [color=red]
+    L -> T [color=blue]
+
+}

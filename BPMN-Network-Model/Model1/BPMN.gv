@@ -1,0 +1,58 @@
+digraph BPMN {
+
+    #layout=dot
+    label = "BPMN of Model1";
+    labelloc = "t"; // place the label at the top
+    #node [shape=record];
+    rankdir=LR;
+    compound=true;
+
+
+    #graph [compound=true];
+    node[shape=rectanble style="rounded,filled" color="lightgoldenrodyellow" ]
+    start[shape=circle color=palegreen1]
+    end[shape=doublecircle color=orangered]
+
+    #rank=same
+
+    subgraph cluster_one { label="Workflow" style=dotted start A B K C D L E end }
+    subgraph cluster_two { label="DB\nSubnet4" style=dotted F }
+    subgraph cluster_three { label="Servers\nSubnet2" style=dotted G H }
+    subgraph cluster_four { label="NGINX Server\nSubnet1" style=dotted J }
+    subgraph cluster_five { label="SMTP Server\nSubnet3" style=dotted I }
+
+	A [label = "Recieve Request"]
+    B [label = "Authenticate"]
+    C [label = "Process Data"]
+    D [label = "Email User"]
+    E [label = "Send Request"]
+
+    K [shape=diamond label = "+"]
+    L [shape=diamond label = "+"]
+
+    F [label = "DB"]
+    G [label = "Server1"]
+    H [label = "Server2"]
+    I [label = "SMTP"]
+    J [label = "NGINX"]
+
+    start -> A
+    A -> B [label = "3"]
+    B -> K [label = "3"]
+    K -> C [label = "4"]
+    K -> D [label = "2"]
+    C -> L [label = "4"]
+    D -> L [label = "2"]
+    L -> E [label = "3"]
+    E -> end
+
+    A -> J [lhead=cluster_four style=dashed]
+    B -> G [lhead=cluster_three style=dashed]
+    C -> G [lhead=cluster_three style=dashed]
+    D -> G [lhead=cluster_three style=dashed]
+    D -> I [lhead=cluster_five style=dashed]
+    E -> J [lhead=cluster_four style=dashed]
+    G -> F [lhead=cluster_two ltail=cluster_three style=dashed]
+
+
+}

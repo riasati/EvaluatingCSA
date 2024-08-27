@@ -111,7 +111,7 @@ Attack:
     Process: Nginx
     SuccessRate: 0.8
     Target: (1,0)
-    AttackStage: [Reconnaissance, Initial Compromise]
+    AttackStage: [Initial Compromise]
     SuccessPath: 1-2
     FailurePath: 1-1
   1-1:
@@ -122,20 +122,10 @@ Attack:
     Process: Nginx
     SuccessRate: 0.7
     Target: (1,0)
-    SuccessPath: 1-1-2
+    AttackStage: [Initial Compromise]
+    SuccessPath: 1-2
     FailurePath: None
   1-2:
-    ExploitName: Privilege Escalation Exploit
-    Vulnerability: privilege escalation
-    Os: linux
-    Service: None
-    Process: None
-    SuccessRate: 0.6
-    Target: (1,0)
-    AttackStage: [Data Exfiltration]
-    SuccessPath: 1-2-2
-    FailurePath: 1-2-1
-  1-1-2:
     ExploitName: Privilege Escalation Exploit
     Vulnerability: privilege escalation
     Os: linux
@@ -154,7 +144,7 @@ Attack:
     Process: Apache
     SuccessRate: 0.7
     Target: (2,1)
-    AttackStage: [Reconnaissance, Initial Compromise]
+    AttackStage: [Initial Compromise]
     SuccessPath: 1-2-2-2
     FailurePath: 1-2-2
   1-2-2:
@@ -164,8 +154,8 @@ Attack:
     Service: http
     Process: Apache
     SuccessRate: 0.7
-    Target: (2,1)
-    AttackStage: [Reconnaissance, Initial Compromise]
+    Target: (2,0)
+    AttackStage: [Initial Compromise]
     SuccessPath: 1-2-2-2
     FailurePath: 1-2-2-1
   1-2-2-1:
@@ -176,7 +166,7 @@ Attack:
     Process: ftp
     SuccessRate: 0.6
     Target: (2,1)
-    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    AttackStage: [Initial Compromise, Data Exfiltration]
     SuccessPath: 1-2-2-2
     FailurePath: None
   1-2-2-2:
@@ -187,7 +177,7 @@ Attack:
     Process: mysql
     SuccessRate: 0.7
     Target: (4,0)
-    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    AttackStage: [Initial Compromise, Data Exfiltration]
     SuccessPath: 1-2-2-2-2
     FailurePath: 1-2-2-2-1
   1-2-2-2-1:
@@ -198,7 +188,7 @@ Attack:
     Process: Sendmail
     SuccessRate: 0.8
     Target: (3,0)
-    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    AttackStage: [Initial Compromise, Data Exfiltration]
     SuccessPath: 1-2-2-2-1-2
     FailurePath: None
   1-2-2-2-2:
@@ -209,7 +199,7 @@ Attack:
     Process: mysql
     SuccessRate: 0.7
     Target: (4,0)
-    AttackStage: [ Terminate Node ]
+    AttackStage: [Terminate Node]
     SuccessPath: 1-2-2-2-2-2
     FailurePath: 1-2-2-2-2-1
   1-2-2-2-1-2:
@@ -220,7 +210,7 @@ Attack:
     Process: None
     SuccessRate: 0.3
     Target: (4,0)
-    AttackStage: [ Reconnaissance, Initial Compromise ]
+    AttackStage: [Initial Compromise]
     SuccessPath: 1-2-2-2-1-2-2
     FailurePath: None
   1-2-2-2-2-1:
@@ -231,7 +221,7 @@ Attack:
     Process: Sendmail
     SuccessRate: 0.8
     Target: (3,0)
-    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    AttackStage: [Initial Compromise, Data Exfiltration]
     SuccessPath: None
     FailurePath: None
   1-2-2-2-2-2:
@@ -242,7 +232,7 @@ Attack:
     Process: Sendmail
     SuccessRate: 0.8
     Target: (3,0)
-    AttackStage: [ Reconnaissance, Initial Compromise, Data Exfiltration ]
+    AttackStage: [Initial Compromise, Data Exfiltration ]
     SuccessPath: None
     FailurePath: None
   1-2-2-2-1-2-2:
