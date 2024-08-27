@@ -1,0 +1,28 @@
+digraph Network {
+
+    label = "Network of Model1";
+    labelloc = "t"; // place the label at the top
+    rankdir=LR;
+    compound=true;
+
+    subgraph cluster_one { label="Internet"  Internet }
+    subgraph cluster_two { label="Subnet1"  A }
+    subgraph cluster_three { label="Subnet2" B C }
+    subgraph cluster_four { label="Subnet3" D }
+    subgraph cluster_five { label="Subnet4" E }
+
+	A [label = "(1, 0)\nLinux\n[ http, https, dns ]\n[ Nginx ]\n0.8"]
+    B [label = "(2, 0)\nLinux\n[ http, https, dns, ftp ]\n[ Apache ]\n0.9"]
+    C [label = "(2, 1)\nLinux\n[ http, https, dns, ftp ]\n[ Apache ]\n0.6"]
+    D [label = "(3, 0)\nWindows\n[ smtp, dns ]\n[ Sendmail ]\n0.5"]
+    E [label = "(4, 0)\nLinux\n[ http, https, dns, ftp ]\n[ MySql ]\n0.4"]
+
+    Internet -> A [dir=both]
+    A -> B [dir=both]
+    A -> C [dir=both]
+    B -> D [dir=both]
+    C -> D [dir=both]
+    B -> E [dir=both]
+    C -> E [dir=both]
+
+}
