@@ -21,6 +21,10 @@ digraph BPMN {
     subgraph cluster_four { label="NGINX Server\nSubnet1" style=dotted J }
     subgraph cluster_five { label="SMTP Server\nSubnet3" style=dotted I }
 
+    subgraph cluster_six { label="Mission1" style=dotted M }
+    subgraph cluster_seven { label="Mission2" style=dotted N }
+    subgraph cluster_eight { label="Mission3" style=dotted O }
+
 	A [label = "Recieve Request"]
     B [label = "Authenticate"]
     C [label = "Process Data"]
@@ -36,14 +40,18 @@ digraph BPMN {
     I [label = "SMTP"]
     J [label = "NGINX"]
 
+    M [label = "Correct Authentication\n3"]
+    N [label = "Emailing Users\n2"]
+    O [label = "Process Data Correctly\n4"]
+
     start -> A
-    A -> B [label = "3"]
-    B -> K [label = "3"]
-    K -> C [label = "4"]
+    A -> B
+    B -> K
+    K -> C [label = "5"]
     K -> D [label = "2"]
-    C -> L [label = "4"]
-    D -> L [label = "2"]
-    L -> E [label = "3"]
+    C -> L
+    D -> L
+    L -> E
     E -> end
 
     A -> J [lhead=cluster_four style=dashed]
@@ -53,6 +61,12 @@ digraph BPMN {
     D -> I [lhead=cluster_five style=dashed]
     E -> J [lhead=cluster_four style=dashed]
     G -> F [lhead=cluster_two ltail=cluster_three style=dashed]
+
+    B -> M [lhead=cluster_six style=dashed]
+    D -> N [lhead=cluster_seven style=dashed]
+    A -> O [lhead=cluster_eight style=dashed]
+    C -> O [lhead=cluster_eight style=dashed]
+    E -> O [lhead=cluster_eight style=dashed]
 
 
 }
