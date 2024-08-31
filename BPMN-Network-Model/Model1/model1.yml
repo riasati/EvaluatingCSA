@@ -7,7 +7,7 @@ BPMN:
       Resource1:
         Name: "DB"
       Dependencies: []
-    SubnetNumber: 4
+      SubnetNumber: 4
     ResourcePool2:
       Name: "Servers"
       ResourceNumbers: 2
@@ -48,23 +48,41 @@ BPMN:
     Process5:
       Name: "SendResponse"
       ResourcePool: NginxServer
-  WorkFlow:
-    ProcessesNumbers: 2
-    Processes1: [ "Start", ReceiveRequest, Authenticate ]
-    Priority: 3
-    GateWays:
-      Type: "Parallel" #Exclusive and Inclusive
-      Condition: None
-      PathNumbers: 2
-      Path1:
-        ProcessesNumbers: 1
-        Processes1: [ ProcessData ]
-        Priority: 4
-      Path2:
-        ProcessesNumbers: 1
-        Processes1: [ EmailUser ]
-        Priority: 2
-    Processes2: [ SendResponse, "End" ]
+  WorkFlows:
+    PathNumbers: 1
+    Path1:
+      HasPriority: False
+      OrderedKeys: [Processes1, GateWays, Processes2]
+      Processes1: [ "Start", ReceiveRequest, Authenticate ]
+      GateWays:
+        Type: "Parallel" #Exclusive and Inclusive
+        Condition: None
+        PathNumbers: 2
+        Path1:
+          HasPriority: True
+          OrderedKeys: [Processes1]
+          Processes1: [ ProcessData ]
+          Priority: 5
+        Path2:
+          HasPriority: True
+          OrderedKeys: [Processes1]
+          Processes1: [ EmailUser ]
+          Priority: 2
+      Processes2: [ SendResponse, "End" ]
+  Missions:
+    MissionNumbers: 3
+    Mission1:
+      Name: "Correct Authentication"
+      Processes: [Authenticate]
+      Priority: 3
+    Mission2:
+      Name: "Emailing Users"
+      Processes: [ EmailUser ]
+      Priority: 2
+    Mission3:
+      Name: "Process data correctly"
+      Processes: [ ReceiveRequest, ProcessData, SendResponse]
+      Priority: 4
 
 Network:
   SubnetsNumbers: 4
@@ -78,29 +96,29 @@ Network:
   HostConfiguration:
     (1, 0):
       Os: linux
-      services: [ http, https, dns ]
-      processes: [ Nginx ]
-      securityFactor: 0.8
+      Services: [ http, https, dns ]
+      Processes: [ Nginx ]
+      SecurityFactor: 0.8
     (2, 0):
       Os: linux
-      services: [ http, https, dns, ftp ]
-      processes: [ Apache ]
-      securityFactor: 0.9
+      Services: [ http, https, dns, ftp ]
+      Processes: [ Apache ]
+      SecurityFactor: 0.9
     (2, 1):
       Os: linux
-      services: [ http, https, dns, ftp ]
-      processes: [ Apache ]
-      securityFactor: 0.6
+      Services: [ http, https, dns, ftp ]
+      Processes: [ Apache ]
+      SecurityFactor: 0.6
     (3, 0):
       Os: windows
-      services: [ smtp, dns ]
-      processes: [ Sendmail ]
-      securityFactor: 0.5
+      Services: [ smtp, dns ]
+      Processes: [ Sendmail ]
+      SecurityFactor: 0.5
     (4, 0):
       Os: linux
-      services: [ http, https, dns, ftp ]
-      processes: [ MySQL ]
-      securityFactor: 0.4
+      Services: [ http, https, dns, ftp ]
+      Processes: [ MySQL ]
+      SecurityFactor: 0.4
 
 Attack:
   1:
