@@ -2,6 +2,8 @@ import json
 import yaml
 from ClassModels.BPMN import BPMN
 from ClassModels.NetworkState import NetworkState
+from ClassModels.Attacker import Attacker
+from pprint import pprint
 
 # with open('BPMN-Network-Model/Model1/model1.yml', 'r') as file:
 #     configuration = yaml.safe_load(file)
@@ -15,8 +17,12 @@ from ClassModels.NetworkState import NetworkState
 a = json.load(open('config.json'))
 b = BPMN(a["BPMN"])
 c = NetworkState(a["Network"])
+d = Attacker(a["Attack"])
+#e = d.get_success_attack_node("A")
+#f = d.get_failure_attack_node("A")
+#g = d.get_host_related_security_factor("A", c.hosts_configuration)
+#h = d.is_attack_successful("A", g)
+#i = d.create_attack_path("A", c.hosts_configuration, [])
 
-d = c.change_name_of_subnet("Subnet3")
-e = c.access_of_one_subnet(2)
-f = c.access_of_one_subnet_to_another(3,4)
-print(f)
+d.create_numbers_of_attack_path("A", c.hosts_configuration, 10000)
+pprint(d.attack_path_list_object)
