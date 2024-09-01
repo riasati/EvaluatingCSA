@@ -94,34 +94,34 @@ Network:
     Subnet3: [Subnet2]
     Subnet4: [Subnet2]
   HostConfiguration:
-    (1, 0):
+    (1,0):
       Os: linux
       Services: [ http, https, dns ]
       Processes: [ Nginx ]
       SecurityFactor: 0.8
-    (2, 0):
+    (2,0):
       Os: linux
       Services: [ http, https, dns, ftp ]
       Processes: [ Apache ]
       SecurityFactor: 0.9
-    (2, 1):
+    (2,1):
       Os: linux
       Services: [ http, https, dns, ftp ]
       Processes: [ Apache ]
       SecurityFactor: 0.6
-    (3, 0):
+    (3,0):
       Os: windows
       Services: [ smtp, dns ]
       Processes: [ Sendmail ]
       SecurityFactor: 0.5
-    (4, 0):
+    (4,0):
       Os: linux
       Services: [ http, https, dns, ftp ]
       Processes: [ MySQL ]
       SecurityFactor: 0.4
 
 Attack:
-  1:
+  A:
     ExploitName: Nginx Exploit
     Vulnerability: Buffer overflows
     Os: None
@@ -130,9 +130,9 @@ Attack:
     SuccessRate: 0.8
     Target: (1,0)
     AttackStage: [Initial Compromise]
-    SuccessPath: 1-2
-    FailurePath: 1-1
-  1-1:
+    SuccessPath: C
+    FailurePath: B
+  B:
     ExploitName: Misconfigurations Exploit
     Vulnerability: misconfigurations
     Os: None
@@ -141,9 +141,9 @@ Attack:
     SuccessRate: 0.7
     Target: (1,0)
     AttackStage: [Initial Compromise]
-    SuccessPath: 1-2
+    SuccessPath: C
     FailurePath: None
-  1-2:
+  C:
     ExploitName: Privilege Escalation Exploit
     Vulnerability: privilege escalation
     Os: linux
@@ -152,9 +152,9 @@ Attack:
     SuccessRate: 0.6
     Target: (1,0)
     AttackStage: [Data Exfiltration]
-    SuccessPath: 1-2-2
-    FailurePath: 1-2-1
-  1-2-1:
+    SuccessPath: E
+    FailurePath: D
+  D:
     ExploitName: Cross-Site Scripting (XSS) Exploit
     Vulnerability: Cross-Site Scripting (XSS)
     Os: None
@@ -163,9 +163,9 @@ Attack:
     SuccessRate: 0.7
     Target: (2,1)
     AttackStage: [Initial Compromise]
-    SuccessPath: 1-2-2-2
-    FailurePath: 1-2-2
-  1-2-2:
+    SuccessPath: G
+    FailurePath: E
+  E:
     ExploitName: Cross-Site Scripting (XSS) Exploit
     Vulnerability: Cross-Site Scripting (XSS)
     Os: None
@@ -174,9 +174,9 @@ Attack:
     SuccessRate: 0.7
     Target: (2,0)
     AttackStage: [Initial Compromise]
-    SuccessPath: 1-2-2-2
-    FailurePath: 1-2-2-1
-  1-2-2-1:
+    SuccessPath: G
+    FailurePath: F
+  F:
     ExploitName: Anonymous Access Exploit
     Vulnerability: anonymous access
     Os: None
@@ -185,9 +185,9 @@ Attack:
     SuccessRate: 0.6
     Target: (2,1)
     AttackStage: [Initial Compromise, Data Exfiltration]
-    SuccessPath: 1-2-2-2
+    SuccessPath: G
     FailurePath: None
-  1-2-2-2:
+  G:
     ExploitName: Sql Injection Exploit
     Vulnerability: Sql Injection
     Os: None
@@ -196,9 +196,9 @@ Attack:
     SuccessRate: 0.7
     Target: (4,0)
     AttackStage: [Initial Compromise, Data Exfiltration]
-    SuccessPath: 1-2-2-2-2
-    FailurePath: 1-2-2-2-1
-  1-2-2-2-1:
+    SuccessPath: I
+    FailurePath: H
+  H:
     ExploitName: Command Injection Exploit
     Vulnerability: command injection
     Os: None
@@ -207,9 +207,9 @@ Attack:
     SuccessRate: 0.8
     Target: (3,0)
     AttackStage: [Initial Compromise, Data Exfiltration]
-    SuccessPath: 1-2-2-2-1-2
+    SuccessPath: J
     FailurePath: None
-  1-2-2-2-2:
+  I:
     ExploitName: Privilege Escalation Exploit
     Vulnerability: privilege escalation
     Os: None
@@ -218,9 +218,9 @@ Attack:
     SuccessRate: 0.7
     Target: (4,0)
     AttackStage: [Terminate Node]
-    SuccessPath: 1-2-2-2-2-2
-    FailurePath: 1-2-2-2-2-1
-  1-2-2-2-1-2:
+    SuccessPath: K
+    FailurePath: K
+  J:
     ExploitName: SSL/TLS vulnerabilities Exploit
     Vulnerability: SSL/TLS vulnerabilities
     Os: None
@@ -229,20 +229,9 @@ Attack:
     SuccessRate: 0.3
     Target: (4,0)
     AttackStage: [Initial Compromise]
-    SuccessPath: 1-2-2-2-1-2-2
+    SuccessPath: L
     FailurePath: None
-  1-2-2-2-2-1:
-    ExploitName: Command Injection Exploit
-    Vulnerability: command injection
-    Os: None
-    Service: smtp
-    Process: Sendmail
-    SuccessRate: 0.8
-    Target: (3,0)
-    AttackStage: [Initial Compromise, Data Exfiltration]
-    SuccessPath: None
-    FailurePath: None
-  1-2-2-2-2-2:
+  K:
     ExploitName: Command Injection Exploit
     Vulnerability: command injection
     Os: None
@@ -253,7 +242,7 @@ Attack:
     AttackStage: [Initial Compromise, Data Exfiltration ]
     SuccessPath: None
     FailurePath: None
-  1-2-2-2-1-2-2:
+  L:
     ExploitName: Command Injection Exploit
     Vulnerability: Command Injection
     Os: None

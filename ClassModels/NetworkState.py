@@ -3,7 +3,7 @@ class NetworkState:
         self.subnet_numbers = NetworkJson["SubnetsNumbers"]
         self.subnet_hosts = NetworkJson["Subnets"]
         self.topology = NetworkJson["Topology"]
-        self.hosts = []
+        self.hosts_configuration = []
 
         for host in NetworkJson["HostConfiguration"].keys():
             one_host = {}
@@ -12,7 +12,9 @@ class NetworkState:
             one_host["Services"] = NetworkJson["HostConfiguration"][host]["Services"]
             one_host["Processes"] = NetworkJson["HostConfiguration"][host]["Processes"]
             one_host["SecurityFactor"] = NetworkJson["HostConfiguration"][host]["SecurityFactor"]
-            self.hosts.append(one_host)
+            self.hosts_configuration.append(one_host)
+        self.hosts = self.hosts_configuration[:]
+
 
     def initial_state_network(self):
         for host in self.hosts:
