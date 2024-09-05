@@ -1,46 +1,44 @@
 class BPMN:
-    def __init__(self, BPMNJson):
-        self.resource_pool_number = BPMNJson["ResourcePools"]["ResourcePoolNumbers"]
+    def __init__(self, bpmn_json):
+        self.business_importance = None
+        self.resource_pool_number = bpmn_json["ResourcePools"]["ResourcePoolNumbers"]
         resource_pools = []
         for i in range(self.resource_pool_number):
-            one_resource = {}
-            one_resource["Name"] = BPMNJson["ResourcePools"][f"ResourcePool{i + 1}"]["Name"]
-            one_resource["ResourceNumber"] = BPMNJson["ResourcePools"][f"ResourcePool{i + 1}"]["ResourceNumbers"]
+            one_resource = {"Name": bpmn_json["ResourcePools"][f"ResourcePool{i + 1}"]["Name"],
+                            "ResourceNumber": bpmn_json["ResourcePools"][f"ResourcePool{i + 1}"]["ResourceNumbers"]}
             resource_list = []
             for j in range(one_resource["ResourceNumber"]):
-                resource_list.append(BPMNJson["ResourcePools"][f"ResourcePool{i + 1}"][f"Resource{j + 1}"]["Name"])
+                resource_list.append(bpmn_json["ResourcePools"][f"ResourcePool{i + 1}"][f"Resource{j + 1}"]["Name"])
             one_resource["Resources"] = resource_list
-            one_resource["RelatedSubnet"] = BPMNJson["ResourcePools"][f"ResourcePool{i + 1}"]["SubnetNumber"]
-            one_resource["Dependencies"] = BPMNJson["ResourcePools"][f"ResourcePool{i + 1}"]["Dependencies"]
+            one_resource["RelatedSubnet"] = bpmn_json["ResourcePools"][f"ResourcePool{i + 1}"]["SubnetNumber"]
+            one_resource["Dependencies"] = bpmn_json["ResourcePools"][f"ResourcePool{i + 1}"]["Dependencies"]
             resource_pools.append(one_resource)
         self.resource_pools = resource_pools
-        self.change_dependency_to_number()
+        #self.change_dependency_to_number()
 
-        self.process_number = BPMNJson["Processes"]["ProcessNumbers"]
+        self.process_number = bpmn_json["Processes"]["ProcessNumbers"]
         processes = []
         for i in range(self.process_number):
-            one_process = {}
-            one_process["Name"] = BPMNJson["Processes"][f"Process{i + 1}"]["Name"]
-            one_process["RelatedResourcePool"] = BPMNJson["Processes"][f"Process{i + 1}"]["ResourcePool"]
+            one_process = {"Name": bpmn_json["Processes"][f"Process{i + 1}"]["Name"],
+                           "RelatedResourcePool": bpmn_json["Processes"][f"Process{i + 1}"]["ResourcePool"]}
             processes.append(one_process)
         self.processes = processes
-        self.change_resource_pool_related_to_process_to_number()
+        #self.change_resource_pool_related_to_process_to_number()
 
-        self.workflow_path_number = BPMNJson["WorkFlows"]["PathNumbers"]
+        self.workflow_path_number = bpmn_json["WorkFlows"]["PathNumbers"]
         paths = []
         for i in range(self.workflow_path_number):
-            return_paths = self.add_path_to_workflow(BPMNJson["WorkFlows"][f"Path{i + 1}"], [])
+            return_paths = self.add_path_to_workflow(bpmn_json["WorkFlows"][f"Path{i + 1}"], [])
             paths.extend(return_paths)
         self.workflow_paths = paths
-        self.find_priority_of_workflow_path(BPMNJson["WorkFlows"])
+        self.find_priority_of_workflow_path(bpmn_json["WorkFlows"])
 
-        self.mission_number = BPMNJson["Missions"]["MissionNumbers"]
+        self.mission_number = bpmn_json["Missions"]["MissionNumbers"]
         missions = []
         for i in range(self.mission_number):
-            one_mission = {}
-            one_mission["Name"] = BPMNJson["Missions"][f"Mission{i + 1}"]["Name"]
-            one_mission["Processes"] = BPMNJson["Missions"][f"Mission{i + 1}"]["Processes"]
-            one_mission["Priority"] = BPMNJson["Missions"][f"Mission{i + 1}"]["Priority"]
+            one_mission = {"Name": bpmn_json["Missions"][f"Mission{i + 1}"]["Name"],
+                           "Processes": bpmn_json["Missions"][f"Mission{i + 1}"]["Processes"],
+                           "Priority": bpmn_json["Missions"][f"Mission{i + 1}"]["Priority"]}
             missions.append(one_mission)
         self.missions = missions
 
@@ -120,5 +118,27 @@ class BPMN:
                 else:
                     return self.find_priority_of_process_in_workflow(process_name, workflows_json[f"Path{i + 1}"][key])
         return None
+
+    def calculate_business_importance(self) -> None:
+        priority = 0
+        for workflow_path in self.workflow_paths:
+            priority += workflow_path["Priority"]
+        for mission in self.missions:
+            priority += mission["Priority"]
+        self.business_importance = priority
+
+    def calculate_process_priority(self):
+        for process in self.processes:
+            priority = 0.0
+            process_name = process["Name"]
+            for path in self.workflow_paths:
+                if process_name in path["Path"]:
+                    priority += (path["Priority"] * 1.0) / (len(path["Path"]) - 2)
+            for mission in self.missions:
+                if process_name in mission["Processes"]:
+                    priority += (mission["Priority"] * 1.0) / len(mission["Processes"])
+            process["Importance"] = priority
+
+
 
 

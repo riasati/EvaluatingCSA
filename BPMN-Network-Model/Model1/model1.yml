@@ -29,7 +29,7 @@ BPMN:
       ResourceNumbers: 1
       Resource1:
         Name: "SMTP"
-      Dependencies: [ Servers ]
+      Dependencies: []
       SubnetNumber: 3
   Processes:
     ProcessNumbers: 5
