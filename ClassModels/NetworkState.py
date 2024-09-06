@@ -1,4 +1,6 @@
 import copy
+import random
+
 from ClassModels.Attacker import Attacker
 from ClassModels.BPMN import BPMN
 
@@ -164,4 +166,25 @@ class NetworkState:
             host2 = [x for x in self.hosts if x["Address"] == host["Address"]][0]
             host2["Importance"] = host["Importance"]
 
+    def which_host_is_different(self, network_state):
+        for host in self.hosts:
+            address = host["Address"]
+            host_in_other = [x for x in network_state.hosts if x["Address"] == address][0]
+            if host["attemptedAttack"] == host_in_other["attemptedAttack"] and host["IsCompromised"] == host_in_other[
+                "IsCompromised"] and host["IsCompromisedCompletely"] == host_in_other["IsCompromisedCompletely"] and \
+                    host["IsTerminated"] == host_in_other["IsTerminated"] and host["isDataLeaked"] == host_in_other[
+                "isDataLeaked"]: continue
+            return host_in_other
+
+    def fake_change_in_host(self, one_host, probabilities: list):
+        one_host['attemptedAttack'] = True
+        is_attack_successful = random.random() > probabilities[0]
+        if is_attack_successful:
+            one_host['IsCompromised'] = True
+            if random.random() > probabilities[1]:
+                one_host['IsCompromisedCompletely'] = True
+            if random.random() > probabilities[2]:
+                one_host['isDataLeaked'] = True
+            if random.random() > probabilities[3] and one_host['IsCompromisedCompletely']:
+                one_host['IsTerminated'] = True
 

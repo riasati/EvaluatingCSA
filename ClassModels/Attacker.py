@@ -1,6 +1,11 @@
 import random
+import json
 class Attacker:
     def __init__(self, attack_json):
+        self.attack_path_list_object = None
+        self.current_attack_path : list = None
+        self.current_first_node: str = None
+        self.current_second_node: str = None
         self.attack_path_graph = attack_json
 
     def get_success_attack_node(self, attack_node_name: str) -> str:
@@ -97,3 +102,19 @@ class Attacker:
             else:
                 return_object[one_attack_path_string] += 1
         self.attack_path_list_object = return_object
+
+    def fill_current_attack_path(self, attack_path_string):
+        if self.attack_path_list_object is None:
+            raise "you have to call create_numbers_of_attack_path before this"
+        # if attack_path_string not in self.attack_path_list_object.keys():
+        #     raise "attack_path_string_error"
+        self.current_attack_path = json.loads(attack_path_string)
+
+    def get_future_nodes_in_path(self):
+        if self.current_attack_path is None:
+            raise "you have to call fill_current_attack_path before this"
+        if self.current_second_node is None:
+            raise "you have to fill second node first before this"
+        if self.current_second_node == "None":
+            return self.current_second_node, self.current_second_node
+        return self.current_second_node, self.current_attack_path[self.current_attack_path.index(self.current_second_node) + 1]
