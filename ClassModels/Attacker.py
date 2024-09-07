@@ -9,48 +9,55 @@ class Attacker:
         self.attack_path_graph = attack_json
 
     def get_success_attack_node(self, attack_node_name: str) -> str:
+        attack_node_name = attack_node_name.split(":")[0]
         if attack_node_name not in self.attack_path_graph.keys():
-            raise "there is no node with this name"
+            raise Exception(f"there is no node with this name {attack_node_name}")
         node_name: str = self.attack_path_graph[attack_node_name]["SuccessPath"]
         return node_name
 
     def get_failure_attack_node(self, attack_node_name: str) -> str:
+        attack_node_name = attack_node_name.split(":")[0]
         if attack_node_name not in self.attack_path_graph.keys():
-            raise "there is no node with this name"
+            raise Exception(f"there is no node with this name {attack_node_name}")
         node_name: str = self.attack_path_graph[attack_node_name]["FailurePath"]
         return node_name
 
     def get_target_address_of_attack(self, attack_node_name: str) -> str:
+        attack_node_name = attack_node_name.split(":")[0]
         if attack_node_name not in self.attack_path_graph.keys():
-            raise "there is no node with this name"
+            raise Exception(f"there is no node with this name {attack_node_name}")
         target: str = self.attack_path_graph[attack_node_name]["Target"]
         return target
 
     def get_attack_stage_of_attack(self, attack_node_name: str) -> list:
+        attack_node_name = attack_node_name.split(":")[0]
         if attack_node_name not in self.attack_path_graph.keys():
-            raise "there is no node with this name"
+            raise Exception(f"there is no node with this name {attack_node_name}")
         attack_stage: list = self.attack_path_graph[attack_node_name]["AttackStage"]
         return attack_stage
 
     def get_vulnerability_of_attack(self, attack_node_name: str) -> str:
+        attack_node_name = attack_node_name.split(":")[0]
         if attack_node_name not in self.attack_path_graph.keys():
-            raise "there is no node with this name"
+            raise Exception(f"there is no node with this name {attack_node_name}")
         vulnerability: str = self.attack_path_graph[attack_node_name]["Vulnerability"]
         return vulnerability
 
     def get_host_related_security_factor(self, attack_node_name: str, hosts_configuration: list) -> float:
+        attack_node_name = attack_node_name.split(":")[0]
         if attack_node_name not in self.attack_path_graph.keys():
-            raise "there is no node with this name"
+            raise Exception(f"there is no node with this name {attack_node_name}")
         attack_node = self.attack_path_graph[attack_node_name]
         desired_hosts = [x for x in hosts_configuration if x["Address"] == attack_node["Target"]]
         if len(desired_hosts) == 0:
-            raise "address of host does not match with attack address"
+            raise Exception("address of host does not match with attack address")
         desired_host = desired_hosts[0]
         return desired_host["SecurityFactor"]
 
     def is_attack_successful(self, attack_node_name: str, security_factor: float) -> bool:
+        attack_node_name = attack_node_name.split(":")[0]
         if attack_node_name not in self.attack_path_graph.keys():
-            raise "there is no node with this name"
+            raise Exception(f"there is no node with this name {attack_node_name}")
         success_rate = self.attack_path_graph[attack_node_name]["SuccessRate"] * (1 - security_factor)
         probability = random.random()
         if probability > success_rate:
@@ -64,7 +71,7 @@ class Attacker:
         if attack_node_name == 'None':
             return attack_path_names
         if attack_node_name not in self.attack_path_graph.keys():
-            raise "there is no node with this name"
+            raise Exception("there is no node with this name")
         security_factor: float = self.get_host_related_security_factor(attack_node_name, hosts_configuration)
         is_attack_successful = self.is_attack_successful(attack_node_name, security_factor)
         success_node = self.get_success_attack_node(attack_node_name)
@@ -105,16 +112,22 @@ class Attacker:
 
     def fill_current_attack_path(self, attack_path_string):
         if self.attack_path_list_object is None:
-            raise "you have to call create_numbers_of_attack_path before this"
-        # if attack_path_string not in self.attack_path_list_object.keys():
-        #     raise "attack_path_string_error"
+            raise Exception("you have to call create_numbers_of_attack_path before this")
+        if attack_path_string not in self.attack_path_list_object.keys():
+            raise Exception("attack_path_string_error")
         self.current_attack_path = json.loads(attack_path_string)
+        self.current_first_node = self.current_attack_path[0]
+        self.current_second_node = self.current_attack_path[1]
 
     def get_future_nodes_in_path(self):
         if self.current_attack_path is None:
-            raise "you have to call fill_current_attack_path before this"
+            raise Exception("you have to call fill_current_attack_path before this")
         if self.current_second_node is None:
-            raise "you have to fill second node first before this"
+            raise Exception("you have to fill second node first before this")
         if self.current_second_node == "None":
+            return self.current_second_node, self.current_second_node
+        if self.current_second_node == "None:S":
+            return self.current_second_node, self.current_second_node
+        if self.current_second_node == "None:F":
             return self.current_second_node, self.current_second_node
         return self.current_second_node, self.current_attack_path[self.current_attack_path.index(self.current_second_node) + 1]
