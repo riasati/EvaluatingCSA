@@ -42,6 +42,9 @@ class BPMN:
             missions.append(one_mission)
         self.missions = missions
 
+        self.calculate_business_importance()
+        self.calculate_process_priority()
+
     def change_dependency_to_number(self) -> None:
         for i in range(self.resource_pool_number):
             dependency = []
@@ -60,12 +63,12 @@ class BPMN:
     
     def get_resource_pool(self, number: int):
         if number > self.resource_pool_number:
-            raise "number is bigger than number of resource pools"
+            raise Exception("number is bigger than number of resource pools")
         return self.resource_pools[number - 1]
         
     def get_resource_pool_name(self, number: int) -> str:
         if number > self.resource_pool_number:
-            raise "number is bigger than number of resource pools"
+            raise Exception("number is bigger than number of resource pools")
         return self.resource_pools[number - 1]["Name"]
 
     def add_path_to_workflow(self, path, return_paths) -> list:

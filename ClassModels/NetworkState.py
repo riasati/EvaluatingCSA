@@ -37,7 +37,6 @@ class NetworkState:
             host["IsCompromised"] = False
             host["IsCompromisedCompletely"] = False
             host["IsTerminated"] = False
-            # host["CanWorkProperly"] = True
             host["isDataLeaked"] = False
 
     def get_host_numbers_of_subnet(self, subnet_number: int) -> int:
@@ -60,7 +59,7 @@ class NetworkState:
     def access_of_one_subnet(self, subnet_number: int):
 
         if subnet_number > self.subnet_numbers:
-            raise "number is bigger than number of subnets"
+            raise Exception("number is bigger than number of subnets")
 
         if subnet_number == 0:
             return [self.change_name_of_subnet(x) for x in self.topology["Internet"]]
@@ -141,7 +140,7 @@ class NetworkState:
         for process in bpmn.processes:
             desired_resource_pools = [x for x in bpmn.resource_pools if x["Name"] == process["RelatedResourcePool"]]
             if len(desired_resource_pools) == 0:
-                raise "related resource pool of process does not match with resource pool number"
+                raise Exception("related resource pool of process does not match with resource pool number")
             process_subnet_related = desired_resource_pools[0]["RelatedSubnet"]
             process_importance = process["Importance"]
             subnet = [x for x in subnet_data if x["Number"] == process_subnet_related][0]

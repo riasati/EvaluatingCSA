@@ -5,18 +5,18 @@ digraph AttackPathModel {
     labelloc = "t"; // place the label at the top
     #node [shape=record];
 
-	A [label = "Nginx Exploit\nBuffer overflows\n(1,0)\nInitial Compromise"]
-    B [label = "Misconfigurations Exploit\nMisconfigurations\n(1,0)\nInitial Compromise"]
-    C [label = "Privilege Escalation Exploit\nPrivilege Escalation\n(1,0)\nData Exfiltration"]
-    D [label = "Cross Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,1)\nInitial Compromise"]
-    E [label = "Cross Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,0)\nInitial Compromise"]
-    F [label = "Anonymous Access Exploit\nAnonymous Access\n(2,1)\nInitial Compromise, Data Exfiltration"]
-    G [label = "Sql Injection Exploit\nSql Injection\n(4,0)\nInitial Compromise, Data Exfiltration"]
-    H [label = "Command Injection Exploit\nCommand Injection \n(3,0)\nInitial Compromise, Data Exfiltration"]
-    I [label = "Privilege Escalation Exploit\nPrivilege Escalation\n(4,0)\nTerminate Node"]
-    J [label = "SSL/TLS vulnerabilities Exploit\nSSL/TLS vulnerabilities\n(4,0)\nInitial Compromise"]
-    K [label = "Command Injection Exploit\nCommand Injection\n(3,0)\nInitial Compromise, Data Exfiltration"]
-    L [label = "Command Injection Exploit\nCommand Injection\n(4,0)\nInitial Compromise, Data Exfiltration"]
+	A [label = "A\nNginx Exploit\nBuffer overflows\n(1,0)\nInitial Compromise"]
+    B [label = "B\nMisconfigurations Exploit\nMisconfigurations\n(1,0)\nInitial Compromise"]
+    C [label = "C\nPrivilege Escalation Exploit\nPrivilege Escalation\n(1,0)\nData Exfiltration"]
+    D [label = "D\nCross Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,1)\nInitial Compromise"]
+    E [label = "E\nCross Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,0)\nInitial Compromise"]
+    F [label = "F\nAnonymous Access Exploit\nAnonymous Access\n(2,1)\nInitial Compromise, Data Exfiltration"]
+    G [label = "G\nSql Injection Exploit\nSql Injection\n(4,0)\nInitial Compromise, Data Exfiltration"]
+    H [label = "H\nCommand Injection Exploit\nCommand Injection \n(3,0)\nInitial Compromise, Data Exfiltration"]
+    I [label = "I\nPrivilege Escalation Exploit\nPrivilege Escalation\n(4,0)\nTerminate Node"]
+    J [label = "J\nSSL/TLS vulnerabilities Exploit\nSSL/TLS vulnerabilities\n(4,0)\nInitial Compromise"]
+    K [label = "K\nCommand Injection Exploit\nCommand Injection\n(3,0)\nInitial Compromise, Data Exfiltration"]
+    L [label = "L\nCommand Injection Exploit\nCommand Injection\n(4,0)\nInitial Compromise, Data Exfiltration"]
 
 
     T [label = "Terminal"]
