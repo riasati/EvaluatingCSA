@@ -26,3 +26,6 @@ class MongoHelper:
 
     def delete_all_records(self):
         self.collection.delete_many({})
+
+    def delete_all_records_of_model(self):
+        self.collection.delete_many({"ModelNumber": self.model_number})
