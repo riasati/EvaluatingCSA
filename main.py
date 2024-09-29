@@ -40,8 +40,8 @@ def initialize_csa_s(attacker, network):
     return [csa1, csa2, csa3, csa4]
 
 
-def fill_attack_paths_in_attacker(attacker, network, first_node: str, number: int):
-    attacker.create_numbers_of_attack_path(first_node, network.hosts_configuration, number)
+def fill_attack_paths_in_attacker(attacker, network, first_node: str):
+    attacker.create_numbers_of_attack_path(first_node, network.hosts_configuration)
 
 
 def fill_current_attack_path(attacker, number):
@@ -50,11 +50,12 @@ def fill_current_attack_path(attacker, number):
 
 
 def one_stage_attack(attacker, network, csa_list: list, file, record):
-    network.real_change_in_network(attacker, attacker.current_first_node, attacker.current_second_node)
+    network_hosts = network.real_change_in_network(attacker, attacker.current_first_node, attacker.current_second_node)
     print(f"Attack Stage From {attacker.current_first_node} to {attacker.current_second_node}", file=file)
     business_factor = network.calculate_business_factor_with_state()
     print(f"real business factor: {round(business_factor, 2)}", file=file)
     record["RealBusinessFactor"] = round(business_factor, 2)
+    record["State"] = network_hosts
     for i in range(len(csa_list)):
         csa_current_business_factor = csa_list[i].report_current_state()
         future_real_business_factor, csa_future_business_factor = csa_list[i].report_project_state()
@@ -157,7 +158,12 @@ def run_simulation(mongo, one_model_json, attack_path_file_address: str, csa_res
     bpmn, network, attacker = initialize_elements(one_model_json)
     csa_list = initialize_csa_s(attacker, network)
 
-    fill_attack_paths_in_attacker(attacker, network, "A", 10000)
+    first_node = "A"
+
+    attacker.calculate_probability_of_most_successful_path(network.hosts_configuration, first_node)
+    attacker.calculate_appropriate_attack_path_number()
+
+    fill_attack_paths_in_attacker(attacker, network, first_node)
 
     pprint(attacker.attack_path_list_object, attack_path_file)
     attack_path_file.close()
