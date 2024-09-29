@@ -6,6 +6,8 @@ class Attacker:
         self.current_attack_path : list = None
         self.current_first_node: str = None
         self.current_second_node: str = None
+        self.probability_of_most_successful_path: float = None
+        self.appropriate_attack_path_number: int = None
         self.attack_path_graph = attack_json
 
     def get_success_attack_node(self, attack_node_name: str) -> str:
@@ -98,10 +100,10 @@ class Attacker:
             self.create_attack_path(failure_node, hosts_configuration, attack_path_names)
         return attack_path_names
 
-    def create_numbers_of_attack_path(self, attack_node_name: str, hosts_configuration: list, desired_number: int):
+    def create_numbers_of_attack_path(self, attack_node_name: str, hosts_configuration: list):
         import json
         return_object = {}
-        for i in range(desired_number):
+        for i in range(self.appropriate_attack_path_number):
             one_attack_path = self.create_attack_path(attack_node_name, hosts_configuration, [])
             one_attack_path_string = json.dumps(one_attack_path)
             if one_attack_path_string not in return_object:
@@ -109,6 +111,28 @@ class Attacker:
             else:
                 return_object[one_attack_path_string] += 1
         self.attack_path_list_object = return_object
+
+    def calculate_probability_of_most_successful_path(self, hosts_configuration, first_node:str):
+        probability: float = 1
+        next_node = first_node
+        while next_node != "None":
+            security_factor: float = self.get_host_related_security_factor(next_node, hosts_configuration)
+            probability *= self.attack_path_graph[next_node]["SuccessRate"] * (1 - security_factor)
+            next_node = self.get_success_attack_node(next_node)
+        self.probability_of_most_successful_path = probability
+        return probability
+
+    def calculate_appropriate_attack_path_number(self):
+        appropriate_number = (1.0 / self.probability_of_most_successful_path)
+        appropriate_number = int(appropriate_number)
+        quotient = appropriate_number // 100
+        remain = appropriate_number % 100
+        if remain >= 50:
+            quotient += 1
+        appropriate_number = quotient * 100
+        self.appropriate_attack_path_number = appropriate_number
+        return appropriate_number
+
 
     def fill_current_attack_path(self, attack_path_string):
         if self.attack_path_list_object is None:
