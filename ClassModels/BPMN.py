@@ -75,17 +75,16 @@ class BPMN:
         ordered_keys = path["OrderedKeys"]
         for key in ordered_keys:
             if "GateWays" in key:
-                if "Parallel" == path[key]["Type"]:
-                    for j in range(path[key]["PathNumbers"]):
-                        internal_return_path = self.add_path_to_workflow(path[key][f"Path{j + 1}"], [])
-                        #return_paths.extend(internal_return_path)
-                        if j == 0:
-                            for k in range(len(internal_return_path)):
-                                return_paths[j].extend(internal_return_path[k])
-                        else:
-                            return_paths.append(return_paths[0][:len(return_paths[0])-1])
-                            for k in range(len(internal_return_path)):
-                                return_paths[j].extend(internal_return_path[k])
+                for j in range(path[key]["PathNumbers"]):
+                    internal_return_path = self.add_path_to_workflow(path[key][f"Path{j + 1}"], [])
+                    # return_paths.extend(internal_return_path)
+                    if j == 0:
+                        for k in range(len(internal_return_path)):
+                            return_paths[j].extend(internal_return_path[k])
+                    else:
+                        return_paths.append(return_paths[0][:len(return_paths[0]) - 1])
+                        for k in range(len(internal_return_path)):
+                            return_paths[j].extend(internal_return_path[k])
             else:
                 if len(return_paths) == 0:
                     return_paths.append(path[key][:])

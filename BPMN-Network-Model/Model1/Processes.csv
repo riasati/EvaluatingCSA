@@ -1,0 +1,6 @@
+Name,ResourcePool
+ReceiveRequest,NginxServer
+Authenticate,Servers
+EmailUser,SMTPServer
+ProcessData,Servers
+SendResponse,NginxServer

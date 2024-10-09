@@ -55,8 +55,6 @@ BPMN:
       OrderedKeys: [Processes1, GateWays, Processes2]
       Processes1: [ "Start", ReceiveRequest, Authenticate ]
       GateWays:
-        Type: "Parallel" #Exclusive and Inclusive
-        Condition: None
         PathNumbers: 2
         Path1:
           HasPriority: True
