@@ -1,60 +1,41 @@
+// Attack Path
 digraph AttackPathModel {
-
-    #layout=dot
-    label = "Attack Path of Model1";
-    labelloc = "t"; // place the label at the top
-    #node [shape=record];
-
-	A [label = "A\nNginx Exploit\nBuffer overflows\n(1,0)\nInitial Compromise"]
-    B [label = "B\nMisconfigurations Exploit\nMisconfigurations\n(1,0)\nInitial Compromise"]
-    C [label = "C\nPrivilege Escalation Exploit\nPrivilege Escalation\n(1,0)\nData Exfiltration"]
-    D [label = "D\nCross Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,1)\nInitial Compromise"]
-    E [label = "E\nCross Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,0)\nInitial Compromise"]
-    F [label = "F\nAnonymous Access Exploit\nAnonymous Access\n(2,1)\nInitial Compromise, Data Exfiltration"]
-    G [label = "G\nSql Injection Exploit\nSql Injection\n(4,0)\nInitial Compromise, Data Exfiltration"]
-    H [label = "H\nCommand Injection Exploit\nCommand Injection \n(3,0)\nInitial Compromise, Data Exfiltration"]
-    I [label = "I\nPrivilege Escalation Exploit\nPrivilege Escalation\n(4,0)\nTerminate Node"]
-    J [label = "J\nSSL/TLS vulnerabilities Exploit\nSSL/TLS vulnerabilities\n(4,0)\nInitial Compromise"]
-    K [label = "K\nCommand Injection Exploit\nCommand Injection\n(3,0)\nInitial Compromise, Data Exfiltration"]
-    L [label = "L\nCommand Injection Exploit\nCommand Injection\n(4,0)\nInitial Compromise, Data Exfiltration"]
-
-
-    T [label = "Terminal"]
-    
+	graph [label="Attack Path of Model1" labelloc=t]
+	A [label="A\nNginx Exploit\nBuffer overflows\n(1,0)\nInitial Compromise\n0.8"]
+	B [label="B\nMisconfigurations Exploit\nmisconfigurations\n(1,0)\nInitial Compromise\n0.7"]
+	C [label="C\nPrivilege Escalation Exploit\nprivilege escalation\n(1,0)\nData Exfiltration\n0.6"]
+	D [label="D\nCross-Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,1)\nInitial Compromise\n0.7"]
+	E [label="E\nCross-Site Scripting (XSS) Exploit\nCross-Site Scripting (XSS)\n(2,0)\nInitial Compromise\n0.7"]
+	F [label="F\nAnonymous Access Exploit\nanonymous access\n(2,1)\nInitial CompromiseData Exfiltration\n0.6"]
+	G [label="G\nSql Injection Exploit\nSql Injection\n(4,0)\nInitial CompromiseData Exfiltration\n0.7"]
+	H [label="H\nCommand Injection Exploit\ncommand injection\n(3,0)\nInitial CompromiseData Exfiltration\n0.8"]
+	I [label="I\nPrivilege Escalation Exploit\nprivilege escalation\n(4,0)\nTerminate Node\n0.7"]
+	J [label="J\nSSL/TLS vulnerabilities Exploit\nSSL/TLS vulnerabilities\n(4,0)\nInitial Compromise\n0.3"]
+	K [label="K\nCommand Injection Exploit\ncommand injection\n(3,0)\nInitial CompromiseData Exfiltration\n0.8"]
+	L [label="L\nCommand Injection Exploit\nCommand Injection\n(4,0)\nTerminate Node\n0.4"]
+	Terminal [label=Terminal]
+	A -> C [color=blue]
 	A -> B [color=red]
-    A -> C [color=blue]
-
-    B -> T [color=red]
-    B -> C [color=blue]
-
-    C -> D [color=red]
-    C -> E [color=blue]
-
-    D -> E [color=red]
-    D -> G [color=blue]
-
-    E -> F [color=red]
-    E -> G [color=blue]
-
-    F -> T [color=red]
-    F -> G [color=blue]
-
-    G -> H [color=red]
-    G -> I [color=blue]
-
-    H -> T [color=red]
-    H -> J [color=blue]
-
-    I -> K [color=red]
-    I -> K [color=blue]
-
-    J -> T [color=red]
-    J -> L [color=blue]
-
-    K -> T [color=red]
-    K -> T [color=blue]
-
-    L -> T [color=red]
-    L -> T [color=blue]
-
+	B -> C [color=blue]
+	B -> Terminal [color=red]
+	C -> E [color=blue]
+	C -> D [color=red]
+	D -> G [color=blue]
+	D -> E [color=red]
+	E -> G [color=blue]
+	E -> F [color=red]
+	F -> G [color=blue]
+	F -> Terminal [color=red]
+	G -> I [color=blue]
+	G -> H [color=red]
+	H -> J [color=blue]
+	H -> Terminal [color=red]
+	I -> K [color=blue]
+	I -> K [color=red]
+	J -> L [color=blue]
+	J -> Terminal [color=red]
+	K -> Terminal [color=blue]
+	K -> Terminal [color=red]
+	L -> Terminal [color=blue]
+	L -> Terminal [color=red]
 }

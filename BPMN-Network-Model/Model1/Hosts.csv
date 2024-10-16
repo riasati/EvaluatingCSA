@@ -1,6 +1,6 @@
 Address,OS,Services,Processes,SecurityFactor
-(1 0),Linux,http https dns,Nginx,0.8
-(2 0),Linux,http https dns ftp,Apache,0.9
-(2 1),Linux,http https dns ftp,Apache,0.6
-(3 0),Windows,smtp dns,Sendmail,0.5
-(4 0),Linux,http https dns ftp,MySQL,0.4
+(1 0),linux,http https dns,Nginx,0.8
+(2 0),linux,http https dns ftp,Apache,0.9
+(2 1),linux,http https dns ftp,Apache,0.6
+(3 0),windows,smtp dns,Sendmail,0.5
+(4 0),linux,http https dns ftp,MySQL,0.4

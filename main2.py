@@ -6,6 +6,7 @@ import yaml
 from ClassModels.Attacker import Attacker
 from ClassModels.BPMN import BPMN
 from ClassModels.DataConvertor import DataConvertor
+from ClassModels.MongoHelper import MongoHelper
 from ClassModels.NetworkState import NetworkState
 
 
@@ -27,9 +28,12 @@ def initialize_elements(one_json):
     network.add_host_importance(bpmn)
     return bpmn, network, attacker
 
-
+mongo_helper = MongoHelper()
 jsons = import_yml_files_to_json()
 
 for one_json in jsons:
     bpmn, network, attacker = initialize_elements(one_json)
-    DataConvertor.create_model_csv(bpmn, network, attacker, one_json["DirectoryPath"])
+    #DataConvertor.create_model_csv(bpmn, network, attacker, one_json["DirectoryPath"])
+    #DataConvertor.create_result_csv(one_json["DirectoryPath"], one_json["ModelNumber"], mongo_helper)
+    DataConvertor.create_graph(one_json["DirectoryPath"], one_json["ModelNumber"], bpmn, network, attacker)
+    #DataConvertor.create_graph_from_file(one_json["DirectoryPath"])

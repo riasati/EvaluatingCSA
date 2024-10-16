@@ -37,7 +37,7 @@ class NetworkState:
             host["IsCompromised"] = False
             host["IsCompromisedCompletely"] = False
             host["IsTerminated"] = False
-            host["isDataLeaked"] = False
+            host["IsDataLeaked"] = False
 
     def get_host_numbers_of_subnet(self, subnet_number: int) -> int:
         return self.subnet_hosts[subnet_number - 1]
@@ -100,7 +100,7 @@ class NetworkState:
             target_host["IsCompromised"] = True
 
         if "Data Exfiltration" in attack_stage:
-            target_host["isDataLeaked"] = True
+            target_host["IsDataLeaked"] = True
 
         if "Terminate Node" in attack_stage:
             target_host["IsTerminated"] = True
@@ -117,10 +117,10 @@ class NetworkState:
             if host["IsTerminated"]:
                 business_factor += host_factor - (self.terminated_factor * host_factor)
                 continue
-            if host["isDataLeaked"] and host["IsCompromisedCompletely"]:
+            if host["IsDataLeaked"] and host["IsCompromisedCompletely"]:
                 business_factor += host_factor - (self.data_leaked_with_complete_compromise_factor * host_factor)
                 continue
-            if host["isDataLeaked"] and host["IsCompromised"]:
+            if host["IsDataLeaked"] and host["IsCompromised"]:
                 business_factor += host_factor - (self.data_leaked_without_complete_compromise_factor * host_factor)
                 continue
             if host["IsCompromisedCompletely"]:
@@ -171,8 +171,8 @@ class NetworkState:
             host_in_other = [x for x in network_state.hosts if x["Address"] == address][0]
             if host["attemptedAttack"] == host_in_other["attemptedAttack"] and host["IsCompromised"] == host_in_other[
                 "IsCompromised"] and host["IsCompromisedCompletely"] == host_in_other["IsCompromisedCompletely"] and \
-                    host["IsTerminated"] == host_in_other["IsTerminated"] and host["isDataLeaked"] == host_in_other[
-                "isDataLeaked"]: continue
+                    host["IsTerminated"] == host_in_other["IsTerminated"] and host["IsDataLeaked"] == host_in_other[
+                "IsDataLeaked"]: continue
             return host_in_other
 
     def fake_change_in_host(self, one_host, probabilities: list):
@@ -183,7 +183,7 @@ class NetworkState:
             if random.random() > probabilities[1]:
                 one_host['IsCompromisedCompletely'] = True
             if random.random() > probabilities[2]:
-                one_host['isDataLeaked'] = True
+                one_host['IsDataLeaked'] = True
             if random.random() > probabilities[3] and one_host['IsCompromisedCompletely']:
                 one_host['IsTerminated'] = True
 

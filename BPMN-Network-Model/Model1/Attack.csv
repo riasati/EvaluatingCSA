@@ -1,7 +1,7 @@
 NodeName,ExploitName,Vulnerability,OS,Service,Process,SuccessRate,Target,AttackStage,SuccessPath,FailurePath
 A,Nginx Exploit,Buffer overflows,None,None,Nginx,0.8,(1 0),Initial Compromise,C,B
 B,Misconfigurations Exploit,misconfigurations,None,None,Nginx,0.7,(1 0),Initial Compromise,C,None
-C,Privilege Escalation Exploit,privilege escalation,Linux,None,None,0.6,(1 0),Data Exfiltration,E,D
+C,Privilege Escalation Exploit,privilege escalation,linux,None,None,0.6,(1 0),Data Exfiltration,E,D
 D,Cross-Site Scripting (XSS) Exploit,Cross-Site Scripting (XSS),None,http,Apache,0.7,(2 1),Initial Compromise,G,E
 E,Cross-Site Scripting (XSS) Exploit,Cross-Site Scripting (XSS),None,http,Apache,0.7,(2 0),Initial Compromise,G,F
 F,Anonymous Access Exploit,anonymous access,None,None,ftp,0.6,(2 1),Initial Compromise Data Exfiltration,G,None
