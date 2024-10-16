@@ -52,9 +52,9 @@ BPMN:
     PathNumbers: 1
     Path1:
       HasPriority: False
-      OrderedKeys: [Processes1, GateWays, Processes2]
+      OrderedKeys: [Processes1, GateWays1, Processes2]
       Processes1: [ "Start", ReceiveRequest, Authenticate ]
-      GateWays:
+      GateWays1:
         PathNumbers: 2
         Path1:
           HasPriority: True

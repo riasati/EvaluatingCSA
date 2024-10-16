@@ -60,6 +60,15 @@ digraph BPMN {
 		label=Mission3 style=dotted
 		"Process data correctly"
 	}
+	start -> ReceiveRequest
+	ReceiveRequest -> Authenticate
+	Authenticate -> path1gateways1start
+	path1gateways1start -> ProcessData
+	ProcessData -> path1gateways1end
+	path1gateways1end -> SendResponse
+	SendResponse -> end
+	path1gateways1start -> EmailUser
+	EmailUser -> path1gateways1end
 	ReceiveRequest -> NGINX [lhead=cluster_nginxserver style=dashed]
 	Authenticate -> Server1 [lhead=cluster_servers style=dashed]
 	EmailUser -> SMTP [lhead=cluster_smtpserver style=dashed]
