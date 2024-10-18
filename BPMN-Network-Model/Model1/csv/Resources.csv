@@ -1,0 +1,5 @@
+Name,Dependencies,HostAddresses
+DB,,(4;0)
+Servers,DB,(2;0) (2;1)
+NGINXServer,,(1;0)
+SMTPServer,Servers,(3;0)

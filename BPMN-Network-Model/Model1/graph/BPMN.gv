@@ -1,0 +1,105 @@
+// BPMN
+digraph BPMN {
+	graph [compound=true label="BPMN of Model1" labelloc=t rankdir=LR]
+	node [color=lightgoldenrodyellow shape=rectangle style="rounded,filled"]
+	"start.1" [label=start color=palegreen1 shape=circle]
+	"end.1" [label=end color=orangered shape=doublecircle]
+	"start.2" [label=start color=palegreen1 shape=circle]
+	"end.2" [label=end color=orangered shape=doublecircle]
+	5.1 [label=5 color=gray]
+	"ReceiveRequest.1" [label=ReceiveRequest]
+	"Authenticate.1" [label=Authenticate]
+	"ProcessData.1" [label=ProcessData]
+	"SendResponse.1" [label=SendResponse]
+	2.2 [label=2 color=gray]
+	"ReceiveRequest.2" [label=ReceiveRequest]
+	"Authenticate.2" [label=Authenticate]
+	"EmailUser.2" [label=EmailUser]
+	"SendResponse.2" [label=SendResponse]
+	"(4,0).DB" [label="(4,0)"]
+	"(2,0).Servers" [label="(2,0)"]
+	"(2,1).Servers" [label="(2,1)"]
+	"(1,0).NGINXServer" [label="(1,0)"]
+	"(3,0).SMTPServer" [label="(3,0)"]
+	"3.Correct Authentication" [label=3 color=gray]
+	"Authenticate.Correct Authentication" [label=Authenticate]
+	"2.Emailing Users" [label=2 color=gray]
+	"EmailUser.Emailing Users" [label=EmailUser]
+	"4.Process data correctly" [label=4 color=gray]
+	"ReceiveRequest.Process data correctly" [label=ReceiveRequest]
+	"ProcessData.Process data correctly" [label=ProcessData]
+	"SendResponse.Process data correctly" [label=SendResponse]
+	subgraph cluster_workflow {
+		label=Workflow style=dotted
+		"start.1"
+		"end.1"
+		"start.2"
+		"end.2"
+		5.1
+		2.2
+		"ReceiveRequest.1"
+		"Authenticate.1"
+		"ProcessData.1"
+		"SendResponse.1"
+		"ReceiveRequest.2"
+		"Authenticate.2"
+		"EmailUser.2"
+		"SendResponse.2"
+	}
+	subgraph cluster_db {
+		label=DB style=dotted
+		"(4,0).DB"
+	}
+	subgraph cluster_servers {
+		label=Servers style=dotted
+		"(2,0).Servers"
+		"(2,1).Servers"
+	}
+	subgraph cluster_nginxserver {
+		label=NGINXServer style=dotted
+		"(1,0).NGINXServer"
+	}
+	subgraph cluster_smtpserver {
+		label=SMTPServer style=dotted
+		"(3,0).SMTPServer"
+	}
+	subgraph cluster_mission1 {
+		label="Mission1\nCorrect Authentication" style=dotted
+		"3.Correct Authentication"
+		"Authenticate.Correct Authentication"
+	}
+	subgraph cluster_mission2 {
+		label="Mission2\nEmailing Users" style=dotted
+		"2.Emailing Users"
+		"EmailUser.Emailing Users"
+	}
+	subgraph cluster_mission3 {
+		label="Mission3\nProcess data correctly" style=dotted
+		"4.Process data correctly"
+		"ReceiveRequest.Process data correctly"
+		"ProcessData.Process data correctly"
+		"SendResponse.Process data correctly"
+	}
+	"start.1" -> 5.1
+	5.1 -> "ReceiveRequest.1"
+	"ReceiveRequest.1" -> "Authenticate.1"
+	"Authenticate.1" -> "ProcessData.1"
+	"ProcessData.1" -> "SendResponse.1"
+	"SendResponse.1" -> "end.1"
+	"start.2" -> 2.2
+	2.2 -> "ReceiveRequest.2"
+	"ReceiveRequest.2" -> "Authenticate.2"
+	"Authenticate.2" -> "EmailUser.2"
+	"EmailUser.2" -> "SendResponse.2"
+	"SendResponse.2" -> "end.2"
+	"ReceiveRequest.1" -> "(1,0).NGINXServer" [lhead=cluster_nginxserver style=dashed]
+	"Authenticate.1" -> "(2,0).Servers" [lhead=cluster_servers style=dashed]
+	"ProcessData.1" -> "(2,0).Servers" [lhead=cluster_servers style=dashed]
+	"SendResponse.1" -> "(1,0).NGINXServer" [lhead=cluster_nginxserver style=dashed]
+	"ReceiveRequest.2" -> "(1,0).NGINXServer" [lhead=cluster_nginxserver style=dashed]
+	"Authenticate.2" -> "(2,0).Servers" [lhead=cluster_servers style=dashed]
+	"EmailUser.2" -> "(3,0).SMTPServer" [lhead=cluster_smtpserver style=dashed]
+	"SendResponse.2" -> "(1,0).NGINXServer" [lhead=cluster_nginxserver style=dashed]
+	"(2,0).Servers" -> "(4,0).DB" [lhead=cluster_db ltail=cluster_servers style=dashed]
+	"(3,0).SMTPServer" -> "(2,0).Servers" [lhead=cluster_servers ltail=cluster_smtpserver style=dashed]
+}

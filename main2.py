@@ -33,7 +33,7 @@ jsons = import_yml_files_to_json()
 
 for one_json in jsons:
     bpmn, network, attacker = initialize_elements(one_json)
-    #DataConvertor.create_model_csv(bpmn, network, attacker, one_json["DirectoryPath"])
-    #DataConvertor.create_result_csv(one_json["DirectoryPath"], one_json["ModelNumber"], mongo_helper)
+    DataConvertor.create_model_csv(bpmn, network, attacker, one_json["DirectoryPath"])
+    DataConvertor.create_result_csv(one_json["DirectoryPath"], one_json["ModelNumber"], mongo_helper)
     DataConvertor.create_graph(one_json["DirectoryPath"], one_json["ModelNumber"], bpmn, network, attacker)
     #DataConvertor.create_graph_from_file(one_json["DirectoryPath"])
