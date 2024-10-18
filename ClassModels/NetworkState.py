@@ -15,7 +15,8 @@ class NetworkState:
             one_host = {"Address": host, "Os": network_json["HostConfiguration"][host]["Os"],
                         "Services": network_json["HostConfiguration"][host]["Services"],
                         "Processes": network_json["HostConfiguration"][host]["Processes"],
-                        "SecurityFactor": network_json["HostConfiguration"][host]["SecurityFactor"]}
+                        "SecurityFactor": network_json["HostConfiguration"][host]["SecurityFactor"],
+                        "Importance": 0}
             self.hosts_configuration.append(one_host)
         self.hosts = copy.deepcopy(self.hosts_configuration)
         #self.hosts = self.hosts_configuration[:]
@@ -133,37 +134,76 @@ class NetworkState:
         return business_factor
 
     def add_host_importance(self, bpmn: BPMN):
-        subnet_data = []
-        for i in range(self.subnet_numbers):
-            one_subnet = {"Number": i + 1, "Importance": 0.0}
-            subnet_data.append(one_subnet)
-        for process in bpmn.processes:
-            desired_resource_pools = [x for x in bpmn.resource_pools if x["Name"] == process["RelatedResourcePool"]]
-            if len(desired_resource_pools) == 0:
-                raise Exception("related resource pool of process does not match with resource pool number")
-            process_subnet_related = desired_resource_pools[0]["RelatedSubnet"]
-            process_importance = process["Importance"]
-            subnet = [x for x in subnet_data if x["Number"] == process_subnet_related][0]
-            if len(desired_resource_pools[0]["Dependencies"]) > 0:
-                dependency_number = len(desired_resource_pools[0]["Dependencies"])
-                for i in range(dependency_number):
-                    desired_resource_pools2 = [x for x in bpmn.resource_pools if
-                                              x["Name"] == desired_resource_pools[0]["Dependencies"][i]]
-                    process_subnet_related2 = desired_resource_pools2[0]["RelatedSubnet"]
-                    subnet2 = [x for x in subnet_data if x["Number"] == process_subnet_related2][0]
-                    subnet2["Importance"] += process_importance / (dependency_number + 1)
-                subnet["Importance"] += process_importance / (dependency_number + 1)
-            else:
-                subnet["Importance"] += process_importance
+
+        def calculate_host_related_number(activity_resource_name, resources):
+            number = 0
+            related_resource = [x for x in resources if x["Name"] == activity_resource_name][0]
+            related_host_addresses = related_resource["HostAddresses"]
+            dependencies = related_resource["Dependencies"]
+            number += len(related_host_addresses)
+            for dependency in dependencies:
+                number += calculate_host_related_number(dependency, resources)
+            return number
+
+        def add_importance(activity, resource_name, resources, host_numbers):
+            related_resource = [x for x in resources if x["Name"] == resource_name][0]
+            related_host_addresses = related_resource["HostAddresses"]
+            related_dependencies = related_resource["Dependencies"]
+            for address in related_host_addresses:
+                related_host = [x for x in self.hosts_configuration if x["Address"] == address][0]
+                related_host["Importance"] += (activity["Importance"] * 1.0) / host_numbers
+            for dependency in related_dependencies:
+                add_importance(activity, dependency, resources, host_numbers)
 
 
-        for host in self.hosts_configuration:
-            subnet_related = self.get_subnet_number_of_host(host)
-            host_number_of_subnet = self.get_host_numbers_of_subnet(subnet_related)
-            subnet = [x for x in subnet_data if x["Number"] == subnet_related][0]
-            host["Importance"] = (subnet["Importance"] * 1.0) / host_number_of_subnet
-            host2 = [x for x in self.hosts if x["Address"] == host["Address"]][0]
-            host2["Importance"] = host["Importance"]
+        # subnet_data = []
+        # for i in range(self.subnet_numbers):
+        #     one_subnet = {"Number": i + 1, "Importance": 0.0}
+        #     subnet_data.append(one_subnet)
+        for activity in bpmn.activities:
+            host_numbers = calculate_host_related_number(activity["RelatedResource"], bpmn.resources)
+            add_importance(activity, activity["RelatedResource"], bpmn.resources, host_numbers)
+
+        for host_configuration in self.hosts_configuration:
+            host = [x for x in self.hosts if x["Address"] == host_configuration["Address"]][0]
+            host["Importance"] = host_configuration["Importance"]
+
+
+
+            # desired_resource = [x for x in bpmn.resources if x["Name"] == activity["RelatedResource"]]
+            # if len(desired_resource) == 0:
+            #     raise Exception("related resource of activity does not match with resource name")
+            # activity_host_related = desired_resource[0]["HostAddresses"]
+            # activity_importance = activity["Importance"]
+            #
+            # for address in activity_host_related:
+            #     related_host = [x for x in self.hosts_configuration if x["Address"] == address][0]
+            #     if len(desired_resource[0]["Dependencies"]) > 0:
+            #         dependency_number = len(desired_resource[0]["Dependencies"])
+            #         for i in range(dependency_number):
+            #             desired_resource2 = [x for x in bpmn.resources if
+            #                                  x["Name"] == desired_resource[0]["Dependencies"][i]]
+            #             host_related2 = desired_resource2[0]["HostAddresses"]
+            #             #activity_importance = activity["Importance"]
+            #             related_host2 = [x for x in self.hosts_configuration if x["Address"] == address][0]
+            #
+            #
+            #     else:
+            #         related_host["Importance"] += (activity_importance * 1.0) / len(activity_host_related)
+            #
+            # subnet = [x for x in subnet_data if x["Number"] == process_subnet_related][0]
+            # if len(desired_resource_pools[0]["Dependencies"]) > 0:
+            #     dependency_number = len(desired_resource_pools[0]["Dependencies"])
+            #     for i in range(dependency_number):
+            #         desired_resource_pools2 = [x for x in bpmn.resources if
+            #                                    x["Name"] == desired_resource_pools[0]["Dependencies"][i]]
+            #         process_subnet_related2 = desired_resource_pools2[0]["RelatedSubnet"]
+            #         subnet2 = [x for x in subnet_data if x["Number"] == process_subnet_related2][0]
+            #         subnet2["Importance"] += process_importance / (dependency_number + 1)
+            #     subnet["Importance"] += process_importance / (dependency_number + 1)
+            # else:
+            #     subnet["Importance"] += process_importance
+
 
     def which_host_is_different(self, network_state):
         for host in self.hosts:

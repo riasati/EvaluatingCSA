@@ -1,5 +1,0 @@
-Name,ResourceNumber,Resources,Dependencies,SubnetNumber
-DB,1,DB,,4
-Servers,2,Server1 Server2,DB,2
-NginxServer,1,NGINX,,1
-SMTPServer,1,SMTP,Servers,3

@@ -1,88 +1,69 @@
 BPMN:
-  ResourcePools:
-    ResourcePoolNumbers: 4
-    ResourcePool1:
+  Resources:
+    ResourceNumbers: 4
+    Resource1:
       Name: "DB"
-      ResourceNumbers: 1
-      Resource1:
-        Name: "DB"
       Dependencies: []
-      SubnetNumber: 4
-    ResourcePool2:
+      HostAddresses: ["(4,0)"]
+    Resource2:
       Name: "Servers"
-      ResourceNumbers: 2
-      Resource1:
-        Name: "Server1"
-      Resource2:
-        Name: "Server2"
       Dependencies: [ DB ]
-      SubnetNumber: 2
-    ResourcePool3:
-      Name: "NginxServer"
-      ResourceNumbers: 1
-      Resource1:
-        Name: "NGINX"
+      HostAddresses: ["(2,0)", "(2,1)"]
+    Resource3:
+      Name: "NGINXServer"
       Dependencies: []
-      SubnetNumber: 1
-    ResourcePool4:
+      HostAddresses: ["(1,0)"]
+    Resource4:
       Name: "SMTPServer"
-      ResourceNumbers: 1
-      Resource1:
-        Name: "SMTP"
       Dependencies: [ Servers ]
-      SubnetNumber: 3
-  Processes:
-    ProcessNumbers: 5
-    Process1:
+      HostAddresses: ["(3,0)"]
+  Activities:
+    ActivityNumbers: 5
+    Activity1:
       Name: "ReceiveRequest"
-      ResourcePool: NginxServer
-    Process2:
+      Resource: NGINXServer
+    Activity2:
       Name: "Authenticate"
-      ResourcePool: Servers
-    Process3:
+      Resource: Servers
+    Activity3:
       Name: "EmailUser"
-      ResourcePool: SMTPServer
-    Process4:
+      Resource: SMTPServer
+    Activity4:
       Name: "ProcessData"
-      ResourcePool: Servers
-    Process5:
+      Resource: Servers
+    Activity5:
       Name: "SendResponse"
-      ResourcePool: NginxServer
+      Resource: NGINXServer
   WorkFlows:
-    PathNumbers: 1
-    Path1:
-      HasPriority: False
-      OrderedKeys: [Processes1, GateWays, Processes2]
-      Processes1: [ "Start", ReceiveRequest, Authenticate ]
-      GateWays:
-        Type: "Parallel" #Exclusive and Inclusive
-        Condition: None
-        PathNumbers: 2
-        Path1:
-          HasPriority: True
-          OrderedKeys: [Processes1]
-          Processes1: [ ProcessData ]
-          Priority: 5
-        Path2:
-          HasPriority: True
-          OrderedKeys: [Processes1]
-          Processes1: [ EmailUser ]
-          Priority: 2
-      Processes2: [ SendResponse, "End" ]
+    WorkFlowNumbers: 2
+    WorkFlow1:
+      Importance: 5
+      Activities: ["Start", ReceiveRequest, Authenticate, ProcessData, SendResponse, "End"]
+      Name: "Processing Data"
+    WorkFlow2:
+      Importance: 2
+      Activities: [ "Start", ReceiveRequest, Authenticate, EmailUser, SendResponse, "End" ]
+      Name: "Emailing User"
   Missions:
     MissionNumbers: 3
     Mission1:
       Name: "Correct Authentication"
-      Processes: [Authenticate]
-      Priority: 3
+      Activities: [Authenticate]
+      Importance: 3
+      Type: "Equal"
+      Weights: []
     Mission2:
       Name: "Emailing Users"
-      Processes: [ EmailUser ]
-      Priority: 2
+      Activities: [ EmailUser ]
+      Importance: 2
+      Type: "Weighted"
+      Weights: [1.0]
     Mission3:
       Name: "Process data correctly"
-      Processes: [ ReceiveRequest, ProcessData, SendResponse]
-      Priority: 4
+      Activities: [ ReceiveRequest, ProcessData, SendResponse]
+      Importance: 4
+      Type: "Related"
+      Weights: []
 
 Network:
   SubnetsNumbers: 4
