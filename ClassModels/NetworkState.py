@@ -16,7 +16,11 @@ class NetworkState:
                         "Services": network_json["HostConfiguration"][host]["Services"],
                         "Processes": network_json["HostConfiguration"][host]["Processes"],
                         "SecurityFactor": network_json["HostConfiguration"][host]["SecurityFactor"],
-                        "Importance": 0}
+                        "Importance": 0,
+                        "InitialImportance": 0,
+                        "CurrentImportance": 0,
+                        "RelatedHosts": [],
+                        "RelatedHostsImportance": []}
             self.hosts_configuration.append(one_host)
         self.hosts = copy.deepcopy(self.hosts_configuration)
         #self.hosts = self.hosts_configuration[:]
@@ -37,8 +41,10 @@ class NetworkState:
             host["attemptedAttack"] = False
             host["IsCompromised"] = False
             host["IsCompromisedCompletely"] = False
-            host["IsTerminated"] = False
-            host["IsDataLeaked"] = False
+            host["Termination"] = 0.0
+            host["DataLeakage"] = 0.0
+            host["Importance"] = host["InitialImportance"]
+            host["CurrentImportance"] = host["Importance"]
 
     def get_host_numbers_of_subnet(self, subnet_number: int) -> int:
         return self.subnet_hosts[subnet_number - 1]
@@ -100,11 +106,13 @@ class NetworkState:
         if "Initial Compromise" in attack_stage:
             target_host["IsCompromised"] = True
 
-        if "Data Exfiltration" in attack_stage:
-            target_host["IsDataLeaked"] = True
+        for attack in attack_stage:
+            if attack.split(":")[0] == "Data Exfiltration":
+                target_host["DataLeakage"] = float(attack.split(":")[1])
 
-        if "Terminate Node" in attack_stage:
-            target_host["IsTerminated"] = True
+        for attack in attack_stage:
+            if attack.split(":")[0] == "Terminate Node":
+                target_host["Termination"] = float(attack.split(":")[1])
 
         if vulnerability == "privilege escalation":
             target_host["IsCompromisedCompletely"] = True
@@ -112,25 +120,56 @@ class NetworkState:
         return self.hosts
 
     def calculate_business_factor_with_state(self) -> float:
+
+        def change_current_importance_of_related_host(one_host, importance_difference) -> None:
+            if len(one_host["RelatedHosts"]) == 0: return
+            for host_str, related_importance in zip(one_host["RelatedHosts"], one_host["RelatedHostsImportance"]):
+                related_host = [x for x in self.hosts if x["Address"] == host_str][0]
+                if related_importance > 0:
+                    if importance_difference >= related_importance:
+                        related_host["Importance"] -= related_importance
+                        related_host["CurrentImportance"] = related_host["Importance"]
+                        index = one_host["RelatedHosts"].index(host_str)
+                        one_host["RelatedHostsImportance"][index] -= related_importance
+                        index = related_host["RelatedHosts"].index(one_host["Address"])
+                        related_host["RelatedHostsImportance"][index] -= related_importance
+                    else:
+                        related_host["Importance"] -= importance_difference
+                        related_host["CurrentImportance"] = related_host["Importance"]
+                        index = one_host["RelatedHosts"].index(host_str)
+                        one_host["RelatedHostsImportance"][index] -= importance_difference
+                        index = related_host["RelatedHosts"].index(one_host["Address"])
+                        related_host["RelatedHostsImportance"][index] -= importance_difference
+
         business_factor = 0.0
         for host in self.hosts:
-            host_factor = host["Importance"]
-            if host["IsTerminated"]:
-                business_factor += host_factor - (self.terminated_factor * host_factor)
+            if host["Termination"] != 0:
+                difference = (((self.terminated_factor * host["Termination"]) + self.data_leaked_with_complete_compromise_factor) * host["Importance"])
+                change_current_importance_of_related_host(host, difference)
+                host["CurrentImportance"] = host["Importance"] - difference
                 continue
-            if host["IsDataLeaked"] and host["IsCompromisedCompletely"]:
-                business_factor += host_factor - (self.data_leaked_with_complete_compromise_factor * host_factor)
+            if host["DataLeakage"] != 0 and host["IsCompromisedCompletely"]:
+                difference = (((self.data_leaked_with_complete_compromise_factor * host["DataLeakage"]) + self.data_leaked_without_complete_compromise_factor) * host["Importance"])
+                change_current_importance_of_related_host(host, difference)
+                host["CurrentImportance"] = host["Importance"] - difference
                 continue
-            if host["IsDataLeaked"] and host["IsCompromised"]:
-                business_factor += host_factor - (self.data_leaked_without_complete_compromise_factor * host_factor)
+            if host["DataLeakage"] != 0 and host["IsCompromised"]:
+                difference = (((self.data_leaked_without_complete_compromise_factor * host["DataLeakage"]) + self.compromised_completely_factor) * host["Importance"])
+                change_current_importance_of_related_host(host, difference)
+                host["CurrentImportance"] = host["Importance"] - difference
                 continue
             if host["IsCompromisedCompletely"]:
-                business_factor += host_factor - (self.compromised_completely_factor * host_factor)
+                difference = (self.compromised_completely_factor * host["Importance"])
+                change_current_importance_of_related_host(host, difference)
+                host["CurrentImportance"] = host["Importance"] - difference
                 continue
             if host["IsCompromised"]:
-                business_factor += host_factor - (self.compromised_factor * host_factor)
+                difference = (self.compromised_factor * host["Importance"])
+                change_current_importance_of_related_host(host, difference)
+                host["CurrentImportance"] = host["Importance"] - difference
                 continue
-            business_factor += host_factor
+        for host in self.hosts:
+            business_factor += host["CurrentImportance"]
         return business_factor
 
     def add_host_importance(self, bpmn: BPMN):
@@ -155,65 +194,50 @@ class NetworkState:
             for dependency in related_dependencies:
                 add_importance(activity, dependency, resources, host_numbers)
 
+        def get_related_host(activity, resource_name, resources, return_host_addresses):
+            related_resource = [x for x in resources if x["Name"] == resource_name][0]
+            related_host_addresses = related_resource["HostAddresses"]
+            related_dependencies = related_resource["Dependencies"]
+            for address in related_host_addresses:
+                related_host = [x for x in self.hosts_configuration if x["Address"] == address][0]
+                return_host_addresses.append(related_host["Address"])
+            for dependency in related_dependencies:
+                get_related_host(activity, dependency, resources, return_host_addresses)
 
-        # subnet_data = []
-        # for i in range(self.subnet_numbers):
-        #     one_subnet = {"Number": i + 1, "Importance": 0.0}
-        #     subnet_data.append(one_subnet)
         for activity in bpmn.activities:
             host_numbers = calculate_host_related_number(activity["RelatedResource"], bpmn.resources)
             add_importance(activity, activity["RelatedResource"], bpmn.resources, host_numbers)
 
+        for activity in bpmn.activities:
+            activity_host_addresses = []
+            get_related_host(activity, activity["RelatedResource"], bpmn.resources,
+                             activity_host_addresses)
+            for related_activity_str,importance in zip(activity["RelatedActivities"], activity["RelatedActivitiesImportance"]):
+                related_activity = [x for x in bpmn.activities if x["Name"] == related_activity_str][0]
+                related_host_addresses = []
+                get_related_host(related_activity, related_activity["RelatedResource"], bpmn.resources, related_host_addresses)
+                importance = importance / len(activity_host_addresses)
+                importance = importance / len(related_host_addresses)
+                for address in activity_host_addresses:
+                    for address2 in related_host_addresses:
+                        if address == address2: continue
+                        host = [x for x in self.hosts_configuration if x["Address"] == address][0]
+                        if address2 not in host["RelatedHosts"]:
+                            host["RelatedHosts"].append(address2)
+                            host["RelatedHostsImportance"].append(importance)
+                        else:
+                            index = host["RelatedHosts"].index(address2)
+                            host["RelatedHostsImportance"][index] += importance
+
         for host_configuration in self.hosts_configuration:
             host = [x for x in self.hosts if x["Address"] == host_configuration["Address"]][0]
             host["Importance"] = host_configuration["Importance"]
+            host["InitialImportance"] = host["Importance"]
+            host["CurrentImportance"] = host["Importance"]
+            host["RelatedHosts"] = host_configuration["RelatedHosts"]
+            host["RelatedHostsImportance"] = host_configuration["RelatedHostsImportance"]
 
 
-
-            # desired_resource = [x for x in bpmn.resources if x["Name"] == activity["RelatedResource"]]
-            # if len(desired_resource) == 0:
-            #     raise Exception("related resource of activity does not match with resource name")
-            # activity_host_related = desired_resource[0]["HostAddresses"]
-            # activity_importance = activity["Importance"]
-            #
-            # for address in activity_host_related:
-            #     related_host = [x for x in self.hosts_configuration if x["Address"] == address][0]
-            #     if len(desired_resource[0]["Dependencies"]) > 0:
-            #         dependency_number = len(desired_resource[0]["Dependencies"])
-            #         for i in range(dependency_number):
-            #             desired_resource2 = [x for x in bpmn.resources if
-            #                                  x["Name"] == desired_resource[0]["Dependencies"][i]]
-            #             host_related2 = desired_resource2[0]["HostAddresses"]
-            #             #activity_importance = activity["Importance"]
-            #             related_host2 = [x for x in self.hosts_configuration if x["Address"] == address][0]
-            #
-            #
-            #     else:
-            #         related_host["Importance"] += (activity_importance * 1.0) / len(activity_host_related)
-            #
-            # subnet = [x for x in subnet_data if x["Number"] == process_subnet_related][0]
-            # if len(desired_resource_pools[0]["Dependencies"]) > 0:
-            #     dependency_number = len(desired_resource_pools[0]["Dependencies"])
-            #     for i in range(dependency_number):
-            #         desired_resource_pools2 = [x for x in bpmn.resources if
-            #                                    x["Name"] == desired_resource_pools[0]["Dependencies"][i]]
-            #         process_subnet_related2 = desired_resource_pools2[0]["RelatedSubnet"]
-            #         subnet2 = [x for x in subnet_data if x["Number"] == process_subnet_related2][0]
-            #         subnet2["Importance"] += process_importance / (dependency_number + 1)
-            #     subnet["Importance"] += process_importance / (dependency_number + 1)
-            # else:
-            #     subnet["Importance"] += process_importance
-
-
-    def which_host_is_different(self, network_state):
-        for host in self.hosts:
-            address = host["Address"]
-            host_in_other = [x for x in network_state.hosts if x["Address"] == address][0]
-            if host["attemptedAttack"] == host_in_other["attemptedAttack"] and host["IsCompromised"] == host_in_other[
-                "IsCompromised"] and host["IsCompromisedCompletely"] == host_in_other["IsCompromisedCompletely"] and \
-                    host["IsTerminated"] == host_in_other["IsTerminated"] and host["IsDataLeaked"] == host_in_other[
-                "IsDataLeaked"]: continue
-            return host_in_other
 
     def fake_change_in_host(self, one_host, probabilities: list):
         one_host['attemptedAttack'] = True
@@ -223,7 +247,7 @@ class NetworkState:
             if random.random() > probabilities[1]:
                 one_host['IsCompromisedCompletely'] = True
             if random.random() > probabilities[2]:
-                one_host['IsDataLeaked'] = True
+                one_host['DataLeakage'] = random.random()
             if random.random() > probabilities[3] and one_host['IsCompromisedCompletely']:
-                one_host['IsTerminated'] = True
+                one_host['Termination'] = random.random()
 

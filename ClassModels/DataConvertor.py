@@ -141,6 +141,10 @@ class DataConvertor:
             host_keys = list(host_keys)
             if "attemptedAttack" in host_keys: host_keys.remove("attemptedAttack")
             if "Importance" in host_keys: host_keys.remove("Importance")
+            if "InitialImportance" in host_keys: host_keys.remove("InitialImportance")
+            if "CurrentImportance" in host_keys: host_keys.remove("CurrentImportance")
+            if "RelatedHosts" in host_keys: host_keys.remove("RelatedHosts")
+            if "RelatedHostsImportance" in host_keys: host_keys.remove("RelatedHostsImportance")
             for key in host_keys:
                 result_key.append(f"Host{i + 1}{key}")
 
@@ -155,6 +159,10 @@ class DataConvertor:
                 host_keys = list(host_keys)
                 if "attemptedAttack" in host_keys: host_keys.remove("attemptedAttack")
                 if "Importance" in host_keys: host_keys.remove("Importance")
+                if "InitialImportance" in host_keys: host_keys.remove("InitialImportance")
+                if "CurrentImportance" in host_keys: host_keys.remove("CurrentImportance")
+                if "RelatedHosts" in host_keys: host_keys.remove("RelatedHosts")
+                if "RelatedHostsImportance" in host_keys: host_keys.remove("RelatedHostsImportance")
                 for key in host_keys:
                     if type(record["State"][i][key]) == str:
                         result_field.append(record["State"][i][key].replace(",", " "))
@@ -183,7 +191,7 @@ class DataConvertor:
         for key in attacker.attack_path_graph.keys():
             node_label = (
                 fr"{key}\n{attacker.attack_path_graph[key]['ExploitName']}\n{attacker.attack_path_graph[key]['Vulnerability']}"
-                fr"\n{attacker.attack_path_graph[key]['Target']}\n{''.join(attacker.attack_path_graph[key]['AttackStage'])}"
+                fr"\n{attacker.attack_path_graph[key]['Target']}\n{' '.join(attacker.attack_path_graph[key]['AttackStage'])}"
                 fr"\n{attacker.attack_path_graph[key]['SuccessRate']}")
             dot.node(key, label=f'{node_label}')
 

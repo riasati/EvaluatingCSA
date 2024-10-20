@@ -132,7 +132,7 @@ Attack:
     Process: None
     SuccessRate: 0.6
     Target: (1,0)
-    AttackStage: [Data Exfiltration]
+    AttackStage: [Data Exfiltration:0.7]
     SuccessPath: E
     FailurePath: D
   D:
@@ -165,7 +165,7 @@ Attack:
     Process: ftp
     SuccessRate: 0.6
     Target: (2,1)
-    AttackStage: [Initial Compromise, Data Exfiltration]
+    AttackStage: [Initial Compromise, Data Exfiltration:0.8]
     SuccessPath: G
     FailurePath: None
   G:
@@ -176,7 +176,7 @@ Attack:
     Process: mysql
     SuccessRate: 0.7
     Target: (4,0)
-    AttackStage: [Initial Compromise, Data Exfiltration]
+    AttackStage: [Initial Compromise, Data Exfiltration:0.6]
     SuccessPath: I
     FailurePath: H
   H:
@@ -187,7 +187,7 @@ Attack:
     Process: Sendmail
     SuccessRate: 0.8
     Target: (3,0)
-    AttackStage: [Initial Compromise, Data Exfiltration]
+    AttackStage: [Initial Compromise, Data Exfiltration:0.9]
     SuccessPath: J
     FailurePath: None
   I:
@@ -198,7 +198,7 @@ Attack:
     Process: mysql
     SuccessRate: 0.7
     Target: (4,0)
-    AttackStage: [Terminate Node]
+    AttackStage: [Terminate Node:0.8]
     SuccessPath: K
     FailurePath: K
   J:
@@ -220,7 +220,7 @@ Attack:
     Process: Sendmail
     SuccessRate: 0.8
     Target: (3,0)
-    AttackStage: [Initial Compromise, Data Exfiltration ]
+    AttackStage: [Initial Compromise, Data Exfiltration:0.8 ]
     SuccessPath: None
     FailurePath: None
   L:
@@ -231,6 +231,6 @@ Attack:
     Process: None
     SuccessRate: 0.4
     Target: (4,0)
-    AttackStage: [ Terminate Node ]
+    AttackStage: [ Terminate Node:0.9 ]
     SuccessPath: None
     FailurePath: None

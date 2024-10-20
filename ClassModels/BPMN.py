@@ -17,7 +17,9 @@ class BPMN:
         activities = []
         for i in range(self.activity_number):
             one_activity = {"Name": bpmn_json["Activities"][f"Activity{i + 1}"]["Name"],
-                           "RelatedResource": bpmn_json["Activities"][f"Activity{i + 1}"]["Resource"]}
+                           "RelatedResource": bpmn_json["Activities"][f"Activity{i + 1}"]["Resource"],
+                            "RelatedActivities": [],
+                            "RelatedActivitiesImportance": []}
             activities.append(one_activity)
         self.activities = activities
 
@@ -54,6 +56,20 @@ class BPMN:
         self.business_importance = importance
 
     def calculate_activity_importance(self):
+
+        def calculate_activity_importance_from_mission(mission, activity):
+            if mission["Type"] == "Equal":
+                importance = (mission["Importance"] * 1.0) / len(mission["Activities"])
+                return importance
+            elif mission["Type"] == "Weighted":
+                number = mission["Activities"].index(activity["Name"])
+                weight = mission["Weights"][number]
+                importance = (mission["Importance"] * weight)
+                return importance
+            elif mission["Type"] == "Related":
+                importance = (mission["Importance"] * 1.0) / len(mission["Activities"])
+                return importance
+
         for activity in self.activities:
             importance = 0.0
             activity_name = activity["Name"]
@@ -62,8 +78,17 @@ class BPMN:
                     importance += (workflow["Importance"] * 1.0) / (len(workflow["Activities"]) - 2)
             for mission in self.missions:
                 if activity_name in mission["Activities"]:
-                    # TODO
-                    importance += (mission["Importance"] * 1.0) / len(mission["Activities"])
+                    activity_mission_importance = calculate_activity_importance_from_mission(mission, activity)
+                    importance += activity_mission_importance
+                    if mission["Type"] == "Related":
+                        for activity2 in mission["Activities"]:
+                            if activity_name == activity2: continue
+                            if activity2 not in activity["RelatedActivities"]:
+                                activity["RelatedActivities"].append(activity2)
+                                activity["RelatedActivitiesImportance"].append(activity_mission_importance)
+                            else:
+                                index = activity["RelatedActivities"].index(activity2)
+                                activity["RelatedActivitiesImportance"][index] += activity_mission_importance
             activity["Importance"] = importance
 
 
