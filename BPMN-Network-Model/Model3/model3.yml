@@ -1,18 +1,18 @@
 BPMN:
   Resources:
-    ResourceNumbers: 4
+    ResourceNumbers: 5
     Resource1:
       Name: "CrawlServer"
-      Dependencies: [ CrawlDB ]
+      Dependencies: [ ]
       HostAddresses: ["(3,0)", "(3,1)"]
     Resource2:
-      Name: "CrawlDB"
+      Name: "WrapperServer"
       Dependencies: []
-      HostAddresses: ["(3,0)", "(3,1)"]
+      HostAddresses: ["(3,2)"]
     Resource3:
       Name: "Server"
       Dependencies: [ DB ]
-      HostAddresses: ["(2,0)", "(2,1)"]
+      HostAddresses: ["(2,0)"]
     Resource4:
       Name: "PresentationServer"
       Dependencies: []
@@ -20,162 +20,162 @@ BPMN:
     Resource5:
       Name: "DB"
       Dependencies: []
-      HostAddresses: ["(2,0)", "(2,1)"]
+      HostAddresses: ["(4,0)"]
   Activities:
-    ActivityNumbers: 5
+    ActivityNumbers: 19
     Activity1:
-      Name: "CreateTwitterProject"
-      Resource: PresentationServer
+      Name: "CrawlCompanyJobinja"
+      Resource: CrawlServer
     Activity2:
-      Name: "CrawlTwitterUsersData"
-      Resource: CrawlServer
+      Name: "StoreCompanyData"
+      Resource: Server
     Activity3:
-      Name: "StoreTwitterData"
-      Resource: SMTPServer
+      Name: "CompanyPresentation"
+      Resource: PresentationServer
     Activity4:
-      Name: "SolvingTwitterData"
-      Resource: Server
+      Name: "CrawlCompanyJobVision"
+      Resource: CrawlServer
     Activity5:
-      Name: "SolvingPresentation"
-      Resource: PresentationServer
+      Name: "CrawlCompanyEestekhdam"
+      Resource: CrawlServer
     Activity6:
-      Name: "DataPresentation"
-      Resource: PresentationServer
+      Name: "CrawlPositionJobinja"
+      Resource: CrawlServer
     Activity7:
-      Name: "CreateLinkedInProject"
-      Resource: PresentationServer
+      Name: "StorePositionData"
+      Resource: Server
     Activity8:
-      Name: "CrawlLinkedInUsersData"
-      Resource: CrawlServer
+      Name: "PositionPresentation"
+      Resource: PresentationServer
     Activity9:
-      Name: "StoreLinkedInData"
-      Resource: Server
+      Name: "CrawlPositionJobVision"
+      Resource: CrawlServer
     Activity10:
-      Name: "SolvingLinkedInData"
-      Resource: Server
+      Name: "CrawlPositionEestekhdam"
+      Resource: CrawlServer
     Activity11:
-      Name: "CreateInstagramProject"
-      Resource: PresentationServer
-    Activity12:
-      Name: "CrawlInstagramUsersData"
-      Resource: CrawlServer
-    Activity13:
-      Name: "StoreInstagramData"
-      Resource: Server
-    Activity14:
-      Name: "SolvingInstagramData"
-      Resource: Server
-    Activity15:
-      Name: "CreateFaceBookProject"
-      Resource: PresentationServer
-    Activity16:
-      Name: "CrawlFaceBookUsersData"
-      Resource: CrawlServer
-    Activity17:
-      Name: "StoreFaceBookData"
-      Resource: Server
-    Activity18:
-      Name: "SolvingFaceBookData"
-      Resource: Server
-    Activity19:
       Name: "Search"
       Resource: PresentationServer
-    Activity20:
+    Activity12:
       Name: "ProcessingSearchData"
       Resource: Server
-    Activity21:
-      Name: "ProcessingResult"
+    Activity13:
+      Name: "PresentationResult"
       Resource: PresentationServer
+    Activity14:
+      Name: "WrapperCompanyJobinja"
+      Resource: WrapperServer
+    Activity15:
+      Name: "WrapperCompanyJobVision"
+      Resource: WrapperServer
+    Activity16:
+      Name: "WrapperCompanyEestekhdam"
+      Resource: WrapperServer
+    Activity17:
+      Name: "WrapperPositionJobinja"
+      Resource: WrapperServer
+    Activity18:
+      Name: "WrapperPositionJobVision"
+      Resource: WrapperServer
+    Activity19:
+      Name: "WrapperPositionEestekhdam"
+      Resource: WrapperServer
   WorkFlows:
-    WorkFlowNumbers: 9
+    WorkFlowNumbers: 7
     WorkFlow1:
       Importance: 5
-      Activities: ["Start", CreateTwitterProject, CrawlTwitterUsersData, StoreTwitterData, SolvingTwitterData, SolvingPresentation, "End"]
+      Activities: ["Start", CrawlCompanyJobinja, WrapperCompanyJobinja, StoreCompanyData, CompanyPresentation, "End"]
     WorkFlow2:
       Importance: 2
-      Activities: ["Start", CreateTwitterProject, CrawlTwitterUsersData, StoreTwitterData, DataPresentation, "End"]
+      Activities: ["Start", CrawlCompanyJobVision, WrapperCompanyJobVision, StoreCompanyData, CompanyPresentation, "End"]
     WorkFlow3:
       Importance: 5
-      Activities: [ "Start", CreateLinkedInProject, CrawlLinkedInUsersData, StoreLinkedInData, SolvingLinkedInData, SolvingPresentation, "End" ]
+      Activities: [ "Start", CrawlCompanyEestekhdam, WrapperCompanyEestekhdam, StoreCompanyData, CompanyPresentation, "End" ]
     WorkFlow4:
       Importance: 2
-      Activities: [ "Start", CreateLinkedInProject, CrawlLinkedInUsersData, StoreLinkedInData, DataPresentation, "End" ]
+      Activities: [ "Start", CrawlPositionJobinja, WrapperPositionJobinja, StorePositionData, PositionPresentation, "End" ]
     WorkFlow5:
       Importance: 5
-      Activities: [ "Start", CreateInstagramProject, CrawlInstagramUsersData, StoreInstagramData, SolvingInstagramData, SolvingPresentation, "End" ]
+      Activities: [ "Start", CrawlPositionJobVision, WrapperPositionJobVision, StorePositionData, PositionPresentation, "End" ]
     WorkFlow6:
       Importance: 2
-      Activities: [ "Start", CreateInstagramProject, CrawlInstagramUsersData, StoreInstagramData, DataPresentation, "End" ]
+      Activities: [ "Start", CrawlPositionEestekhdam, WrapperPositionEestekhdam, StorePositionData, PositionPresentation, "End" ]
     WorkFlow7:
-      Importance: 5
-      Activities: [ "Start", CreateFaceBookProject, CrawlFaceBookUsersData, StoreFaceBookData, SolvingFaceBookData, SolvingPresentation, "End" ]
-    WorkFlow8:
       Importance: 2
-      Activities: [ "Start", CreateFaceBookProject, CrawlFaceBookUsersData, StoreFaceBookData, DataPresentation, "End" ]
-    WorkFlow9:
-      Importance: 2
-      Activities: [ "Start", Search, ProcessingSearchData, ProcessingResult, "End" ]
+      Activities: [ "Start", Search, ProcessingSearchData, PresentationResult, "End" ]
   Missions:
-    MissionNumbers: 3
+    MissionNumbers: 5
     Mission1:
       Name: "Crawl Data Successfully"
-      Activities: [ CrawlTwitterUsersData, CrawlLinkedInUsersData, CrawlInstagramUsersData, CrawlFaceBookUsersData]
+      Activities: [ CrawlCompanyJobinja, CrawlCompanyJobVision, CrawlCompanyEestekhdam, CrawlPositionJobinja, CrawlPositionJobVision, CrawlPositionEestekhdam]
       Importance: 3
       Type: "Equal"
       Weights: []
     Mission2:
       Name: "Store Data Correctly"
-      Activities: [ StoreTwitterData, StoreLinkedInData, StoreInstagramData, StoreFaceBookData]
+      Activities: [ StoreCompanyData, StorePositionData]
       Importance: 2
       Type: "Weighted"
-      Weights: [1.0]
+      Weights: [0.5, 0.5]
     Mission3:
-      Name: "Solving Problems Correctly"
-      Activities: [ SolvingTwitterData, SolvingLinkedInData, SolvingInstagramData, SolvingFaceBookData]
+      Name: "Search Data Correctly"
+      Activities: [ ProcessingSearchData ]
       Importance: 4
       Type: "Related"
       Weights: []
     Mission4:
+      Name: "Wrapper Data Correctly"
+      Activities: [ WrapperCompanyJobinja, WrapperCompanyJobVision, WrapperCompanyEestekhdam, WrapperPositionJobinja, WrapperPositionJobVision, WrapperPositionEestekhdam ]
+      Importance: 6
+      Type: "Equal"
+      Weights: [ ]
+    Mission5:
       Name: "Presentation Without Problem"
-      Activities: [ SolvingPresentation, DataPresentation ]
+      Activities: [ CompanyPresentation, PositionPresentation ]
       Importance: 4
       Type: "Weighted"
       Weights: [ 0.4, 0.6]
 
 Network:
-  SubnetsNumbers: 3
-  Subnets: [ 1, 2, 2 ]
+  SubnetsNumbers: 4
+  Subnets: [ 1, 1, 3, 1 ]
   Topology:
     Internet: [Subnet1, Subnet3]
     Subnet1: [Internet, Subnet2]
-    Subnet2: [Subnet1, Subnet3]
+    Subnet2: [Subnet1, Subnet4]
     Subnet3: [Subnet2, Internet]
+    Subnet4: [Subnet2]
   HostConfiguration:
     (1,0):
-      Os: linux
-      Services: [ http, https, dns, ssh ]
-      Processes: [ Apache ]
+      Os: Windows
+      Services: [ https, dns, rdp ]
+      Processes: [ NginX ]
       SecurityFactor: 0.8
     (2,0):
       Os: linux
-      Services: [ http, dns, ftp ]
-      Processes: [ Apache, MySQL ]
-      SecurityFactor: 0.7
-    (2,1):
-      Os: linux
-      Services: [ http, dns, ftp ]
-      Processes: [ Apache, MySQL ]
+      Services: [ http, dns, ftp, ssh ]
+      Processes: [ Apache ]
       SecurityFactor: 0.7
     (3,0):
       Os: linux
       Services: [ https, dns, ssh ]
-      Processes: [ Nginx, MongoDB ]
-      SecurityFactor: 0.8
+      Processes: [ Apache ]
+      SecurityFactor: 0.6
     (3,1):
       Os: linux
       Services: [ https, dns, ssh ]
-      Processes: [ Nginx, MongoDB ]
+      Processes: [ Apache ]
+      SecurityFactor: 0.6
+    (3,2):
+      Os: linux
+      Services: [ http, https, dns, ssh ]
+      Processes: [ NginX ]
       SecurityFactor: 0.8
+    (4,0):
+      Os: Windows
+      Services: [ https, dns ]
+      Processes: [ SqlServer ]
+      SecurityFactor: 0.7
 
 Attack:
   A:

@@ -1,0 +1,363 @@
+BPMN:
+  Resources:
+    ResourceNumbers: 5
+    Resource1:
+      Name: "DataServer"
+      Dependencies: [ DB ]
+      HostAddresses: ["(2,0)", "(2,1)"]
+    Resource2:
+      Name: "UserServer"
+      Dependencies: [ DB ]
+      HostAddresses: [ "(2,1)", "(2,2)" ]
+    Resource3:
+      Name: "PurchaseServer"
+      Dependencies: [ DB ]
+      HostAddresses: [ "(2,0)", "(2,2)" ]
+    Resource4:
+      Name: "PresentationServer"
+      Dependencies: []
+      HostAddresses: ["(1,0)", "(1,1)"]
+    Resource5:
+      Name: "DB"
+      Dependencies: []
+      HostAddresses: ["(3,0)"]
+  Activities:
+    ActivityNumbers: 30
+    Activity1:
+      Name: "EmployeeCollectInternalPlaneData"
+      Resource: PresentationServer
+    Activity2:
+      Name: "StoreInternalPlaneData"
+      Resource: DataServer
+    Activity3:
+      Name: "PresentingInternalPlaneData"
+      Resource: PresentationServer
+    Activity4:
+      Name: "SearchInInternalPlane"
+      Resource: PresentationServer
+    Activity5:
+      Name: "ProcessingInternalPlaneSearch"
+      Resource: DataServer
+    Activity6:
+      Name: "EmployeeCollectExternalPlaneData"
+      Resource: PresentationServer
+    Activity7:
+      Name: "StoreExternalPlaneData"
+      Resource: DataServer
+    Activity8:
+      Name: "PresentingExternalPlaneData"
+      Resource: PresentationServer
+    Activity9:
+      Name: "SearchInExternalPlane"
+      Resource: PresentationServer
+    Activity10:
+      Name: "ProcessingExternalPlaneSearch"
+      Resource: DataServer
+    Activity11:
+      Name: "EmployeeCollectTrainData"
+      Resource: PresentationServer
+    Activity12:
+      Name: "StoreTrainData"
+      Resource: DataServer
+    Activity13:
+      Name: "PresentingTrainData"
+      Resource: PresentationServer
+    Activity14:
+      Name: "SearchInTrain"
+      Resource: PresentationServer
+    Activity15:
+      Name: "ProcessingTrainSearch"
+      Resource: DataServer
+    Activity16:
+      Name: "EmployeeCollectBusData"
+      Resource: PresentationServer
+    Activity17:
+      Name: "StoreBusData"
+      Resource: DataServer
+    Activity18:
+      Name: "PresentingBusData"
+      Resource: PresentationServer
+    Activity19:
+      Name: "SearchInBus"
+      Resource: PresentationServer
+    Activity20:
+      Name: "ProcessingBusSearch"
+      Resource: DataServer
+    Activity21:
+      Name: "PresentSignUpPage"
+      Resource: PresentationServer
+    Activity22:
+      Name: "StoreSignUpData"
+      Resource: UserServer
+    Activity23:
+      Name: "Authorization"
+      Resource: UserServer
+    Activity24:
+      Name: "PresentUserPage"
+      Resource: PresentationServer
+    Activity25:
+      Name: "PresentLoginPage"
+      Resource: PresentationServer
+    Activity26:
+      Name: "Authentication"
+      Resource: UserServer
+    Activity27:
+      Name: "SelectTicketPage"
+      Resource: PresentationServer
+    Activity28:
+      Name: "CalculatePriceAndData"
+      Resource: PurchaseServer
+    Activity29:
+      Name: "Purchase"
+      Resource: PurchaseServer
+    Activity30:
+      Name: "PresentPurchaseResult"
+      Resource: PresentationServer
+  WorkFlows:
+    WorkFlowNumbers: 11
+    WorkFlow1:
+      Importance: 5
+      Activities: [ "Start", EmployeeCollectInternalPlaneData, StoreInternalPlaneData, PresentingInternalPlaneData, "End" ]
+    WorkFlow2:
+      Importance: 2
+      Activities: [ "Start", SearchInInternalPlane, ProcessingInternalPlaneSearch, PresentingInternalPlaneData, "End" ]
+    WorkFlow3:
+      Importance: 5
+      Activities: [ "Start", EmployeeCollectExternalPlaneData, StoreExternalPlaneData, PresentingExternalPlaneData, "End" ]
+    WorkFlow4:
+      Importance: 2
+      Activities: [ "Start", SearchInExternalPlane, ProcessingExternalPlaneSearch, PresentingExternalPlaneData, "End" ]
+    WorkFlow5:
+      Importance: 5
+      Activities: [ "Start", EmployeeCollectTrainData, StoreTrainData, PresentingTrainData, "End" ]
+    WorkFlow6:
+      Importance: 2
+      Activities: [ "Start", SearchInTrain, ProcessingTrainSearch, PresentingTrainData, "End" ]
+    WorkFlow7:
+      Importance: 2
+      Activities: [ "Start", EmployeeCollectBusData, StoreBusData, PresentingBusData, "End" ]
+    WorkFlow8:
+      Importance: 5
+      Activities: [ "Start", SearchInBus, ProcessingBusSearch, PresentingBusData, "End" ]
+    WorkFlow9:
+      Importance: 2
+      Activities: [ "Start", PresentSignUpPage, StoreSignUpData, Authorization, PresentUserPage, "End" ]
+    WorkFlow10:
+      Importance: 2
+      Activities: [ "Start", PresentLoginPage, Authentication, Authorization, PresentUserPage, "End" ]
+    WorkFlow11:
+      Importance: 2
+      Activities: [ "Start", SelectTicketPage, CalculatePriceAndData, Purchase, PresentPurchaseResult, "End" ]
+  Missions:
+    MissionNumbers: 6
+    Mission1:
+      Name: "Store Data Correctly"
+      Activities: [ StoreInternalPlaneData, StoreExternalPlaneData, StoreTrainData, StoreBusData, StoreSignUpData ]
+      Importance: 2
+      Type: "Weighted"
+      Weights: [0.225, 0.225, 0.225, 0.225, 0.1]
+    Mission2:
+      Name: "Search Data Correctly"
+      Activities: [ ProcessingInternalPlaneSearch, ProcessingExternalPlaneSearch, ProcessingTrainSearch, ProcessingBusSearch ]
+      Importance: 4
+      Type: "Related"
+      Weights: []
+    Mission3:
+      Name: "Presentation Without Problem"
+      Activities: [ PresentingInternalPlaneData, PresentingExternalPlaneData, PresentingTrainData, PresentingBusData, PresentUserPage, PresentPurchaseResult]
+      Importance: 4
+      Type: "Weighted"
+      Weights: [ 0.15, 0.15, 0.15, 0.15, 0.1, 0.3]
+    Mission4:
+      Name: "Purchase Ticket Correctly"
+      Activities: [ CalculatePriceAndData, Purchase ]
+      Importance: 4
+      Type: "Related"
+      Weights: [ ]
+    Mission5:
+      Name: "Authentication and Authorization Correctly"
+      Activities: [ Authorization, Authentication ]
+      Importance: 4
+      Type: "Related"
+      Weights: [ ]
+    Mission6:
+      Name: "Collecting Data Correctly"
+      Activities: [ EmployeeCollectInternalPlaneData, EmployeeCollectExternalPlaneData, EmployeeCollectTrainData, EmployeeCollectBusData ]
+      Importance: 4
+      Type: "Related"
+      Weights: [ ]
+
+
+Network:
+  SubnetsNumbers: 3
+  Subnets: [ 2, 3, 1 ]
+  Topology:
+    Internet: [Subnet1]
+    Subnet1: [Internet, Subnet2]
+    Subnet2: [Subnet1, Subnet3]
+    Subnet3: [Subnet2]
+  HostConfiguration:
+    (1,0):
+      Os: linux
+      Services: [ https, dns ]
+      Processes: [ NginX ]
+      SecurityFactor: 0.8
+    (1,1):
+      Os: linux
+      Services: [ https, dns ]
+      Processes: [ NginX ]
+      SecurityFactor: 0.8
+    (2,0):
+      Os: Windows
+      Services: [ http, https, dns, ftp, rdp ]
+      Processes: [ ]
+      SecurityFactor: 0.6
+    (2,1):
+      Os: Windows
+      Services: [ http, https, dns, ftp, rdp ]
+      Processes: [ ]
+      SecurityFactor: 0.6
+    (2,2):
+      Os: Windows
+      Services: [ http, https, dns, ftp, rdp ]
+      Processes: [ ]
+      SecurityFactor: 0.6
+    (3,0):
+      Os: linux
+      Services: [ http, https, dns, ssh ]
+      Processes: [ MySql ]
+      SecurityFactor: 0.5
+
+Attack:
+  A:
+    ExploitName: Nginx Exploit
+    Vulnerability: Buffer overflows
+    Os: None
+    Service: None
+    Process: Nginx
+    SuccessRate: 0.8
+    Target: (1,0)
+    AttackStage: [Initial Compromise]
+    SuccessPath: C
+    FailurePath: B
+  B:
+    ExploitName: Misconfigurations Exploit
+    Vulnerability: misconfigurations
+    Os: None
+    Service: None
+    Process: Nginx
+    SuccessRate: 0.7
+    Target: (1,0)
+    AttackStage: [Initial Compromise]
+    SuccessPath: C
+    FailurePath: None
+  C:
+    ExploitName: Privilege Escalation Exploit
+    Vulnerability: privilege escalation
+    Os: linux
+    Service: None
+    Process: None
+    SuccessRate: 0.6
+    Target: (1,0)
+    AttackStage: [Data Exfiltration:0.7]
+    SuccessPath: E
+    FailurePath: D
+  D:
+    ExploitName: Cross-Site Scripting (XSS) Exploit
+    Vulnerability: Cross-Site Scripting (XSS)
+    Os: None
+    Service: http
+    Process: Apache
+    SuccessRate: 0.7
+    Target: (2,1)
+    AttackStage: [Initial Compromise]
+    SuccessPath: G
+    FailurePath: E
+  E:
+    ExploitName: Cross-Site Scripting (XSS) Exploit
+    Vulnerability: Cross-Site Scripting (XSS)
+    Os: None
+    Service: http
+    Process: Apache
+    SuccessRate: 0.7
+    Target: (2,0)
+    AttackStage: [Initial Compromise]
+    SuccessPath: G
+    FailurePath: F
+  F:
+    ExploitName: Anonymous Access Exploit
+    Vulnerability: anonymous access
+    Os: None
+    Service: None
+    Process: ftp
+    SuccessRate: 0.6
+    Target: (2,1)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.8]
+    SuccessPath: G
+    FailurePath: None
+  G:
+    ExploitName: Sql Injection Exploit
+    Vulnerability: Sql Injection
+    Os: None
+    Service: None
+    Process: mysql
+    SuccessRate: 0.7
+    Target: (4,0)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.6]
+    SuccessPath: I
+    FailurePath: H
+  H:
+    ExploitName: Command Injection Exploit
+    Vulnerability: command injection
+    Os: None
+    Service: smtp
+    Process: Sendmail
+    SuccessRate: 0.8
+    Target: (3,0)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.9]
+    SuccessPath: J
+    FailurePath: None
+  I:
+    ExploitName: Privilege Escalation Exploit
+    Vulnerability: privilege escalation
+    Os: None
+    Service: None
+    Process: mysql
+    SuccessRate: 0.7
+    Target: (4,0)
+    AttackStage: [Terminate Node:0.8]
+    SuccessPath: K
+    FailurePath: K
+  J:
+    ExploitName: SSL/TLS vulnerabilities Exploit
+    Vulnerability: SSL/TLS vulnerabilities
+    Os: None
+    Service: https
+    Process: None
+    SuccessRate: 0.3
+    Target: (4,0)
+    AttackStage: [Initial Compromise]
+    SuccessPath: L
+    FailurePath: None
+  K:
+    ExploitName: Command Injection Exploit
+    Vulnerability: command injection
+    Os: None
+    Service: smtp
+    Process: Sendmail
+    SuccessRate: 0.8
+    Target: (3,0)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.8 ]
+    SuccessPath: None
+    FailurePath: None
+  L:
+    ExploitName: Command Injection Exploit
+    Vulnerability: Command Injection
+    Os: None
+    Service: ftp
+    Process: None
+    SuccessRate: 0.4
+    Target: (4,0)
+    AttackStage: [ Terminate Node:0.9 ]
+    SuccessPath: None
+    FailurePath: None

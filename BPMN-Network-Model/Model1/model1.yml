@@ -39,11 +39,9 @@ BPMN:
     WorkFlow1:
       Importance: 5
       Activities: ["Start", ReceiveRequest, Authenticate, ProcessData, SendResponse, "End"]
-      Name: "Processing Data"
     WorkFlow2:
       Importance: 2
       Activities: [ "Start", ReceiveRequest, Authenticate, EmailUser, SendResponse, "End" ]
-      Name: "Emailing User"
   Missions:
     MissionNumbers: 3
     Mission1:
