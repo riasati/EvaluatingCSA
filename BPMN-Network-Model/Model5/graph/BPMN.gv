@@ -1,0 +1,352 @@
+// BPMN
+digraph BPMN {
+	graph [compound=true label="BPMN of Model5" labelloc=t rankdir=LR]
+	node [color=lightgoldenrodyellow shape=rectangle style="rounded,filled"]
+	"start.1" [label=start color=palegreen1 shape=circle]
+	"end.1" [label=end color=orangered shape=doublecircle]
+	"start.2" [label=start color=palegreen1 shape=circle]
+	"end.2" [label=end color=orangered shape=doublecircle]
+	"start.3" [label=start color=palegreen1 shape=circle]
+	"end.3" [label=end color=orangered shape=doublecircle]
+	"start.4" [label=start color=palegreen1 shape=circle]
+	"end.4" [label=end color=orangered shape=doublecircle]
+	"start.5" [label=start color=palegreen1 shape=circle]
+	"end.5" [label=end color=orangered shape=doublecircle]
+	"start.6" [label=start color=palegreen1 shape=circle]
+	"end.6" [label=end color=orangered shape=doublecircle]
+	"start.7" [label=start color=palegreen1 shape=circle]
+	"end.7" [label=end color=orangered shape=doublecircle]
+	"start.8" [label=start color=palegreen1 shape=circle]
+	"end.8" [label=end color=orangered shape=doublecircle]
+	"start.9" [label=start color=palegreen1 shape=circle]
+	"end.9" [label=end color=orangered shape=doublecircle]
+	"start.10" [label=start color=palegreen1 shape=circle]
+	"end.10" [label=end color=orangered shape=doublecircle]
+	"start.11" [label=start color=palegreen1 shape=circle]
+	"end.11" [label=end color=orangered shape=doublecircle]
+	5.1 [label=5 color=gray]
+	"EmployeeCollectInternalPlaneData.1" [label=EmployeeCollectInternalPlaneData]
+	"StoreInternalPlaneData.1" [label=StoreInternalPlaneData]
+	"PresentingInternalPlaneData.1" [label=PresentingInternalPlaneData]
+	2.2 [label=2 color=gray]
+	"SearchInInternalPlane.2" [label=SearchInInternalPlane]
+	"ProcessingInternalPlaneSearch.2" [label=ProcessingInternalPlaneSearch]
+	"PresentingInternalPlaneData.2" [label=PresentingInternalPlaneData]
+	5.3 [label=5 color=gray]
+	"EmployeeCollectExternalPlaneData.3" [label=EmployeeCollectExternalPlaneData]
+	"StoreExternalPlaneData.3" [label=StoreExternalPlaneData]
+	"PresentingExternalPlaneData.3" [label=PresentingExternalPlaneData]
+	2.4 [label=2 color=gray]
+	"SearchInExternalPlane.4" [label=SearchInExternalPlane]
+	"ProcessingExternalPlaneSearch.4" [label=ProcessingExternalPlaneSearch]
+	"PresentingExternalPlaneData.4" [label=PresentingExternalPlaneData]
+	5.5 [label=5 color=gray]
+	"EmployeeCollectTrainData.5" [label=EmployeeCollectTrainData]
+	"StoreTrainData.5" [label=StoreTrainData]
+	"PresentingTrainData.5" [label=PresentingTrainData]
+	2.6 [label=2 color=gray]
+	"SearchInTrain.6" [label=SearchInTrain]
+	"ProcessingTrainSearch.6" [label=ProcessingTrainSearch]
+	"PresentingTrainData.6" [label=PresentingTrainData]
+	2.7 [label=2 color=gray]
+	"EmployeeCollectBusData.7" [label=EmployeeCollectBusData]
+	"StoreBusData.7" [label=StoreBusData]
+	"PresentingBusData.7" [label=PresentingBusData]
+	5.8 [label=5 color=gray]
+	"SearchInBus.8" [label=SearchInBus]
+	"ProcessingBusSearch.8" [label=ProcessingBusSearch]
+	"PresentingBusData.8" [label=PresentingBusData]
+	2.9 [label=2 color=gray]
+	"PresentSignUpPage.9" [label=PresentSignUpPage]
+	"StoreSignUpData.9" [label=StoreSignUpData]
+	"Authorization.9" [label=Authorization]
+	"PresentUserPage.9" [label=PresentUserPage]
+	2.10 [label=2 color=gray]
+	"PresentLoginPage.10" [label=PresentLoginPage]
+	"Authentication.10" [label=Authentication]
+	"Authorization.10" [label=Authorization]
+	"PresentUserPage.10" [label=PresentUserPage]
+	2.11 [label=2 color=gray]
+	"SelectTicketPage.11" [label=SelectTicketPage]
+	"CalculatePriceAndData.11" [label=CalculatePriceAndData]
+	"Purchase.11" [label=Purchase]
+	"PresentPurchaseResult.11" [label=PresentPurchaseResult]
+	"(2,0).DataServer" [label="(2,0)"]
+	"(2,1).DataServer" [label="(2,1)"]
+	"(2,1).UserServer" [label="(2,1)"]
+	"(2,2).UserServer" [label="(2,2)"]
+	"(2,0).PurchaseServer" [label="(2,0)"]
+	"(2,2).PurchaseServer" [label="(2,2)"]
+	"(1,0).PresentationServer" [label="(1,0)"]
+	"(1,1).PresentationServer" [label="(1,1)"]
+	"(3,0).DB" [label="(3,0)"]
+	"2.Store Data Correctly" [label=2 color=gray]
+	"StoreInternalPlaneData.Store Data Correctly" [label=StoreInternalPlaneData]
+	"StoreExternalPlaneData.Store Data Correctly" [label=StoreExternalPlaneData]
+	"StoreTrainData.Store Data Correctly" [label=StoreTrainData]
+	"StoreBusData.Store Data Correctly" [label=StoreBusData]
+	"StoreSignUpData.Store Data Correctly" [label=StoreSignUpData]
+	"4.Search Data Correctly" [label=4 color=gray]
+	"ProcessingInternalPlaneSearch.Search Data Correctly" [label=ProcessingInternalPlaneSearch]
+	"ProcessingExternalPlaneSearch.Search Data Correctly" [label=ProcessingExternalPlaneSearch]
+	"ProcessingTrainSearch.Search Data Correctly" [label=ProcessingTrainSearch]
+	"ProcessingBusSearch.Search Data Correctly" [label=ProcessingBusSearch]
+	"4.Presentation Without Problem" [label=4 color=gray]
+	"PresentingInternalPlaneData.Presentation Without Problem" [label=PresentingInternalPlaneData]
+	"PresentingExternalPlaneData.Presentation Without Problem" [label=PresentingExternalPlaneData]
+	"PresentingTrainData.Presentation Without Problem" [label=PresentingTrainData]
+	"PresentingBusData.Presentation Without Problem" [label=PresentingBusData]
+	"PresentUserPage.Presentation Without Problem" [label=PresentUserPage]
+	"PresentPurchaseResult.Presentation Without Problem" [label=PresentPurchaseResult]
+	"4.Purchase Ticket Correctly" [label=4 color=gray]
+	"CalculatePriceAndData.Purchase Ticket Correctly" [label=CalculatePriceAndData]
+	"Purchase.Purchase Ticket Correctly" [label=Purchase]
+	"4.Authentication and Authorization Correctly" [label=4 color=gray]
+	"Authorization.Authentication and Authorization Correctly" [label=Authorization]
+	"Authentication.Authentication and Authorization Correctly" [label=Authentication]
+	"4.Collecting Data Correctly" [label=4 color=gray]
+	"EmployeeCollectInternalPlaneData.Collecting Data Correctly" [label=EmployeeCollectInternalPlaneData]
+	"EmployeeCollectExternalPlaneData.Collecting Data Correctly" [label=EmployeeCollectExternalPlaneData]
+	"EmployeeCollectTrainData.Collecting Data Correctly" [label=EmployeeCollectTrainData]
+	"EmployeeCollectBusData.Collecting Data Correctly" [label=EmployeeCollectBusData]
+	subgraph cluster_workflow {
+		label=Workflow style=dotted
+		"start.1"
+		"end.1"
+		"start.2"
+		"end.2"
+		"start.3"
+		"end.3"
+		"start.4"
+		"end.4"
+		"start.5"
+		"end.5"
+		"start.6"
+		"end.6"
+		"start.7"
+		"end.7"
+		"start.8"
+		"end.8"
+		"start.9"
+		"end.9"
+		"start.10"
+		"end.10"
+		"start.11"
+		"end.11"
+		5.1
+		2.2
+		5.3
+		2.4
+		5.5
+		2.6
+		2.7
+		5.8
+		2.9
+		2.10
+		2.11
+		"EmployeeCollectInternalPlaneData.1"
+		"StoreInternalPlaneData.1"
+		"PresentingInternalPlaneData.1"
+		"SearchInInternalPlane.2"
+		"ProcessingInternalPlaneSearch.2"
+		"PresentingInternalPlaneData.2"
+		"EmployeeCollectExternalPlaneData.3"
+		"StoreExternalPlaneData.3"
+		"PresentingExternalPlaneData.3"
+		"SearchInExternalPlane.4"
+		"ProcessingExternalPlaneSearch.4"
+		"PresentingExternalPlaneData.4"
+		"EmployeeCollectTrainData.5"
+		"StoreTrainData.5"
+		"PresentingTrainData.5"
+		"SearchInTrain.6"
+		"ProcessingTrainSearch.6"
+		"PresentingTrainData.6"
+		"EmployeeCollectBusData.7"
+		"StoreBusData.7"
+		"PresentingBusData.7"
+		"SearchInBus.8"
+		"ProcessingBusSearch.8"
+		"PresentingBusData.8"
+		"PresentSignUpPage.9"
+		"StoreSignUpData.9"
+		"Authorization.9"
+		"PresentUserPage.9"
+		"PresentLoginPage.10"
+		"Authentication.10"
+		"Authorization.10"
+		"PresentUserPage.10"
+		"SelectTicketPage.11"
+		"CalculatePriceAndData.11"
+		"Purchase.11"
+		"PresentPurchaseResult.11"
+	}
+	subgraph cluster_dataserver {
+		label=DataServer style=dotted
+		"(2,0).DataServer"
+		"(2,1).DataServer"
+	}
+	subgraph cluster_userserver {
+		label=UserServer style=dotted
+		"(2,1).UserServer"
+		"(2,2).UserServer"
+	}
+	subgraph cluster_purchaseserver {
+		label=PurchaseServer style=dotted
+		"(2,0).PurchaseServer"
+		"(2,2).PurchaseServer"
+	}
+	subgraph cluster_presentationserver {
+		label=PresentationServer style=dotted
+		"(1,0).PresentationServer"
+		"(1,1).PresentationServer"
+	}
+	subgraph cluster_db {
+		label=DB style=dotted
+		"(3,0).DB"
+	}
+	subgraph cluster_mission1 {
+		label="Mission1\nStore Data Correctly" style=dotted
+		"2.Store Data Correctly"
+		"StoreInternalPlaneData.Store Data Correctly"
+		"StoreExternalPlaneData.Store Data Correctly"
+		"StoreTrainData.Store Data Correctly"
+		"StoreBusData.Store Data Correctly"
+		"StoreSignUpData.Store Data Correctly"
+	}
+	subgraph cluster_mission2 {
+		label="Mission2\nSearch Data Correctly" style=dotted
+		"4.Search Data Correctly"
+		"ProcessingInternalPlaneSearch.Search Data Correctly"
+		"ProcessingExternalPlaneSearch.Search Data Correctly"
+		"ProcessingTrainSearch.Search Data Correctly"
+		"ProcessingBusSearch.Search Data Correctly"
+	}
+	subgraph cluster_mission3 {
+		label="Mission3\nPresentation Without Problem" style=dotted
+		"4.Presentation Without Problem"
+		"PresentingInternalPlaneData.Presentation Without Problem"
+		"PresentingExternalPlaneData.Presentation Without Problem"
+		"PresentingTrainData.Presentation Without Problem"
+		"PresentingBusData.Presentation Without Problem"
+		"PresentUserPage.Presentation Without Problem"
+		"PresentPurchaseResult.Presentation Without Problem"
+	}
+	subgraph cluster_mission4 {
+		label="Mission4\nPurchase Ticket Correctly" style=dotted
+		"4.Purchase Ticket Correctly"
+		"CalculatePriceAndData.Purchase Ticket Correctly"
+		"Purchase.Purchase Ticket Correctly"
+	}
+	subgraph cluster_mission5 {
+		label="Mission5\nAuthentication and Authorization Correctly" style=dotted
+		"4.Authentication and Authorization Correctly"
+		"Authorization.Authentication and Authorization Correctly"
+		"Authentication.Authentication and Authorization Correctly"
+	}
+	subgraph cluster_mission6 {
+		label="Mission6\nCollecting Data Correctly" style=dotted
+		"4.Collecting Data Correctly"
+		"EmployeeCollectInternalPlaneData.Collecting Data Correctly"
+		"EmployeeCollectExternalPlaneData.Collecting Data Correctly"
+		"EmployeeCollectTrainData.Collecting Data Correctly"
+		"EmployeeCollectBusData.Collecting Data Correctly"
+	}
+	"start.1" -> 5.1
+	5.1 -> "EmployeeCollectInternalPlaneData.1"
+	"EmployeeCollectInternalPlaneData.1" -> "StoreInternalPlaneData.1"
+	"StoreInternalPlaneData.1" -> "PresentingInternalPlaneData.1"
+	"PresentingInternalPlaneData.1" -> "end.1"
+	"start.2" -> 2.2
+	2.2 -> "SearchInInternalPlane.2"
+	"SearchInInternalPlane.2" -> "ProcessingInternalPlaneSearch.2"
+	"ProcessingInternalPlaneSearch.2" -> "PresentingInternalPlaneData.2"
+	"PresentingInternalPlaneData.2" -> "end.2"
+	"start.3" -> 5.3
+	5.3 -> "EmployeeCollectExternalPlaneData.3"
+	"EmployeeCollectExternalPlaneData.3" -> "StoreExternalPlaneData.3"
+	"StoreExternalPlaneData.3" -> "PresentingExternalPlaneData.3"
+	"PresentingExternalPlaneData.3" -> "end.3"
+	"start.4" -> 2.4
+	2.4 -> "SearchInExternalPlane.4"
+	"SearchInExternalPlane.4" -> "ProcessingExternalPlaneSearch.4"
+	"ProcessingExternalPlaneSearch.4" -> "PresentingExternalPlaneData.4"
+	"PresentingExternalPlaneData.4" -> "end.4"
+	"start.5" -> 5.5
+	5.5 -> "EmployeeCollectTrainData.5"
+	"EmployeeCollectTrainData.5" -> "StoreTrainData.5"
+	"StoreTrainData.5" -> "PresentingTrainData.5"
+	"PresentingTrainData.5" -> "end.5"
+	"start.6" -> 2.6
+	2.6 -> "SearchInTrain.6"
+	"SearchInTrain.6" -> "ProcessingTrainSearch.6"
+	"ProcessingTrainSearch.6" -> "PresentingTrainData.6"
+	"PresentingTrainData.6" -> "end.6"
+	"start.7" -> 2.7
+	2.7 -> "EmployeeCollectBusData.7"
+	"EmployeeCollectBusData.7" -> "StoreBusData.7"
+	"StoreBusData.7" -> "PresentingBusData.7"
+	"PresentingBusData.7" -> "end.7"
+	"start.8" -> 5.8
+	5.8 -> "SearchInBus.8"
+	"SearchInBus.8" -> "ProcessingBusSearch.8"
+	"ProcessingBusSearch.8" -> "PresentingBusData.8"
+	"PresentingBusData.8" -> "end.8"
+	"start.9" -> 2.9
+	2.9 -> "PresentSignUpPage.9"
+	"PresentSignUpPage.9" -> "StoreSignUpData.9"
+	"StoreSignUpData.9" -> "Authorization.9"
+	"Authorization.9" -> "PresentUserPage.9"
+	"PresentUserPage.9" -> "end.9"
+	"start.10" -> 2.10
+	2.10 -> "PresentLoginPage.10"
+	"PresentLoginPage.10" -> "Authentication.10"
+	"Authentication.10" -> "Authorization.10"
+	"Authorization.10" -> "PresentUserPage.10"
+	"PresentUserPage.10" -> "end.10"
+	"start.11" -> 2.11
+	2.11 -> "SelectTicketPage.11"
+	"SelectTicketPage.11" -> "CalculatePriceAndData.11"
+	"CalculatePriceAndData.11" -> "Purchase.11"
+	"Purchase.11" -> "PresentPurchaseResult.11"
+	"PresentPurchaseResult.11" -> "end.11"
+	"EmployeeCollectInternalPlaneData.1" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"StoreInternalPlaneData.1" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingInternalPlaneData.1" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"SearchInInternalPlane.2" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"ProcessingInternalPlaneSearch.2" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingInternalPlaneData.2" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"EmployeeCollectExternalPlaneData.3" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"StoreExternalPlaneData.3" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingExternalPlaneData.3" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"SearchInExternalPlane.4" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"ProcessingExternalPlaneSearch.4" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingExternalPlaneData.4" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"EmployeeCollectTrainData.5" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"StoreTrainData.5" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingTrainData.5" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"SearchInTrain.6" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"ProcessingTrainSearch.6" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingTrainData.6" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"EmployeeCollectBusData.7" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"StoreBusData.7" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingBusData.7" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"SearchInBus.8" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"ProcessingBusSearch.8" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingBusData.8" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"PresentSignUpPage.9" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"StoreSignUpData.9" -> "(2,1).UserServer" [lhead=cluster_userserver style=dashed]
+	"Authorization.9" -> "(2,1).UserServer" [lhead=cluster_userserver style=dashed]
+	"PresentUserPage.9" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"PresentLoginPage.10" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"Authentication.10" -> "(2,1).UserServer" [lhead=cluster_userserver style=dashed]
+	"Authorization.10" -> "(2,1).UserServer" [lhead=cluster_userserver style=dashed]
+	"PresentUserPage.10" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"SelectTicketPage.11" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CalculatePriceAndData.11" -> "(2,0).PurchaseServer" [lhead=cluster_purchaseserver style=dashed]
+	"Purchase.11" -> "(2,0).PurchaseServer" [lhead=cluster_purchaseserver style=dashed]
+	"PresentPurchaseResult.11" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"(2,0).DataServer" -> "(3,0).DB" [lhead=cluster_db ltail=cluster_dataserver style=dashed]
+	"(2,1).UserServer" -> "(3,0).DB" [lhead=cluster_db ltail=cluster_userserver style=dashed]
+	"(2,0).PurchaseServer" -> "(3,0).DB" [lhead=cluster_db ltail=cluster_purchaseserver style=dashed]
+}

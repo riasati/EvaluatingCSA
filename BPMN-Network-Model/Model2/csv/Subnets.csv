@@ -1,0 +1,5 @@
+Name,HostNumbers,Relations
+Internet,0,Subnet1 Subnet3
+Subnet1,1,Internet Subnet2
+Subnet2,2,Subnet1 Subnet3
+Subnet3,2,Subnet2 Internet

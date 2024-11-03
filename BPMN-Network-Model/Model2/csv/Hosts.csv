@@ -1,0 +1,6 @@
+Address,OS,Services,Processes,SecurityFactor
+(1 0),linux,http https dns ssh,Apache,0.8
+(2 0),linux,http dns ftp,Apache MySQL,0.7
+(2 1),linux,http dns ftp,Apache MySQL,0.7
+(3 0),linux,https dns ssh,Nginx MongoDB,0.8
+(3 1),linux,https dns ssh,Nginx MongoDB,0.8

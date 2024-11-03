@@ -22,7 +22,7 @@ BPMN:
       Dependencies: []
       HostAddresses: ["(3,1)"]
   Activities:
-    ActivityNumbers: 15
+    ActivityNumbers: 14
     Activity1:
       Name: "CrawlProfessorAmirkabir"
       Resource: CrawlServer
@@ -115,7 +115,7 @@ BPMN:
       Name: "Search Data Correctly"
       Activities: [ ProcessingSearchData ]
       Importance: 4
-      Type: "Related"
+      Type: "Equal"
       Weights: []
     Mission4:
       Name: "Presentation Without Problem"
@@ -176,134 +176,145 @@ Network:
 
 Attack:
   A:
+    ExploitName: Credential Theft Exploit
+    Vulnerability: credential theft
+    Os: None
+    Service: rdp
+    Process: None
+    SuccessRate: 0.8
+    Target: (1,2)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.7]
+    SuccessPath: G
+    FailurePath: B
+  B:
+    ExploitName: Misconfigurations Exploit
+    Vulnerability: misconfigurations
+    Os: Windows
+    Service: None
+    Process: None
+    SuccessRate: 0.7
+    Target: (1,3)
+    AttackStage: [Initial Compromise]
+    SuccessPath: G
+    FailurePath: C
+  C:
     ExploitName: Nginx Exploit
     Vulnerability: Buffer overflows
     Os: None
     Service: None
     Process: Nginx
-    SuccessRate: 0.8
-    Target: (1,0)
-    AttackStage: [Initial Compromise]
-    SuccessPath: C
-    FailurePath: B
-  B:
-    ExploitName: Misconfigurations Exploit
-    Vulnerability: misconfigurations
-    Os: None
-    Service: None
-    Process: Nginx
     SuccessRate: 0.7
     Target: (1,0)
     AttackStage: [Initial Compromise]
-    SuccessPath: C
-    FailurePath: None
-  C:
-    ExploitName: Privilege Escalation Exploit
-    Vulnerability: privilege escalation
-    Os: linux
-    Service: None
-    Process: None
-    SuccessRate: 0.6
-    Target: (1,0)
-    AttackStage: [Data Exfiltration:0.7]
-    SuccessPath: E
+    SuccessPath: I
     FailurePath: D
   D:
     ExploitName: Cross-Site Scripting (XSS) Exploit
     Vulnerability: Cross-Site Scripting (XSS)
     Os: None
-    Service: http
-    Process: Apache
-    SuccessRate: 0.7
-    Target: (2,1)
-    AttackStage: [Initial Compromise]
-    SuccessPath: G
-    FailurePath: E
-  E:
-    ExploitName: Cross-Site Scripting (XSS) Exploit
-    Vulnerability: Cross-Site Scripting (XSS)
-    Os: None
-    Service: http
+    Service: None
     Process: Apache
     SuccessRate: 0.7
     Target: (2,0)
     AttackStage: [Initial Compromise]
-    SuccessPath: G
+    SuccessPath: H
+    FailurePath: E
+  E:
+    ExploitName: Remote Code Execution Exploit
+    Vulnerability: remote code execution
+    Os: Linux
+    Service: None
+    Process: None
+    SuccessRate: 0.7
+    Target: (1,1)
+    AttackStage: [Initial Compromise]
+    SuccessPath: I
     FailurePath: F
   F:
-    ExploitName: Anonymous Access Exploit
-    Vulnerability: anonymous access
+    ExploitName: Weak Ciphers Exploit
+    Vulnerability: weak ciphers
     Os: None
-    Service: None
-    Process: ftp
+    Service: ssh
+    Process: None
     SuccessRate: 0.6
     Target: (2,1)
-    AttackStage: [Initial Compromise, Data Exfiltration:0.8]
-    SuccessPath: G
+    AttackStage: [Initial Compromise]
+    SuccessPath: J
     FailurePath: None
   G:
     ExploitName: Sql Injection Exploit
     Vulnerability: Sql Injection
     Os: None
     Service: None
-    Process: mysql
-    SuccessRate: 0.7
-    Target: (4,0)
-    AttackStage: [Initial Compromise, Data Exfiltration:0.6]
-    SuccessPath: I
-    FailurePath: H
-  H:
-    ExploitName: Command Injection Exploit
-    Vulnerability: command injection
-    Os: None
-    Service: smtp
-    Process: Sendmail
+    Process: Sql Server
     SuccessRate: 0.8
-    Target: (3,0)
-    AttackStage: [Initial Compromise, Data Exfiltration:0.9]
-    SuccessPath: J
-    FailurePath: None
-  I:
-    ExploitName: Privilege Escalation Exploit
-    Vulnerability: privilege escalation
-    Os: None
-    Service: None
-    Process: mysql
-    SuccessRate: 0.7
-    Target: (4,0)
-    AttackStage: [Terminate Node:0.8]
-    SuccessPath: K
-    FailurePath: K
-  J:
-    ExploitName: SSL/TLS vulnerabilities Exploit
-    Vulnerability: SSL/TLS vulnerabilities
-    Os: None
-    Service: https
-    Process: None
-    SuccessRate: 0.3
-    Target: (4,0)
-    AttackStage: [Initial Compromise]
-    SuccessPath: L
-    FailurePath: None
-  K:
-    ExploitName: Command Injection Exploit
-    Vulnerability: command injection
-    Os: None
-    Service: smtp
-    Process: Sendmail
-    SuccessRate: 0.8
-    Target: (3,0)
-    AttackStage: [Initial Compromise, Data Exfiltration:0.8 ]
+    Target: (3,1)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.8]
     SuccessPath: None
     FailurePath: None
-  L:
-    ExploitName: Command Injection Exploit
-    Vulnerability: Command Injection
-    Os: None
-    Service: ftp
+  H:
+    ExploitName: Privilege Escalation Exploit
+    Vulnerability: privilege escalation
+    Os: Linux
+    Service: None
     Process: None
-    SuccessRate: 0.4
-    Target: (4,0)
+    SuccessRate: 0.8
+    Target: (2,0)
+    AttackStage: [Data Exfiltration:0.7, Terminate Node:0.8]
+    SuccessPath: K
+    FailurePath: None
+  I:
+    ExploitName: Misconfigurations Exploit
+    Vulnerability: misconfigurations
+    Os: Windows
+    Service: None
+    Process: None
+    SuccessRate: 0.7
+    Target: (3,1)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.6]
+    SuccessPath: None
+    FailurePath: None
+  J:
+    ExploitName: Privilege Escalation Exploit
+    Vulnerability: privilege escalation
+    Os: Linux
+    Service: None
+    Process: None
+    SuccessRate: 0.6
+    Target: (2,1)
+    AttackStage: [Data Exfiltration:0.9]
+    SuccessPath: K
+    FailurePath: None
+  K:
+    ExploitName: Cross-Site Scripting (XSS) Exploit
+    Vulnerability: Cross-Site Scripting (XSS)
+    Os: None
+    Service: http
+    Process: None
+    SuccessRate: 0.8
+    Target: (3,0)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.6]
+    SuccessPath: L
+    FailurePath: M
+  L:
+    ExploitName: Privilege Escalation Exploit
+    Vulnerability: privilege escalation
+    Os: Windows
+    Service: None
+    Process: Sql Server
+    SuccessRate: 0.8
+    Target: (3,0)
     AttackStage: [ Terminate Node:0.9 ]
+    SuccessPath: M
+    FailurePath: M
+  M:
+    ExploitName: Sql Injection Exploit
+    Vulnerability: Sql Injection
+    Os: Windows
+    Service: None
+    Process: Sql Server
+    SuccessRate: 0.6
+    Target: (3,1)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.7, Terminate Node:0.8]
     SuccessPath: None
     FailurePath: None

@@ -1,0 +1,7 @@
+Address,OS,Services,Processes,SecurityFactor
+(1 0),linux,https dns,NginX,0.8
+(1 1),linux,https dns,NginX,0.8
+(2 0),Windows,http https dns ftp rdp,Apache,0.6
+(2 1),Windows,http https dns ftp rdp,Apache,0.6
+(2 2),Windows,http https dns ftp rdp,Apache,0.6
+(3 0),linux,http https dns ssh,MySql,0.5

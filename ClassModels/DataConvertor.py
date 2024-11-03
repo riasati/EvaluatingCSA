@@ -55,10 +55,10 @@ class DataConvertor:
             csvwriter.writerow(activity_key)
             csvwriter.writerows(activity_value)
 
-        workflow_key = ["Name", "Importance", "Activities"]
+        workflow_key = ["Importance", "Activities"]
         workflow_value = []
         for row in bpmn.workflows:
-            new_field = [row["Name"], row["Importance"], DataConvertor.convert_list_to_string(row["Activities"])]
+            new_field = [row["Importance"], DataConvertor.convert_list_to_string(row["Activities"])]
             workflow_value.append(new_field)
 
         with open(workflow_path, 'w') as csvfile:

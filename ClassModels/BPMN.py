@@ -27,7 +27,7 @@ class BPMN:
         workflows = []
         for i in range(self.workflow_numbers):
             one_workflow = {"Importance": bpmn_json["WorkFlows"][f"WorkFlow{i + 1}"]["Importance"],
-                            "Name": bpmn_json["WorkFlows"][f"WorkFlow{i + 1}"]["Name"],
+                            #"Name": bpmn_json["WorkFlows"][f"WorkFlow{i + 1}"]["Name"],
                             "Activities": bpmn_json["WorkFlows"][f"WorkFlow{i + 1}"]["Activities"]}
             workflows.append(one_workflow)
         self.workflows = workflows

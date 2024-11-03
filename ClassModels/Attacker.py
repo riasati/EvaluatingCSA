@@ -6,9 +6,10 @@ class Attacker:
         self.current_attack_path : list = None
         self.current_first_node: str = None
         self.current_second_node: str = None
-        self.probability_of_most_successful_path: float = None
+        self.least_probability_of_all_paths: float = None
         self.appropriate_attack_path_number: int = None
         self.attack_path_graph = attack_json
+        self.all_paths = None
 
     def get_success_attack_node(self, attack_node_name: str) -> str:
         attack_node_name = attack_node_name.split(":")[0]
@@ -112,24 +113,76 @@ class Attacker:
                 return_object[one_attack_path_string] += 1
         self.attack_path_list_object = return_object
 
-    def calculate_probability_of_most_successful_path(self, hosts_configuration, first_node:str):
-        probability: float = 1
-        next_node = first_node
-        while next_node != "None":
-            security_factor: float = self.get_host_related_security_factor(next_node, hosts_configuration)
-            probability *= self.attack_path_graph[next_node]["SuccessRate"] * (1 - security_factor)
-            next_node = self.get_success_attack_node(next_node)
-        self.probability_of_most_successful_path = probability
-        return probability
+    # def calculate_probability_of_most_successful_path(self, hosts_configuration, first_node:str):
+    #     probability: float = 1
+    #     next_node = first_node
+    #     while next_node != "None":
+    #         security_factor: float = self.get_host_related_security_factor(next_node, hosts_configuration)
+    #         probability *= self.attack_path_graph[next_node]["SuccessRate"] * (1 - security_factor)
+    #         next_node = self.get_success_attack_node(next_node)
+    #     self.probability_of_most_successful_path = probability
+    #     return probability
+
+    def create_all_paths(self):
+        def dfs(data, path, paths):
+            datum = path[-1]
+            if datum in data:
+                for val in [self.get_success_attack_node(datum), self.get_failure_attack_node(datum)]:
+                    new_path = path + [val]
+                    paths = dfs(data, new_path, paths)
+            else:
+                paths += [path]
+            return paths
+
+        def enumerate_paths(graph):
+            nodes = list(graph.keys())
+            all_paths = []
+            for node in nodes:
+                node_paths = dfs(graph, [node], [])
+                all_paths += node_paths
+            return all_paths
+
+        self.all_paths = enumerate_paths(self.attack_path_graph)
+
+
+    def calculate_probability_of_longest_path(self, hosts_configuration, first_node:str):
+
+        first_node_paths = []
+        for one_list in self.all_paths:
+            if one_list[0] == first_node:
+                first_node_paths.append(one_list)
+
+        least_probability: float = 1
+        for path in first_node_paths:
+            probability = 1
+            for i in range(len(path)):
+                if i == len(path) - 1:
+                    continue
+                node = path[i]
+                next_node = path[i + 1]
+                security_factor: float = self.get_host_related_security_factor(node, hosts_configuration)
+                if next_node == self.get_success_attack_node(node):
+                    probability *= self.attack_path_graph[node]["SuccessRate"] * (1 - security_factor)
+                else:
+                    probability *= (1 - (self.attack_path_graph[node]["SuccessRate"] * (1 - security_factor)))
+            if least_probability > probability:
+                least_probability = probability
+
+        self.least_probability_of_all_paths = least_probability
+        return least_probability
+
 
     def calculate_appropriate_attack_path_number(self):
-        appropriate_number = (1.0 / self.probability_of_most_successful_path)
+        appropriate_number = (1.0 / self.least_probability_of_all_paths)
         appropriate_number = int(appropriate_number)
         quotient = appropriate_number // 100
         remain = appropriate_number % 100
         if remain >= 50:
             quotient += 1
         appropriate_number = quotient * 100
+        if appropriate_number > 100000:
+            print(appropriate_number)
+            appropriate_number = 100000
         self.appropriate_attack_path_number = appropriate_number
         return appropriate_number
 

@@ -22,6 +22,17 @@ def import_yml_files_to_json():
             json_list.append(json)
     return json_list
 
+# def import_yml_files_to_json():
+#     json_list = []
+#     #for file_url in ["BPMN-Network-Model\\Model1\\model1.yml","BPMN-Network-Model\\Model2\\model2.yml","BPMN-Network-Model\\Model3\\model3.yml"]:
+#     for file_url in ["BPMN-Network-Model\\Model4\\model4.yml"]:
+#         with open(file_url, 'r') as file:
+#             json = yaml.safe_load(file)
+#             json["ModelNumber"] = int(file_url.split("\\")[1].removeprefix("Model"))
+#             json["DirectoryPath"] = os.path.dirname(file_url)
+#             json_list.append(json)
+#     return json_list
+
 
 def initialize_elements(one_json):
     bpmn = BPMN(one_json["BPMN"])
@@ -160,7 +171,9 @@ def run_simulation(mongo, one_model_json, attack_path_file_address: str, csa_res
 
     first_node = "A"
 
-    attacker.calculate_probability_of_most_successful_path(network.hosts_configuration, first_node)
+    attacker.create_all_paths()
+    attacker.calculate_probability_of_longest_path(network.hosts_configuration, first_node)
+    #attacker.calculate_probability_of_most_successful_path(network.hosts_configuration, first_node)
     attacker.calculate_appropriate_attack_path_number()
 
     fill_attack_paths_in_attacker(attacker, network, first_node)

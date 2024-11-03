@@ -1,0 +1,40 @@
+// Network
+graph Network {
+	graph [compound=true label="Network of Model6" labelloc=t rankdir=LR]
+	subgraph cluster_internet {
+		label=Internet
+		Internet
+	}
+	subgraph cluster_subnet1 {
+		label=Subnet1
+		"(1,0)"
+	}
+	subgraph cluster_subnet2 {
+		label=Subnet2
+		"(2,0)"
+	}
+	subgraph cluster_subnet3 {
+		label=Subnet3
+		"(3,0)"
+	}
+	subgraph cluster_subnet4 {
+		label=Subnet4
+		"(4,0)"
+	}
+	subgraph cluster_subnet5 {
+		label=Subnet5
+		"(5,0)"
+	}
+	"(1,0)" [label="(1,0)\nlinux\nhttps dns\nNginX\n0.8"]
+	"(2,0)" [label="(2,0)\nlinux\nhttp https dns ssh\n\n0.7"]
+	"(3,0)" [label="(3,0)\nWindows\nhttp https dns ftp rdp\n\n0.6"]
+	"(4,0)" [label="(4,0)\nlinux\nhttp https dns ftp ssh\n\n0.7"]
+	"(5,0)" [label="(5,0)\nlinux\nhttp https dns ftp\nMySql\n0.6"]
+	Internet -- "(1,0)" [lhead=cluster_subnet1 ltail=cluster_internet]
+	"(1,0)" -- "(2,0)" [lhead=cluster_subnet2 ltail=cluster_subnet1]
+	"(1,0)" -- "(3,0)" [lhead=cluster_subnet3 ltail=cluster_subnet1]
+	"(1,0)" -- "(4,0)" [lhead=cluster_subnet4 ltail=cluster_subnet1]
+	"(2,0)" -- "(5,0)" [lhead=cluster_subnet5 ltail=cluster_subnet2]
+	"(3,0)" -- "(5,0)" [lhead=cluster_subnet5 ltail=cluster_subnet3]
+	"(4,0)" -- "(5,0)" [lhead=cluster_subnet5 ltail=cluster_subnet4]
+}

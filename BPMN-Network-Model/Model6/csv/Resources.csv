@@ -1,0 +1,6 @@
+Name,Dependencies,HostAddresses
+DataServer,DB,(2;0)
+UserServer,DB,(3;0)
+PurchaseServer,DB,(4;0)
+PresentationServer,,(1;0)
+DB,,(5;0)

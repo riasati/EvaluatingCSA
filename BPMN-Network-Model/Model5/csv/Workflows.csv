@@ -1,0 +1,12 @@
+Importance,Activities
+5,Start EmployeeCollectInternalPlaneData StoreInternalPlaneData PresentingInternalPlaneData End
+2,Start SearchInInternalPlane ProcessingInternalPlaneSearch PresentingInternalPlaneData End
+5,Start EmployeeCollectExternalPlaneData StoreExternalPlaneData PresentingExternalPlaneData End
+2,Start SearchInExternalPlane ProcessingExternalPlaneSearch PresentingExternalPlaneData End
+5,Start EmployeeCollectTrainData StoreTrainData PresentingTrainData End
+2,Start SearchInTrain ProcessingTrainSearch PresentingTrainData End
+2,Start EmployeeCollectBusData StoreBusData PresentingBusData End
+5,Start SearchInBus ProcessingBusSearch PresentingBusData End
+2,Start PresentSignUpPage StoreSignUpData Authorization PresentUserPage End
+2,Start PresentLoginPage Authentication Authorization PresentUserPage End
+2,Start SelectTicketPage CalculatePriceAndData Purchase PresentPurchaseResult End

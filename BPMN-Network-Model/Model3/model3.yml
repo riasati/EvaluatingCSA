@@ -115,13 +115,13 @@ BPMN:
       Name: "Store Data Correctly"
       Activities: [ StoreCompanyData, StorePositionData]
       Importance: 2
-      Type: "Weighted"
-      Weights: [0.5, 0.5]
+      Type: "Equal"
+      Weights: []
     Mission3:
       Name: "Search Data Correctly"
       Activities: [ ProcessingSearchData ]
       Importance: 4
-      Type: "Related"
+      Type: "Equal"
       Weights: []
     Mission4:
       Name: "Wrapper Data Correctly"
@@ -179,134 +179,112 @@ Network:
 
 Attack:
   A:
+    ExploitName: Misconfigurations Exploit
+    Vulnerability: misconfigurations
+    Os: Windows
+    Service: None
+    Process: None
+    SuccessRate: 0.8
+    Target: (1,0)
+    AttackStage: [Initial Compromise]
+    SuccessPath: E
+    FailurePath: B
+  B:
+    ExploitName: Outdated Implementations Exploit
+    Vulnerability: outdated implementations
+    Os: None
+    Service: ssh
+    Process: None
+    SuccessRate: 0.7
+    Target: (3,0)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.8]
+    SuccessPath: F
+    FailurePath: C
+  C:
+    ExploitName: Cross-Site Scripting (XSS) Exploit
+    Vulnerability: Cross-Site Scripting (XSS)
+    Os: None
+    Service: None
+    Process: Apache
+    SuccessRate: 0.7
+    Target: (3,1)
+    AttackStage: [Initial Compromise]
+    SuccessPath: G
+    FailurePath: D
+  D:
     ExploitName: Nginx Exploit
     Vulnerability: Buffer overflows
     Os: None
     Service: None
     Process: Nginx
     SuccessRate: 0.8
-    Target: (1,0)
+    Target: (3,2)
     AttackStage: [Initial Compromise]
-    SuccessPath: C
-    FailurePath: B
-  B:
-    ExploitName: Misconfigurations Exploit
-    Vulnerability: misconfigurations
-    Os: None
-    Service: None
-    Process: Nginx
-    SuccessRate: 0.7
-    Target: (1,0)
-    AttackStage: [Initial Compromise]
-    SuccessPath: C
+    SuccessPath: G
     FailurePath: None
-  C:
+  E:
     ExploitName: Privilege Escalation Exploit
     Vulnerability: privilege escalation
-    Os: linux
+    Os: Windows
     Service: None
     Process: None
-    SuccessRate: 0.6
+    SuccessRate: 0.7
     Target: (1,0)
     AttackStage: [Data Exfiltration:0.7]
-    SuccessPath: E
-    FailurePath: D
-  D:
+    SuccessPath: F
+    FailurePath: B
+  F:
     ExploitName: Cross-Site Scripting (XSS) Exploit
     Vulnerability: Cross-Site Scripting (XSS)
     Os: None
     Service: http
-    Process: Apache
-    SuccessRate: 0.7
-    Target: (2,1)
-    AttackStage: [Initial Compromise]
-    SuccessPath: G
-    FailurePath: E
-  E:
-    ExploitName: Cross-Site Scripting (XSS) Exploit
-    Vulnerability: Cross-Site Scripting (XSS)
+    Process: None
+    SuccessRate: 0.6
+    Target: (2,0)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.6]
+    SuccessPath: H
+    FailurePath: C
+  G:
+    ExploitName: Weak Authentication Exploit
+    Vulnerability: weak authentication
     Os: None
-    Service: http
-    Process: Apache
+    Service: ssh
+    Process: None
     SuccessRate: 0.7
     Target: (2,0)
-    AttackStage: [Initial Compromise]
-    SuccessPath: G
-    FailurePath: F
-  F:
-    ExploitName: Anonymous Access Exploit
-    Vulnerability: anonymous access
-    Os: None
-    Service: None
-    Process: ftp
-    SuccessRate: 0.6
-    Target: (2,1)
-    AttackStage: [Initial Compromise, Data Exfiltration:0.8]
-    SuccessPath: G
+    AttackStage: [Initial Compromise, Data Exfiltration:0.7]
+    SuccessPath: H
     FailurePath: None
-  G:
+  H:
     ExploitName: Sql Injection Exploit
     Vulnerability: Sql Injection
     Os: None
     Service: None
-    Process: mysql
+    Process: Sql Server
+    SuccessRate: 0.8
+    Target: (4,0)
+    AttackStage: [Initial Compromise, Data Exfiltration:0.8]
+    SuccessPath: J
+    FailurePath: I
+  I:
+    ExploitName: Misconfigurations Exploit
+    Vulnerability: misconfigurations
+    Os: Windows
+    Service: None
+    Process: None
     SuccessRate: 0.7
     Target: (4,0)
-    AttackStage: [Initial Compromise, Data Exfiltration:0.6]
-    SuccessPath: I
-    FailurePath: H
-  H:
-    ExploitName: Command Injection Exploit
-    Vulnerability: command injection
-    Os: None
-    Service: smtp
-    Process: Sendmail
-    SuccessRate: 0.8
-    Target: (3,0)
-    AttackStage: [Initial Compromise, Data Exfiltration:0.9]
+    AttackStage: [Initial Compromise, Data Exfiltration:0.7]
     SuccessPath: J
     FailurePath: None
-  I:
+  J:
     ExploitName: Privilege Escalation Exploit
     Vulnerability: privilege escalation
-    Os: None
+    Os: Windows
     Service: None
-    Process: mysql
+    Process: Sql Server
     SuccessRate: 0.7
     Target: (4,0)
     AttackStage: [Terminate Node:0.8]
-    SuccessPath: K
-    FailurePath: K
-  J:
-    ExploitName: SSL/TLS vulnerabilities Exploit
-    Vulnerability: SSL/TLS vulnerabilities
-    Os: None
-    Service: https
-    Process: None
-    SuccessRate: 0.3
-    Target: (4,0)
-    AttackStage: [Initial Compromise]
-    SuccessPath: L
-    FailurePath: None
-  K:
-    ExploitName: Command Injection Exploit
-    Vulnerability: command injection
-    Os: None
-    Service: smtp
-    Process: Sendmail
-    SuccessRate: 0.8
-    Target: (3,0)
-    AttackStage: [Initial Compromise, Data Exfiltration:0.8 ]
-    SuccessPath: None
-    FailurePath: None
-  L:
-    ExploitName: Command Injection Exploit
-    Vulnerability: Command Injection
-    Os: None
-    Service: ftp
-    Process: None
-    SuccessRate: 0.4
-    Target: (4,0)
-    AttackStage: [ Terminate Node:0.9 ]
     SuccessPath: None
     FailurePath: None

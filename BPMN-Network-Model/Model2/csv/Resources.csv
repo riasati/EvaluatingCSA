@@ -1,0 +1,6 @@
+Name,Dependencies,HostAddresses
+CrawlServer,CrawlDB,(3;0) (3;1)
+CrawlDB,,(3;0) (3;1)
+Server,DB,(2;0) (2;1)
+PresentationServer,,(1;0)
+DB,,(2;0) (2;1)

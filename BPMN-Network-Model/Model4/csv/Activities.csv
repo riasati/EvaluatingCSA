@@ -1,0 +1,15 @@
+Name,Resource
+CrawlProfessorAmirkabir,CrawlServer
+StoreProfessorData,Server
+ProfessorPresentation,PresentationServer
+CrawlProfessorFromGoogleScholar,CrawlServer
+StoreGoogleScholarData,Server
+GoogleScholarPresentation,PresentationServer
+CrawlProfessorFromScimet,CrawlServer
+StoreScimetData,Server
+ScimetPresentation,PresentationServer
+CrawlProfessorSharif,CrawlServer
+Search,PresentationServer
+ProcessingSearchData,Server
+PresentationResult,PresentationServer
+CrawlProfessorScienceAndTechnology,CrawlServer

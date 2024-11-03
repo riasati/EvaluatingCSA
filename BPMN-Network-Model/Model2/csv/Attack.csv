@@ -1,0 +1,13 @@
+NodeName,ExploitName,Vulnerability,OS,Service,Process,SuccessRate,Target,AttackStage,SuccessPath,FailurePath
+A,Misconfigurations Exploit,misconfigurations,None,None,Apache,0.7,(1 0),Initial Compromise,D,B
+B,Nginx Exploit,Buffer overflows,None,None,Nginx,0.8,(3 0),Initial Compromise,E,C
+C,Weak Authentication Exploit,weak authentication,None,ssh,None,0.6,(3 1),Initial Compromise,F,None
+D,Privilege Escalation Exploit,privilege escalation,Linux,None,None,0.7,(1 0),Data Exfiltration:0.8,E,B
+E,Sql Injection Exploit,Sql Injection,None,None,MySQL,0.7,(2 0),Initial Compromise,G,C
+F,Privilege Escalation Exploit,privilege escalation,Linux,None,None,0.6,(3 1),Data Exfiltration:0.7,I,None
+G,Privilege Escalation Exploit,privilege escalation,None,None,MySQL,0.8,(2 0),Data Exfiltration:0.9,J,H
+H,Cross-Site Scripting (XSS) Exploit,Cross-Site Scripting (XSS),None,None,Apache,0.7,(2 1),Initial Compromise,K,C
+I,Sql Injection Exploit,Sql Injection,None,None,MySQL,0.8,(2 1),Initial Compromise,K,L
+J,Command Injection Exploit,Command Injection,None,ftp,None,0.8,(2 0),Terminate Node:0.8,H,H
+K,Privilege Escalation Exploit,privilege escalation,Linux,None,None,0.6,(2 1),Data Exfiltration:0.7,None,None
+L,Cross-Site Scripting (XSS) Exploit,Cross-Site Scripting (XSS),None,http,None,0.6,(2 0),Initial Compromise Data Exfiltration:0.6,None,None

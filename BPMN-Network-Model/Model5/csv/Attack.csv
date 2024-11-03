@@ -1,0 +1,14 @@
+NodeName,ExploitName,Vulnerability,OS,Service,Process,SuccessRate,Target,AttackStage,SuccessPath,FailurePath
+A,Nginx Exploit,Buffer overflows,None,None,Nginx,0.8,(1 0),Initial Compromise,D,B
+B,Misconfigurations Exploit,misconfigurations,Linux,None,None,0.7,(1 1),Initial Compromise,E,C
+C,Misconfigurations Exploit,misconfigurations,Linux,None,Nginx,0.7,(1 0),Initial Compromise,D,None
+D,Privilege Escalation Exploit,privilege escalation,Linux,None,None,0.6,(1 0),Data Exfiltration:0.8 Terminate Node:0.7,F,F
+E,Privilege Escalation Exploit,privilege escalation,Linux,None,None,0.6,(1 1),Data Exfiltration:0.8 Terminate Node:0.7,F,F
+F,Command Injection Exploit,command injection,None,None,ftp,0.7,(2 0),Initial Compromise Data Exfiltration:0.6,J,G
+G,Cross-Site Scripting (XSS),Cross-Site Scripting,None,http,None,0.8,(2 0),Initial Compromise Data Exfiltration:0.7,J,H
+H,Misconfigurations Exploit,misconfigurations,Windows,None,Apache,0.8,(2 1),Initial Compromise Data Exfiltration:0.6,K,I
+I,Cleartext Transmission Exploit,cleartext transmission,None,ftp,None,0.7,(2 2),Initial Compromise Data Exfiltration:0.7,K,None
+J,Credential Theft Exploit,credential theft,None,rdp,None,0.6,(2 0),Terminate Node:0.8,K,K
+K,SQL Injection Exploit,SQL Injection,None,None,MySQL,0.7,(3 0),Initial Compromise Data Exfiltration:0.7,M,L
+L,Weak Authentication Exploit,weak authentication,None,ssh,None,0.6,(3 0),Initial Compromise Data Exfiltration:0.8,M,None
+M,Privilege Escalation Exploit,privilege escalation,Linux,None,MySQL,0.7,(3 0),Data Exfiltration:0.6 Terminate Node:0.7,None,None

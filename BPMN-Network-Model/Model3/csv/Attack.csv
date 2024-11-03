@@ -1,0 +1,11 @@
+NodeName,ExploitName,Vulnerability,OS,Service,Process,SuccessRate,Target,AttackStage,SuccessPath,FailurePath
+A,Misconfigurations Exploit,misconfigurations,Windows,None,None,0.8,(1 0),Initial Compromise,E,B
+B,Outdated Implementations Exploit,outdated implementations,None,ssh,None,0.7,(3 0),Initial Compromise Data Exfiltration:0.8,F,C
+C,Cross-Site Scripting (XSS) Exploit,Cross-Site Scripting (XSS),None,None,Apache,0.7,(3 1),Initial Compromise,G,D
+D,Nginx Exploit,Buffer overflows,None,None,Nginx,0.8,(3 2),Initial Compromise,G,None
+E,Privilege Escalation Exploit,privilege escalation,Windows,None,None,0.7,(1 0),Data Exfiltration:0.7,F,B
+F,Cross-Site Scripting (XSS) Exploit,Cross-Site Scripting (XSS),None,http,None,0.6,(2 0),Initial Compromise Data Exfiltration:0.6,H,C
+G,Weak Authentication Exploit,weak authentication,None,ssh,None,0.7,(2 0),Initial Compromise Data Exfiltration:0.7,H,None
+H,Sql Injection Exploit,Sql Injection,None,None,Sql Server,0.8,(4 0),Initial Compromise Data Exfiltration:0.8,J,I
+I,Misconfigurations Exploit,misconfigurations,Windows,None,None,0.7,(4 0),Initial Compromise Data Exfiltration:0.7,J,None
+J,Privilege Escalation Exploit,privilege escalation,Windows,None,Sql Server,0.7,(4 0),Terminate Node:0.8,None,None

@@ -1,0 +1,11 @@
+NodeName,ExploitName,Vulnerability,OS,Service,Process,SuccessRate,Target,AttackStage,SuccessPath,FailurePath
+A,Nginx Exploit,Buffer overflows,None,None,Nginx,0.8,(1 0),Initial Compromise,C,B
+B,SSL/TLS vulnerabilities Exploit,SSL/TLS vulnerabilities,None,https,None,0.5,(1 0),Initial Compromise,C,None
+C,Privilege Escalation Exploit,privilege escalation,linux,None,None,0.6,(1 0),Data Exfiltration:0.7,D,D
+D,Weak Ciphers Exploit,weak ciphers,None,ssh,None,0.8,(2 0),Initial Compromise Data Exfiltration:0.7,G,E
+E,Misconfigurations Exploit,misconfigurations,Windows,None,None,0.7,(3 0),Initial Compromise Data Exfiltration:0.7,H,F
+F,Anonymous Access Exploit,anonymous access,None,ftp,None,0.6,(4 0),Initial Compromise Data Exfiltration:0.8 Terminate Node:0.6,I,None
+G,Misconfigurations Exploit,misconfigurations,Windows,None,None,0.7,(3 0),Initial Compromise Data Exfiltration:0.7,H,I
+H,Anonymous Access Exploit,anonymous access,None,ftp,None,0.6,(4 0),Initial Compromise Data Exfiltration:0.8 Terminate Node:0.6,I,I
+I,SQL Injection Exploit,SQL Injection,None,http,MySQL,0.7,(5 0),Initial Compromise Data Exfiltration:0.6,J,None
+J,Privilege Escalation Exploit,privilege escalation,Linux,None,None,0.6,(3 0),Data Exfiltration:0.8 Terminate Node:0.9,None,None

@@ -1,0 +1,7 @@
+Name,Activities,Importance,Type,Weights
+Store Data Correctly,StoreInternalPlaneData StoreExternalPlaneData StoreTrainData StoreBusData StoreSignUpData,2,Weighted,0.225 0.225 0.225 0.225 0.1
+Search Data Correctly,ProcessingInternalPlaneSearch ProcessingExternalPlaneSearch ProcessingTrainSearch ProcessingBusSearch,4,Equal,
+Presentation Without Problem,PresentingInternalPlaneData PresentingExternalPlaneData PresentingTrainData PresentingBusData PresentUserPage PresentPurchaseResult,4,Weighted,0.15 0.15 0.15 0.15 0.1 0.3
+Purchase Ticket Correctly,CalculatePriceAndData Purchase,4,Related,
+Authentication and Authorization Correctly,Authorization Authentication,4,Related,
+Collecting Data Correctly,EmployeeCollectInternalPlaneData EmployeeCollectExternalPlaneData EmployeeCollectTrainData EmployeeCollectBusData,4,Equal,

@@ -1,0 +1,213 @@
+// BPMN
+digraph BPMN {
+	graph [compound=true label="BPMN of Model6" labelloc=t rankdir=LR]
+	node [color=lightgoldenrodyellow shape=rectangle style="rounded,filled"]
+	"start.1" [label=start color=palegreen1 shape=circle]
+	"end.1" [label=end color=orangered shape=doublecircle]
+	"start.2" [label=start color=palegreen1 shape=circle]
+	"end.2" [label=end color=orangered shape=doublecircle]
+	"start.3" [label=start color=palegreen1 shape=circle]
+	"end.3" [label=end color=orangered shape=doublecircle]
+	"start.4" [label=start color=palegreen1 shape=circle]
+	"end.4" [label=end color=orangered shape=doublecircle]
+	"start.5" [label=start color=palegreen1 shape=circle]
+	"end.5" [label=end color=orangered shape=doublecircle]
+	"start.6" [label=start color=palegreen1 shape=circle]
+	"end.6" [label=end color=orangered shape=doublecircle]
+	5.1 [label=5 color=gray]
+	"SellerRegisterGoodsPage.1" [label=SellerRegisterGoodsPage]
+	"StoreGoods.1" [label=StoreGoods]
+	"PresentGoodsData.1" [label=PresentGoodsData]
+	2.2 [label=2 color=gray]
+	"BuyerSelectGoodsPage.2" [label=BuyerSelectGoodsPage]
+	"CalculatePriceAndData.2" [label=CalculatePriceAndData]
+	"Purchase.2" [label=Purchase]
+	"PresentPurchaseResult.2" [label=PresentPurchaseResult]
+	5.3 [label=5 color=gray]
+	"BuyerSelectGoodsPage.3" [label=BuyerSelectGoodsPage]
+	"CalculatePriceAndData.3" [label=CalculatePriceAndData]
+	"Purchase.3" [label=Purchase]
+	"CreateNewOrder.3" [label=CreateNewOrder]
+	2.4 [label=2 color=gray]
+	"SearchInGoods.4" [label=SearchInGoods]
+	"ProcessingSearch.4" [label=ProcessingSearch]
+	"PresentingSearchData.4" [label=PresentingSearchData]
+	2.5 [label=2 color=gray]
+	"PresentSignUpPage.5" [label=PresentSignUpPage]
+	"StoreSignUpData.5" [label=StoreSignUpData]
+	"Authorization.5" [label=Authorization]
+	"PresentUserPage.5" [label=PresentUserPage]
+	2.6 [label=2 color=gray]
+	"PresentLoginPage.6" [label=PresentLoginPage]
+	"Authentication.6" [label=Authentication]
+	"Authorization.6" [label=Authorization]
+	"PresentUserPage.6" [label=PresentUserPage]
+	"(2,0).DataServer" [label="(2,0)"]
+	"(3,0).UserServer" [label="(3,0)"]
+	"(4,0).PurchaseServer" [label="(4,0)"]
+	"(1,0).PresentationServer" [label="(1,0)"]
+	"(5,0).DB" [label="(5,0)"]
+	"2.Store Data Correctly" [label=2 color=gray]
+	"StoreGoods.Store Data Correctly" [label=StoreGoods]
+	"4.Search Data Correctly" [label=4 color=gray]
+	"ProcessingSearch.Search Data Correctly" [label=ProcessingSearch]
+	"4.Presentation Without Problem" [label=4 color=gray]
+	"PresentGoodsData.Presentation Without Problem" [label=PresentGoodsData]
+	"PresentPurchaseResult.Presentation Without Problem" [label=PresentPurchaseResult]
+	"4.Purchase Goods Correctly" [label=4 color=gray]
+	"CalculatePriceAndData.Purchase Goods Correctly" [label=CalculatePriceAndData]
+	"Purchase.Purchase Goods Correctly" [label=Purchase]
+	"4.Authentication and Authorization Correctly" [label=4 color=gray]
+	"Authorization.Authentication and Authorization Correctly" [label=Authorization]
+	"Authentication.Authentication and Authorization Correctly" [label=Authentication]
+	subgraph cluster_workflow {
+		label=Workflow style=dotted
+		"start.1"
+		"end.1"
+		"start.2"
+		"end.2"
+		"start.3"
+		"end.3"
+		"start.4"
+		"end.4"
+		"start.5"
+		"end.5"
+		"start.6"
+		"end.6"
+		5.1
+		2.2
+		5.3
+		2.4
+		2.5
+		2.6
+		"SellerRegisterGoodsPage.1"
+		"StoreGoods.1"
+		"PresentGoodsData.1"
+		"BuyerSelectGoodsPage.2"
+		"CalculatePriceAndData.2"
+		"Purchase.2"
+		"PresentPurchaseResult.2"
+		"BuyerSelectGoodsPage.3"
+		"CalculatePriceAndData.3"
+		"Purchase.3"
+		"CreateNewOrder.3"
+		"SearchInGoods.4"
+		"ProcessingSearch.4"
+		"PresentingSearchData.4"
+		"PresentSignUpPage.5"
+		"StoreSignUpData.5"
+		"Authorization.5"
+		"PresentUserPage.5"
+		"PresentLoginPage.6"
+		"Authentication.6"
+		"Authorization.6"
+		"PresentUserPage.6"
+	}
+	subgraph cluster_dataserver {
+		label=DataServer style=dotted
+		"(2,0).DataServer"
+	}
+	subgraph cluster_userserver {
+		label=UserServer style=dotted
+		"(3,0).UserServer"
+	}
+	subgraph cluster_purchaseserver {
+		label=PurchaseServer style=dotted
+		"(4,0).PurchaseServer"
+	}
+	subgraph cluster_presentationserver {
+		label=PresentationServer style=dotted
+		"(1,0).PresentationServer"
+	}
+	subgraph cluster_db {
+		label=DB style=dotted
+		"(5,0).DB"
+	}
+	subgraph cluster_mission1 {
+		label="Mission1\nStore Data Correctly" style=dotted
+		"2.Store Data Correctly"
+		"StoreGoods.Store Data Correctly"
+	}
+	subgraph cluster_mission2 {
+		label="Mission2\nSearch Data Correctly" style=dotted
+		"4.Search Data Correctly"
+		"ProcessingSearch.Search Data Correctly"
+	}
+	subgraph cluster_mission3 {
+		label="Mission3\nPresentation Without Problem" style=dotted
+		"4.Presentation Without Problem"
+		"PresentGoodsData.Presentation Without Problem"
+		"PresentPurchaseResult.Presentation Without Problem"
+	}
+	subgraph cluster_mission4 {
+		label="Mission4\nPurchase Goods Correctly" style=dotted
+		"4.Purchase Goods Correctly"
+		"CalculatePriceAndData.Purchase Goods Correctly"
+		"Purchase.Purchase Goods Correctly"
+	}
+	subgraph cluster_mission5 {
+		label="Mission5\nAuthentication and Authorization Correctly" style=dotted
+		"4.Authentication and Authorization Correctly"
+		"Authorization.Authentication and Authorization Correctly"
+		"Authentication.Authentication and Authorization Correctly"
+	}
+	"start.1" -> 5.1
+	5.1 -> "SellerRegisterGoodsPage.1"
+	"SellerRegisterGoodsPage.1" -> "StoreGoods.1"
+	"StoreGoods.1" -> "PresentGoodsData.1"
+	"PresentGoodsData.1" -> "end.1"
+	"start.2" -> 2.2
+	2.2 -> "BuyerSelectGoodsPage.2"
+	"BuyerSelectGoodsPage.2" -> "CalculatePriceAndData.2"
+	"CalculatePriceAndData.2" -> "Purchase.2"
+	"Purchase.2" -> "PresentPurchaseResult.2"
+	"PresentPurchaseResult.2" -> "end.2"
+	"start.3" -> 5.3
+	5.3 -> "BuyerSelectGoodsPage.3"
+	"BuyerSelectGoodsPage.3" -> "CalculatePriceAndData.3"
+	"CalculatePriceAndData.3" -> "Purchase.3"
+	"Purchase.3" -> "CreateNewOrder.3"
+	"CreateNewOrder.3" -> "end.3"
+	"start.4" -> 2.4
+	2.4 -> "SearchInGoods.4"
+	"SearchInGoods.4" -> "ProcessingSearch.4"
+	"ProcessingSearch.4" -> "PresentingSearchData.4"
+	"PresentingSearchData.4" -> "end.4"
+	"start.5" -> 2.5
+	2.5 -> "PresentSignUpPage.5"
+	"PresentSignUpPage.5" -> "StoreSignUpData.5"
+	"StoreSignUpData.5" -> "Authorization.5"
+	"Authorization.5" -> "PresentUserPage.5"
+	"PresentUserPage.5" -> "end.5"
+	"start.6" -> 2.6
+	2.6 -> "PresentLoginPage.6"
+	"PresentLoginPage.6" -> "Authentication.6"
+	"Authentication.6" -> "Authorization.6"
+	"Authorization.6" -> "PresentUserPage.6"
+	"PresentUserPage.6" -> "end.6"
+	"SellerRegisterGoodsPage.1" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"StoreGoods.1" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentGoodsData.1" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"BuyerSelectGoodsPage.2" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CalculatePriceAndData.2" -> "(4,0).PurchaseServer" [lhead=cluster_purchaseserver style=dashed]
+	"Purchase.2" -> "(4,0).PurchaseServer" [lhead=cluster_purchaseserver style=dashed]
+	"PresentPurchaseResult.2" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"BuyerSelectGoodsPage.3" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CalculatePriceAndData.3" -> "(4,0).PurchaseServer" [lhead=cluster_purchaseserver style=dashed]
+	"Purchase.3" -> "(4,0).PurchaseServer" [lhead=cluster_purchaseserver style=dashed]
+	"CreateNewOrder.3" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"SearchInGoods.4" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"ProcessingSearch.4" -> "(2,0).DataServer" [lhead=cluster_dataserver style=dashed]
+	"PresentingSearchData.4" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"PresentSignUpPage.5" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"StoreSignUpData.5" -> "(3,0).UserServer" [lhead=cluster_userserver style=dashed]
+	"Authorization.5" -> "(3,0).UserServer" [lhead=cluster_userserver style=dashed]
+	"PresentUserPage.5" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"PresentLoginPage.6" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"Authentication.6" -> "(3,0).UserServer" [lhead=cluster_userserver style=dashed]
+	"Authorization.6" -> "(3,0).UserServer" [lhead=cluster_userserver style=dashed]
+	"PresentUserPage.6" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"(2,0).DataServer" -> "(5,0).DB" [lhead=cluster_db ltail=cluster_dataserver style=dashed]
+	"(3,0).UserServer" -> "(5,0).DB" [lhead=cluster_db ltail=cluster_userserver style=dashed]
+	"(4,0).PurchaseServer" -> "(5,0).DB" [lhead=cluster_db ltail=cluster_purchaseserver style=dashed]
+}

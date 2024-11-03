@@ -1,0 +1,31 @@
+// Network
+graph Network {
+	graph [compound=true label="Network of Model2" labelloc=t rankdir=LR]
+	subgraph cluster_internet {
+		label=Internet
+		Internet
+	}
+	subgraph cluster_subnet1 {
+		label=Subnet1
+		"(1,0)"
+	}
+	subgraph cluster_subnet2 {
+		label=Subnet2
+		"(2,0)"
+		"(2,1)"
+	}
+	subgraph cluster_subnet3 {
+		label=Subnet3
+		"(3,0)"
+		"(3,1)"
+	}
+	"(1,0)" [label="(1,0)\nlinux\nhttp https dns ssh\nApache\n0.8"]
+	"(2,0)" [label="(2,0)\nlinux\nhttp dns ftp\nApache MySQL\n0.7"]
+	"(2,1)" [label="(2,1)\nlinux\nhttp dns ftp\nApache MySQL\n0.7"]
+	"(3,0)" [label="(3,0)\nlinux\nhttps dns ssh\nNginx MongoDB\n0.8"]
+	"(3,1)" [label="(3,1)\nlinux\nhttps dns ssh\nNginx MongoDB\n0.8"]
+	Internet -- "(1,0)" [lhead=cluster_subnet1 ltail=cluster_internet]
+	Internet -- "(3,0)" [lhead=cluster_subnet3 ltail=cluster_internet]
+	"(1,0)" -- "(2,0)" [lhead=cluster_subnet2 ltail=cluster_subnet1]
+	"(2,0)" -- "(3,0)" [lhead=cluster_subnet3 ltail=cluster_subnet2]
+}

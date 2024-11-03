@@ -1,0 +1,8 @@
+Importance,Activities
+5,Start CrawlCompanyJobinja WrapperCompanyJobinja StoreCompanyData CompanyPresentation End
+2,Start CrawlCompanyJobVision WrapperCompanyJobVision StoreCompanyData CompanyPresentation End
+5,Start CrawlCompanyEestekhdam WrapperCompanyEestekhdam StoreCompanyData CompanyPresentation End
+2,Start CrawlPositionJobinja WrapperPositionJobinja StorePositionData PositionPresentation End
+5,Start CrawlPositionJobVision WrapperPositionJobVision StorePositionData PositionPresentation End
+2,Start CrawlPositionEestekhdam WrapperPositionEestekhdam StorePositionData PositionPresentation End
+2,Start Search ProcessingSearchData PresentationResult End

@@ -1,0 +1,319 @@
+// BPMN
+digraph BPMN {
+	graph [compound=true label="BPMN of Model2" labelloc=t rankdir=LR]
+	node [color=lightgoldenrodyellow shape=rectangle style="rounded,filled"]
+	"start.1" [label=start color=palegreen1 shape=circle]
+	"end.1" [label=end color=orangered shape=doublecircle]
+	"start.2" [label=start color=palegreen1 shape=circle]
+	"end.2" [label=end color=orangered shape=doublecircle]
+	"start.3" [label=start color=palegreen1 shape=circle]
+	"end.3" [label=end color=orangered shape=doublecircle]
+	"start.4" [label=start color=palegreen1 shape=circle]
+	"end.4" [label=end color=orangered shape=doublecircle]
+	"start.5" [label=start color=palegreen1 shape=circle]
+	"end.5" [label=end color=orangered shape=doublecircle]
+	"start.6" [label=start color=palegreen1 shape=circle]
+	"end.6" [label=end color=orangered shape=doublecircle]
+	"start.7" [label=start color=palegreen1 shape=circle]
+	"end.7" [label=end color=orangered shape=doublecircle]
+	"start.8" [label=start color=palegreen1 shape=circle]
+	"end.8" [label=end color=orangered shape=doublecircle]
+	"start.9" [label=start color=palegreen1 shape=circle]
+	"end.9" [label=end color=orangered shape=doublecircle]
+	5.1 [label=5 color=gray]
+	"CreateTwitterProject.1" [label=CreateTwitterProject]
+	"CrawlTwitterUsersData.1" [label=CrawlTwitterUsersData]
+	"StoreTwitterData.1" [label=StoreTwitterData]
+	"SolvingTwitterData.1" [label=SolvingTwitterData]
+	"SolvingPresentation.1" [label=SolvingPresentation]
+	2.2 [label=2 color=gray]
+	"CreateTwitterProject.2" [label=CreateTwitterProject]
+	"CrawlTwitterUsersData.2" [label=CrawlTwitterUsersData]
+	"StoreTwitterData.2" [label=StoreTwitterData]
+	"DataPresentation.2" [label=DataPresentation]
+	5.3 [label=5 color=gray]
+	"CreateLinkedInProject.3" [label=CreateLinkedInProject]
+	"CrawlLinkedInUsersData.3" [label=CrawlLinkedInUsersData]
+	"StoreLinkedInData.3" [label=StoreLinkedInData]
+	"SolvingLinkedInData.3" [label=SolvingLinkedInData]
+	"SolvingPresentation.3" [label=SolvingPresentation]
+	2.4 [label=2 color=gray]
+	"CreateLinkedInProject.4" [label=CreateLinkedInProject]
+	"CrawlLinkedInUsersData.4" [label=CrawlLinkedInUsersData]
+	"StoreLinkedInData.4" [label=StoreLinkedInData]
+	"DataPresentation.4" [label=DataPresentation]
+	5.5 [label=5 color=gray]
+	"CreateInstagramProject.5" [label=CreateInstagramProject]
+	"CrawlInstagramUsersData.5" [label=CrawlInstagramUsersData]
+	"StoreInstagramData.5" [label=StoreInstagramData]
+	"SolvingInstagramData.5" [label=SolvingInstagramData]
+	"SolvingPresentation.5" [label=SolvingPresentation]
+	2.6 [label=2 color=gray]
+	"CreateInstagramProject.6" [label=CreateInstagramProject]
+	"CrawlInstagramUsersData.6" [label=CrawlInstagramUsersData]
+	"StoreInstagramData.6" [label=StoreInstagramData]
+	"DataPresentation.6" [label=DataPresentation]
+	5.7 [label=5 color=gray]
+	"CreateFaceBookProject.7" [label=CreateFaceBookProject]
+	"CrawlFaceBookUsersData.7" [label=CrawlFaceBookUsersData]
+	"StoreFaceBookData.7" [label=StoreFaceBookData]
+	"SolvingFaceBookData.7" [label=SolvingFaceBookData]
+	"SolvingPresentation.7" [label=SolvingPresentation]
+	2.8 [label=2 color=gray]
+	"CreateFaceBookProject.8" [label=CreateFaceBookProject]
+	"CrawlFaceBookUsersData.8" [label=CrawlFaceBookUsersData]
+	"StoreFaceBookData.8" [label=StoreFaceBookData]
+	"DataPresentation.8" [label=DataPresentation]
+	2.9 [label=2 color=gray]
+	"Search.9" [label=Search]
+	"ProcessingSearchData.9" [label=ProcessingSearchData]
+	"ProcessingResult.9" [label=ProcessingResult]
+	"(3,0).CrawlServer" [label="(3,0)"]
+	"(3,1).CrawlServer" [label="(3,1)"]
+	"(3,0).CrawlDB" [label="(3,0)"]
+	"(3,1).CrawlDB" [label="(3,1)"]
+	"(2,0).Server" [label="(2,0)"]
+	"(2,1).Server" [label="(2,1)"]
+	"(1,0).PresentationServer" [label="(1,0)"]
+	"(2,0).DB" [label="(2,0)"]
+	"(2,1).DB" [label="(2,1)"]
+	"3.Crawl Data Successfully" [label=3 color=gray]
+	"CrawlTwitterUsersData.Crawl Data Successfully" [label=CrawlTwitterUsersData]
+	"CrawlLinkedInUsersData.Crawl Data Successfully" [label=CrawlLinkedInUsersData]
+	"CrawlInstagramUsersData.Crawl Data Successfully" [label=CrawlInstagramUsersData]
+	"CrawlFaceBookUsersData.Crawl Data Successfully" [label=CrawlFaceBookUsersData]
+	"2.Store Data Correctly" [label=2 color=gray]
+	"StoreTwitterData.Store Data Correctly" [label=StoreTwitterData]
+	"StoreLinkedInData.Store Data Correctly" [label=StoreLinkedInData]
+	"StoreInstagramData.Store Data Correctly" [label=StoreInstagramData]
+	"StoreFaceBookData.Store Data Correctly" [label=StoreFaceBookData]
+	"4.Solving Problems Correctly" [label=4 color=gray]
+	"SolvingTwitterData.Solving Problems Correctly" [label=SolvingTwitterData]
+	"SolvingLinkedInData.Solving Problems Correctly" [label=SolvingLinkedInData]
+	"SolvingInstagramData.Solving Problems Correctly" [label=SolvingInstagramData]
+	"SolvingFaceBookData.Solving Problems Correctly" [label=SolvingFaceBookData]
+	"4.Presentation Without Problem" [label=4 color=gray]
+	"SolvingPresentation.Presentation Without Problem" [label=SolvingPresentation]
+	"DataPresentation.Presentation Without Problem" [label=DataPresentation]
+	subgraph cluster_workflow {
+		label=Workflow style=dotted
+		"start.1"
+		"end.1"
+		"start.2"
+		"end.2"
+		"start.3"
+		"end.3"
+		"start.4"
+		"end.4"
+		"start.5"
+		"end.5"
+		"start.6"
+		"end.6"
+		"start.7"
+		"end.7"
+		"start.8"
+		"end.8"
+		"start.9"
+		"end.9"
+		5.1
+		2.2
+		5.3
+		2.4
+		5.5
+		2.6
+		5.7
+		2.8
+		2.9
+		"CreateTwitterProject.1"
+		"CrawlTwitterUsersData.1"
+		"StoreTwitterData.1"
+		"SolvingTwitterData.1"
+		"SolvingPresentation.1"
+		"CreateTwitterProject.2"
+		"CrawlTwitterUsersData.2"
+		"StoreTwitterData.2"
+		"DataPresentation.2"
+		"CreateLinkedInProject.3"
+		"CrawlLinkedInUsersData.3"
+		"StoreLinkedInData.3"
+		"SolvingLinkedInData.3"
+		"SolvingPresentation.3"
+		"CreateLinkedInProject.4"
+		"CrawlLinkedInUsersData.4"
+		"StoreLinkedInData.4"
+		"DataPresentation.4"
+		"CreateInstagramProject.5"
+		"CrawlInstagramUsersData.5"
+		"StoreInstagramData.5"
+		"SolvingInstagramData.5"
+		"SolvingPresentation.5"
+		"CreateInstagramProject.6"
+		"CrawlInstagramUsersData.6"
+		"StoreInstagramData.6"
+		"DataPresentation.6"
+		"CreateFaceBookProject.7"
+		"CrawlFaceBookUsersData.7"
+		"StoreFaceBookData.7"
+		"SolvingFaceBookData.7"
+		"SolvingPresentation.7"
+		"CreateFaceBookProject.8"
+		"CrawlFaceBookUsersData.8"
+		"StoreFaceBookData.8"
+		"DataPresentation.8"
+		"Search.9"
+		"ProcessingSearchData.9"
+		"ProcessingResult.9"
+	}
+	subgraph cluster_crawlserver {
+		label=CrawlServer style=dotted
+		"(3,0).CrawlServer"
+		"(3,1).CrawlServer"
+	}
+	subgraph cluster_crawldb {
+		label=CrawlDB style=dotted
+		"(3,0).CrawlDB"
+		"(3,1).CrawlDB"
+	}
+	subgraph cluster_server {
+		label=Server style=dotted
+		"(2,0).Server"
+		"(2,1).Server"
+	}
+	subgraph cluster_presentationserver {
+		label=PresentationServer style=dotted
+		"(1,0).PresentationServer"
+	}
+	subgraph cluster_db {
+		label=DB style=dotted
+		"(2,0).DB"
+		"(2,1).DB"
+	}
+	subgraph cluster_mission1 {
+		label="Mission1\nCrawl Data Successfully" style=dotted
+		"3.Crawl Data Successfully"
+		"CrawlTwitterUsersData.Crawl Data Successfully"
+		"CrawlLinkedInUsersData.Crawl Data Successfully"
+		"CrawlInstagramUsersData.Crawl Data Successfully"
+		"CrawlFaceBookUsersData.Crawl Data Successfully"
+	}
+	subgraph cluster_mission2 {
+		label="Mission2\nStore Data Correctly" style=dotted
+		"2.Store Data Correctly"
+		"StoreTwitterData.Store Data Correctly"
+		"StoreLinkedInData.Store Data Correctly"
+		"StoreInstagramData.Store Data Correctly"
+		"StoreFaceBookData.Store Data Correctly"
+	}
+	subgraph cluster_mission3 {
+		label="Mission3\nSolving Problems Correctly" style=dotted
+		"4.Solving Problems Correctly"
+		"SolvingTwitterData.Solving Problems Correctly"
+		"SolvingLinkedInData.Solving Problems Correctly"
+		"SolvingInstagramData.Solving Problems Correctly"
+		"SolvingFaceBookData.Solving Problems Correctly"
+	}
+	subgraph cluster_mission4 {
+		label="Mission4\nPresentation Without Problem" style=dotted
+		"4.Presentation Without Problem"
+		"SolvingPresentation.Presentation Without Problem"
+		"DataPresentation.Presentation Without Problem"
+	}
+	"start.1" -> 5.1
+	5.1 -> "CreateTwitterProject.1"
+	"CreateTwitterProject.1" -> "CrawlTwitterUsersData.1"
+	"CrawlTwitterUsersData.1" -> "StoreTwitterData.1"
+	"StoreTwitterData.1" -> "SolvingTwitterData.1"
+	"SolvingTwitterData.1" -> "SolvingPresentation.1"
+	"SolvingPresentation.1" -> "end.1"
+	"start.2" -> 2.2
+	2.2 -> "CreateTwitterProject.2"
+	"CreateTwitterProject.2" -> "CrawlTwitterUsersData.2"
+	"CrawlTwitterUsersData.2" -> "StoreTwitterData.2"
+	"StoreTwitterData.2" -> "DataPresentation.2"
+	"DataPresentation.2" -> "end.2"
+	"start.3" -> 5.3
+	5.3 -> "CreateLinkedInProject.3"
+	"CreateLinkedInProject.3" -> "CrawlLinkedInUsersData.3"
+	"CrawlLinkedInUsersData.3" -> "StoreLinkedInData.3"
+	"StoreLinkedInData.3" -> "SolvingLinkedInData.3"
+	"SolvingLinkedInData.3" -> "SolvingPresentation.3"
+	"SolvingPresentation.3" -> "end.3"
+	"start.4" -> 2.4
+	2.4 -> "CreateLinkedInProject.4"
+	"CreateLinkedInProject.4" -> "CrawlLinkedInUsersData.4"
+	"CrawlLinkedInUsersData.4" -> "StoreLinkedInData.4"
+	"StoreLinkedInData.4" -> "DataPresentation.4"
+	"DataPresentation.4" -> "end.4"
+	"start.5" -> 5.5
+	5.5 -> "CreateInstagramProject.5"
+	"CreateInstagramProject.5" -> "CrawlInstagramUsersData.5"
+	"CrawlInstagramUsersData.5" -> "StoreInstagramData.5"
+	"StoreInstagramData.5" -> "SolvingInstagramData.5"
+	"SolvingInstagramData.5" -> "SolvingPresentation.5"
+	"SolvingPresentation.5" -> "end.5"
+	"start.6" -> 2.6
+	2.6 -> "CreateInstagramProject.6"
+	"CreateInstagramProject.6" -> "CrawlInstagramUsersData.6"
+	"CrawlInstagramUsersData.6" -> "StoreInstagramData.6"
+	"StoreInstagramData.6" -> "DataPresentation.6"
+	"DataPresentation.6" -> "end.6"
+	"start.7" -> 5.7
+	5.7 -> "CreateFaceBookProject.7"
+	"CreateFaceBookProject.7" -> "CrawlFaceBookUsersData.7"
+	"CrawlFaceBookUsersData.7" -> "StoreFaceBookData.7"
+	"StoreFaceBookData.7" -> "SolvingFaceBookData.7"
+	"SolvingFaceBookData.7" -> "SolvingPresentation.7"
+	"SolvingPresentation.7" -> "end.7"
+	"start.8" -> 2.8
+	2.8 -> "CreateFaceBookProject.8"
+	"CreateFaceBookProject.8" -> "CrawlFaceBookUsersData.8"
+	"CrawlFaceBookUsersData.8" -> "StoreFaceBookData.8"
+	"StoreFaceBookData.8" -> "DataPresentation.8"
+	"DataPresentation.8" -> "end.8"
+	"start.9" -> 2.9
+	2.9 -> "Search.9"
+	"Search.9" -> "ProcessingSearchData.9"
+	"ProcessingSearchData.9" -> "ProcessingResult.9"
+	"ProcessingResult.9" -> "end.9"
+	"CreateTwitterProject.1" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CrawlTwitterUsersData.1" -> "(3,0).CrawlServer" [lhead=cluster_crawlserver style=dashed]
+	"StoreTwitterData.1" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"SolvingTwitterData.1" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"SolvingPresentation.1" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CreateTwitterProject.2" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CrawlTwitterUsersData.2" -> "(3,0).CrawlServer" [lhead=cluster_crawlserver style=dashed]
+	"StoreTwitterData.2" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"DataPresentation.2" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CreateLinkedInProject.3" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CrawlLinkedInUsersData.3" -> "(3,0).CrawlServer" [lhead=cluster_crawlserver style=dashed]
+	"StoreLinkedInData.3" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"SolvingLinkedInData.3" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"SolvingPresentation.3" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CreateLinkedInProject.4" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CrawlLinkedInUsersData.4" -> "(3,0).CrawlServer" [lhead=cluster_crawlserver style=dashed]
+	"StoreLinkedInData.4" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"DataPresentation.4" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CreateInstagramProject.5" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CrawlInstagramUsersData.5" -> "(3,0).CrawlServer" [lhead=cluster_crawlserver style=dashed]
+	"StoreInstagramData.5" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"SolvingInstagramData.5" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"SolvingPresentation.5" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CreateInstagramProject.6" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CrawlInstagramUsersData.6" -> "(3,0).CrawlServer" [lhead=cluster_crawlserver style=dashed]
+	"StoreInstagramData.6" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"DataPresentation.6" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CreateFaceBookProject.7" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CrawlFaceBookUsersData.7" -> "(3,0).CrawlServer" [lhead=cluster_crawlserver style=dashed]
+	"StoreFaceBookData.7" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"SolvingFaceBookData.7" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"SolvingPresentation.7" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CreateFaceBookProject.8" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"CrawlFaceBookUsersData.8" -> "(3,0).CrawlServer" [lhead=cluster_crawlserver style=dashed]
+	"StoreFaceBookData.8" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"DataPresentation.8" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"Search.9" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"ProcessingSearchData.9" -> "(2,0).Server" [lhead=cluster_server style=dashed]
+	"ProcessingResult.9" -> "(1,0).PresentationServer" [lhead=cluster_presentationserver style=dashed]
+	"(3,0).CrawlServer" -> "(3,0).CrawlDB" [lhead=cluster_crawldb ltail=cluster_crawlserver style=dashed]
+	"(2,0).Server" -> "(2,0).DB" [lhead=cluster_db ltail=cluster_server style=dashed]
+}
