@@ -1,5 +1,6 @@
 import os
 import csv
+
 import graphviz
 
 from ClassModels.Attacker import Attacker
@@ -354,6 +355,66 @@ class DataConvertor:
                          lhead=f"cluster_{desired_resource['Name'].lower()}", style="dashed")
 
         dot.render(directory=model_path, view=False).replace('\\', '/')
+
+    @staticmethod
+    def create_sub_attack_path_graph(model_path: str, model_number: int, attacker: Attacker):
+        import json
+        import ast
+
+        sub_attack_path_dic = json.load(open(os.path.join(model_path, "AttackPath.txt"), mode='r'))
+
+        model_path = os.path.join(model_path, "graph")
+
+        dot = graphviz.Digraph('SubAttackPathModel', comment='Sub Attack Path', filename="SubAttackPath.gv",
+                               graph_attr={"label": f"Sub Attack Path of Model{model_number}", "labelloc": "t", "rankdir": "LR"})
+        dot.format = "png"
+
+        sub_attack_path_list = sub_attack_path_dic.keys()
+        counter = 1
+        for one_attack_path in sub_attack_path_list:
+            attack_list = ast.literal_eval(one_attack_path)
+            number_of_attack_random_number = counter
+            connection_random_number = 0
+            for i in range(len(attack_list) - 1):
+                node = attack_list[i]
+                next_node = attack_list[i + 1]
+                is_success_attack = False
+                if len(next_node.split(":")) == 1:
+                    if next_node == attacker.get_success_attack_node(node):
+                        is_success_attack = True
+                else:
+                    if next_node.split(":")[1] == "S":
+                        is_success_attack = True
+
+                node = node.split(":")[0]
+                next_node = next_node.split(":")[0]
+                if i == 0:
+                    first_node_name = node + str(counter)
+                    connection_random_number = counter
+                    second_node_name = next_node + str(connection_random_number)
+                    dot.node(first_node_name, label=node)
+                    number_of_attack = sub_attack_path_dic[one_attack_path]
+                    dot.node("number_of_attack" + str(number_of_attack_random_number), label=str(number_of_attack))
+                    dot.edge(first_node_name, "number_of_attack" + str(number_of_attack_random_number))
+                    dot.node(second_node_name, label=next_node)
+                    if is_success_attack:
+                        dot.edge("number_of_attack" + str(number_of_attack_random_number), second_node_name, color='blue')
+                    else:
+                        dot.edge("number_of_attack" + str(number_of_attack_random_number), second_node_name, color='red')
+                else:
+                    first_node_name = node + str(connection_random_number)
+                    connection_random_number = counter
+                    if next_node == "None": next_node = "Terminal"
+                    second_node_name = next_node + str(connection_random_number)
+                    dot.node(second_node_name, label=next_node)
+                    if is_success_attack:
+                        dot.edge(first_node_name, second_node_name, color='blue')
+                    else:
+                        dot.edge(first_node_name, second_node_name, color='red')
+            counter += 1
+
+        dot.render(directory=model_path, view=False).replace('\\', '/')
+
 
     @staticmethod
     def create_graph_from_file(model_path: str):

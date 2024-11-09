@@ -1,9 +1,11 @@
 import random
 import json
+import ast
 class Attacker:
     def __init__(self, attack_json):
         self.attack_path_list_object = None
         self.current_attack_path : list = None
+        self.current_current_attack_path: list = None
         self.current_first_node: str = None
         self.current_second_node: str = None
         self.least_probability_of_all_paths: float = None
@@ -102,11 +104,16 @@ class Attacker:
         return attack_path_names
 
     def create_numbers_of_attack_path(self, attack_node_name: str, hosts_configuration: list):
+
+        def convert_single_and_double_quote(one_string: str) -> str:
+            return one_string.replace('"', "'")
+
         import json
         return_object = {}
         for i in range(self.appropriate_attack_path_number):
             one_attack_path = self.create_attack_path(attack_node_name, hosts_configuration, [])
             one_attack_path_string = json.dumps(one_attack_path)
+            one_attack_path_string = convert_single_and_double_quote(one_attack_path_string)
             if one_attack_path_string not in return_object:
                 return_object[one_attack_path_string] = 1
             else:
@@ -180,9 +187,9 @@ class Attacker:
         if remain >= 50:
             quotient += 1
         appropriate_number = quotient * 100
-        if appropriate_number > 100000:
+        if appropriate_number > 10000:
             print(appropriate_number)
-            appropriate_number = 100000
+            appropriate_number = 10000
         self.appropriate_attack_path_number = appropriate_number
         return appropriate_number
 
@@ -192,7 +199,9 @@ class Attacker:
             raise Exception("you have to call create_numbers_of_attack_path before this")
         if attack_path_string not in self.attack_path_list_object.keys():
             raise Exception("attack_path_string_error")
-        self.current_attack_path = json.loads(attack_path_string)
+
+        self.current_attack_path = ast.literal_eval(attack_path_string)
+        #self.current_attack_path = json.loads(attack_path_string)
         self.current_first_node = self.current_attack_path[0]
         self.current_second_node = self.current_attack_path[1]
 
