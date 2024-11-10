@@ -187,9 +187,9 @@ class Attacker:
         if remain >= 50:
             quotient += 1
         appropriate_number = quotient * 100
-        if appropriate_number > 10000:
+        if appropriate_number > 100000:
             print(appropriate_number)
-            appropriate_number = 10000
+            appropriate_number = 100000
         self.appropriate_attack_path_number = appropriate_number
         return appropriate_number
 

@@ -1,7 +1,9 @@
 import os
 import csv
-
+import json
 import graphviz
+import matplotlib.pyplot as plt
+import numpy as np
 
 from ClassModels.Attacker import Attacker
 from ClassModels.BPMN import BPMN
@@ -358,12 +360,15 @@ class DataConvertor:
 
     @staticmethod
     def create_sub_attack_path_graph(model_path: str, model_number: int, attacker: Attacker):
-        import json
         import ast
+
+        if not os.path.exists(os.path.join(model_path, "AttackPath.txt")):
+            print("File Doesn't Exist")
+            return
 
         sub_attack_path_dic = json.load(open(os.path.join(model_path, "AttackPath.txt"), mode='r'))
 
-        model_path = os.path.join(model_path, "graph")
+        graph_path = os.path.join(model_path, "graph")
 
         dot = graphviz.Digraph('SubAttackPathModel', comment='Sub Attack Path', filename="SubAttackPath.gv",
                                graph_attr={"label": f"Sub Attack Path of Model{model_number}", "labelloc": "t", "rankdir": "LR"})
@@ -413,7 +418,119 @@ class DataConvertor:
                         dot.edge(first_node_name, second_node_name, color='red')
             counter += 1
 
-        dot.render(directory=model_path, view=False).replace('\\', '/')
+        dot.render(directory=graph_path, view=False).replace('\\', '/')
+
+        os.remove(os.path.join(model_path, "AttackPath.txt"))
+
+    @staticmethod
+    def create_table_pictures(model_path: str):
+
+        def create_table(title_text, column_header, row_header, data, output_path):
+            cell_text = []
+            for row in data:
+                cell_text.append([f'{x}' for x in row])
+
+            rcolors = plt.cm.BuPu(np.full(len(row_header), 0.1))
+            ccolors = plt.cm.BuPu(np.full(len(column_header), 0.1))
+
+            plt.figure(linewidth=2,
+                       tight_layout={'pad': 1},
+                       figsize=(5, 3)
+                       )
+
+            the_table = plt.table(cellText=cell_text,
+                                  rowLabels=row_header,
+                                  rowColours=rcolors,
+                                  rowLoc='left',
+                                  colColours=ccolors,
+                                  colLabels=column_header,
+                                  cellLoc='center',
+                                  loc='center')
+
+            the_table.scale(1, 1.5)
+
+            ax = plt.gca()
+            ax.get_xaxis().set_visible(False)
+            ax.get_yaxis().set_visible(False)
+            plt.box(on=None)
+
+            plt.suptitle(title_text)
+
+            plt.draw()
+
+            fig = plt.gcf()
+            plt.savefig(output_path,
+                        bbox_inches='tight',
+                        dpi=150
+                        )
+            plt.close(fig)
+
+        if not os.path.exists(os.path.join(model_path, "CSAResult.txt")):
+            print("File Doesn't Exist")
+            return
+
+        csa_list_list = json.load(open(os.path.join(model_path, "CSAResult.txt"), mode='r'))
+
+        title_text = 'Evaluate Attack'
+        column_header = ["Evaluate First Node", "Evaluate Second Node", "Evaluate Attack Path"]
+        row_header = [ f"CSA{i+1}" for i in range(len(csa_list_list[0]))]
+        data = []
+        for i in range(len(csa_list_list[0])):
+            data_list = [csa_list_list[0][i]["evaluate_first_node_correctness"], csa_list_list[0][i]["evaluate_second_node_correctness"], csa_list_list[0][i]["evaluate_attack_path"]]
+            data.append(data_list)
+
+        create_table(title_text, column_header, row_header, data, os.path.join(model_path, "graph", "EvaluateAttack.png"))
+
+        title_text = 'Evaluate State'
+        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        row_header = [f"CSA{i + 1}" for i in range(len(csa_list_list[0]))]
+        data = []
+        for i in range(len(csa_list_list[1])):
+            data_list = [csa_list_list[1][i]["evaluate_now"],
+                         csa_list_list[1][i]["evaluate_future"]]
+            data.append(data_list)
+
+        create_table(title_text, column_header, row_header, data, os.path.join(model_path, "graph", "EvaluateState.png"))
+
+
+        title_text = 'Evaluate State Without Zero Difference'
+        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        row_header = [f"CSA{i + 1}" for i in range(len(csa_list_list[0]))]
+        data = []
+        for i in range(len(csa_list_list[2])):
+            data_list = [csa_list_list[2][i]["evaluate_now"],
+                         csa_list_list[2][i]["evaluate_future"]]
+            data.append(data_list)
+
+        create_table(title_text, column_header, row_header, data,
+                     os.path.join(model_path, "graph", "EvaluateStateWithoutZeroDifference.png"))
+
+        title_text = 'Evaluate State Percentage'
+        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        row_header = [f"CSA{i + 1}" for i in range(len(csa_list_list[0]))]
+        data = []
+        for i in range(len(csa_list_list[3])):
+            data_list = [csa_list_list[3][i]["evaluate_now"],
+                         csa_list_list[3][i]["evaluate_future"]]
+            data.append(data_list)
+
+        create_table(title_text, column_header, row_header, data,
+                     os.path.join(model_path, "graph", "EvaluateStatePercentage.png"))
+
+        title_text = 'Evaluate State Without Zero Difference Percentage'
+        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        row_header = [f"CSA{i + 1}" for i in range(len(csa_list_list[0]))]
+        data = []
+        for i in range(len(csa_list_list[4])):
+            data_list = [csa_list_list[4][i]["evaluate_now"],
+                         csa_list_list[4][i]["evaluate_future"]]
+            data.append(data_list)
+
+        create_table(title_text, column_header, row_header, data,
+                     os.path.join(model_path, "graph", "EvaluateStateWithoutZeroDifferencePercentage.png"))
+
+        os.remove(os.path.join(model_path, "CSAResult.txt"))
+
 
 
     @staticmethod

@@ -22,6 +22,7 @@ class CSA:
     def initialize_state(self, network_state: NetworkState):
         self.network_state = network_state
         self.network_state_simulator = copy.deepcopy(network_state)
+        self.current_attack_path = []
 
     def update_current_attack_path(self):
         self.current_attack_path = self.attacker.current_current_attack_path[:]
@@ -146,9 +147,15 @@ class CSA:
                 failure_node = self.attacker.get_failure_attack_node(self.current_attack_path[-1])
                 if random.random() > self.csa_correctness:
                     if random.random() > 0.5:
-                        self.prediction_of_first_node = success_node
+                        if success_node == failure_node:
+                            self.prediction_of_first_node = success_node + ":S"
+                        else:
+                            self.prediction_of_first_node = success_node
                     else:
-                        self.prediction_of_first_node = failure_node
+                        if success_node == failure_node:
+                            self.prediction_of_first_node = failure_node + ":F"
+                        else:
+                            self.prediction_of_first_node = failure_node
                 else:
                     self.prediction_of_first_node = self.attacker.current_first_node
 
@@ -162,11 +169,91 @@ class CSA:
             failure_node = self.attacker.get_failure_attack_node(self.current_attack_path[-1])
             if random.random() > self.csa_correctness:
                 if random.random() > 0.5:
-                    self.prediction_of_second_node = success_node
+                    if success_node == failure_node:
+                        self.prediction_of_second_node = success_node + ":S"
+                    else:
+                        self.prediction_of_second_node = success_node
                 else:
-                    self.prediction_of_second_node = failure_node
+                    if success_node == failure_node:
+                        self.prediction_of_second_node = failure_node + ":F"
+                    else:
+                        self.prediction_of_second_node = failure_node
             else:
                 self.prediction_of_second_node = self.attacker.current_second_node
         else:
             self.prediction_of_second_node = self.attacker.current_second_node
+
+        if self.prediction_of_first_node == self.prediction_of_second_node:
+            if self.prediction_of_first_node != "None" and self.prediction_of_first_node != "None:S" and self.prediction_of_first_node != "None:F":
+                if random.random() > 0.5:
+                    self.prediction_of_second_node = self.attacker.get_success_attack_node(self.prediction_of_first_node)
+                else:
+                    self.prediction_of_second_node = self.attacker.get_success_attack_node(self.prediction_of_first_node)
+
+
+
+    def report_project_attack_graph(self):
+        if self.prediction_of_first_node == "None" or self.prediction_of_first_node == "None:S" or self.prediction_of_first_node == "None:F":
+            attack_path = self.current_attack_path[:] + [self.prediction_of_first_node]
+            return attack_path
+        if self.prediction_of_second_node == "None" or self.prediction_of_second_node == "None:S" or self.prediction_of_second_node == "None:F":
+            if self.prediction_of_first_node not in self.current_attack_path[:]:
+                attack_path = self.current_attack_path[:] + [self.prediction_of_first_node, self.prediction_of_second_node]
+            else:
+                attack_path = self.current_attack_path[:] + [self.prediction_of_second_node]
+            return attack_path
+
+        attack_path = self.current_attack_path[:]
+        if self.prediction_of_first_node not in attack_path:
+            attack_path.append(self.prediction_of_first_node)
+        prediction_node = self.prediction_of_second_node
+        while prediction_node != "None" and prediction_node != "None:S" and prediction_node != "None:F":
+
+            if prediction_node not in attack_path:
+                attack_path.append(prediction_node)
+
+            prediction_success_node = self.attacker.get_success_attack_node(prediction_node)
+            prediction_failure_node = self.attacker.get_failure_attack_node(prediction_node)
+
+            if prediction_node == self.prediction_of_second_node:
+                if prediction_node == self.attacker.current_second_node:
+                    if random.random() > self.csa_correctness:
+                        if random.random() > 0.5:
+                            if prediction_success_node == prediction_failure_node:
+                                prediction_node = prediction_success_node + ":S"
+                            else:
+                                prediction_node = prediction_success_node
+                        else:
+                            if prediction_success_node == prediction_failure_node:
+                                prediction_node = prediction_failure_node + ":F"
+                            else:
+                                prediction_node = prediction_failure_node
+                    else:
+                        second, third = self.attacker.get_future_nodes_in_path()
+                        prediction_node = third
+                else:
+                    if random.random() > 0.5:
+                        if prediction_success_node == prediction_failure_node:
+                            prediction_node = prediction_success_node + ":S"
+                        else:
+                            prediction_node = prediction_success_node
+                    else:
+                        if prediction_success_node == prediction_failure_node:
+                            prediction_node = prediction_failure_node + ":F"
+                        else:
+                            prediction_node = prediction_failure_node
+            else:
+                if random.random() > 0.5:
+                    if prediction_success_node == prediction_failure_node:
+                        prediction_node = prediction_success_node + ":S"
+                    else:
+                        prediction_node = prediction_success_node
+                else:
+                    if prediction_success_node == prediction_failure_node:
+                        prediction_node = prediction_failure_node + ":F"
+                    else:
+                        prediction_node = prediction_failure_node
+
+        attack_path.append(prediction_node)
+        return attack_path
 
