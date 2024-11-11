@@ -116,28 +116,28 @@ BPMN:
   WorkFlows:
     WorkFlowNumbers: 11
     WorkFlow1:
-      Importance: 5
+      Importance: 3
       Activities: [ "Start", EmployeeCollectInternalPlaneData, StoreInternalPlaneData, PresentingInternalPlaneData, "End" ]
     WorkFlow2:
-      Importance: 2
+      Importance: 4
       Activities: [ "Start", SearchInInternalPlane, ProcessingInternalPlaneSearch, PresentingInternalPlaneData, "End" ]
     WorkFlow3:
-      Importance: 5
+      Importance: 4
       Activities: [ "Start", EmployeeCollectExternalPlaneData, StoreExternalPlaneData, PresentingExternalPlaneData, "End" ]
     WorkFlow4:
-      Importance: 2
+      Importance: 5
       Activities: [ "Start", SearchInExternalPlane, ProcessingExternalPlaneSearch, PresentingExternalPlaneData, "End" ]
     WorkFlow5:
-      Importance: 5
+      Importance: 2
       Activities: [ "Start", EmployeeCollectTrainData, StoreTrainData, PresentingTrainData, "End" ]
     WorkFlow6:
-      Importance: 2
+      Importance: 3
       Activities: [ "Start", SearchInTrain, ProcessingTrainSearch, PresentingTrainData, "End" ]
     WorkFlow7:
       Importance: 2
       Activities: [ "Start", EmployeeCollectBusData, StoreBusData, PresentingBusData, "End" ]
     WorkFlow8:
-      Importance: 5
+      Importance: 3
       Activities: [ "Start", SearchInBus, ProcessingBusSearch, PresentingBusData, "End" ]
     WorkFlow9:
       Importance: 2
@@ -146,20 +146,20 @@ BPMN:
       Importance: 2
       Activities: [ "Start", PresentLoginPage, Authentication, Authorization, PresentUserPage, "End" ]
     WorkFlow11:
-      Importance: 2
+      Importance: 6
       Activities: [ "Start", SelectTicketPage, CalculatePriceAndData, Purchase, PresentPurchaseResult, "End" ]
   Missions:
     MissionNumbers: 6
     Mission1:
       Name: "Store Data Correctly"
       Activities: [ StoreInternalPlaneData, StoreExternalPlaneData, StoreTrainData, StoreBusData, StoreSignUpData ]
-      Importance: 2
+      Importance: 5
       Type: "Weighted"
       Weights: [0.225, 0.225, 0.225, 0.225, 0.1]
     Mission2:
       Name: "Search Data Correctly"
       Activities: [ ProcessingInternalPlaneSearch, ProcessingExternalPlaneSearch, ProcessingTrainSearch, ProcessingBusSearch ]
-      Importance: 4
+      Importance: 6
       Type: "Equal"
       Weights: []
     Mission3:
@@ -171,13 +171,13 @@ BPMN:
     Mission4:
       Name: "Purchase Ticket Correctly"
       Activities: [ CalculatePriceAndData, Purchase ]
-      Importance: 4
+      Importance: 7
       Type: "Related"
       Weights: [ ]
     Mission5:
       Name: "Authentication and Authorization Correctly"
       Activities: [ Authorization, Authentication ]
-      Importance: 4
+      Importance: 6
       Type: "Related"
       Weights: [ ]
     Mission6:

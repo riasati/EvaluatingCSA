@@ -92,53 +92,53 @@ BPMN:
       Importance: 5
       Activities: ["Start", CreateTwitterProject, CrawlTwitterUsersData, StoreTwitterData, SolvingTwitterData, SolvingPresentation, "End"]
     WorkFlow2:
-      Importance: 2
+      Importance: 4
       Activities: ["Start", CreateTwitterProject, CrawlTwitterUsersData, StoreTwitterData, DataPresentation, "End"]
     WorkFlow3:
-      Importance: 5
+      Importance: 3
       Activities: [ "Start", CreateLinkedInProject, CrawlLinkedInUsersData, StoreLinkedInData, SolvingLinkedInData, SolvingPresentation, "End" ]
     WorkFlow4:
       Importance: 2
       Activities: [ "Start", CreateLinkedInProject, CrawlLinkedInUsersData, StoreLinkedInData, DataPresentation, "End" ]
     WorkFlow5:
-      Importance: 5
+      Importance: 4
       Activities: [ "Start", CreateInstagramProject, CrawlInstagramUsersData, StoreInstagramData, SolvingInstagramData, SolvingPresentation, "End" ]
     WorkFlow6:
-      Importance: 2
+      Importance: 3
       Activities: [ "Start", CreateInstagramProject, CrawlInstagramUsersData, StoreInstagramData, DataPresentation, "End" ]
     WorkFlow7:
-      Importance: 5
+      Importance: 2
       Activities: [ "Start", CreateFaceBookProject, CrawlFaceBookUsersData, StoreFaceBookData, SolvingFaceBookData, SolvingPresentation, "End" ]
     WorkFlow8:
-      Importance: 2
+      Importance: 1
       Activities: [ "Start", CreateFaceBookProject, CrawlFaceBookUsersData, StoreFaceBookData, DataPresentation, "End" ]
     WorkFlow9:
-      Importance: 2
+      Importance: 6
       Activities: [ "Start", Search, ProcessingSearchData, ProcessingResult, "End" ]
   Missions:
     MissionNumbers: 4
     Mission1:
       Name: "Crawl Data Successfully"
       Activities: [ CrawlTwitterUsersData, CrawlLinkedInUsersData, CrawlInstagramUsersData, CrawlFaceBookUsersData]
-      Importance: 3
+      Importance: 4
       Type: "Equal"
       Weights: []
     Mission2:
       Name: "Store Data Correctly"
       Activities: [ StoreTwitterData, StoreLinkedInData, StoreInstagramData, StoreFaceBookData]
-      Importance: 2
+      Importance: 4
       Type: "Equal"
       Weights: []
     Mission3:
       Name: "Solving Problems Correctly"
       Activities: [ SolvingTwitterData, SolvingLinkedInData, SolvingInstagramData, SolvingFaceBookData]
-      Importance: 4
+      Importance: 6
       Type: "Weighted"
       Weights: [ 0.4, 0.2, 0.2, 0.2 ]
     Mission4:
       Name: "Presentation Without Problem"
       Activities: [ SolvingPresentation, DataPresentation ]
-      Importance: 4
+      Importance: 3
       Type: "Weighted"
       Weights: [ 0.4, 0.6]
 

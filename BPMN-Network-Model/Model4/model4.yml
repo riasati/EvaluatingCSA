@@ -68,59 +68,59 @@ BPMN:
   WorkFlows:
     WorkFlowNumbers: 10
     WorkFlow1:
-      Importance: 5
+      Importance: 4
       Activities: ["Start", CrawlProfessorAmirkabir, StoreProfessorData, ProfessorPresentation, "End"]
     WorkFlow2:
-      Importance: 2
+      Importance: 3
       Activities: ["Start", CrawlProfessorAmirkabir, StoreProfessorData, CrawlProfessorFromGoogleScholar, StoreGoogleScholarData, GoogleScholarPresentation, "End"]
     WorkFlow3:
-      Importance: 5
+      Importance: 3
       Activities: [ "Start", CrawlProfessorAmirkabir, StoreProfessorData, CrawlProfessorFromScimet, StoreScimetData, ScimetPresentation, "End" ]
     WorkFlow4:
-      Importance: 2
+      Importance: 5
       Activities: [ "Start", CrawlProfessorSharif, StoreProfessorData, ProfessorPresentation, "End" ]
     WorkFlow5:
-      Importance: 5
+      Importance: 4
       Activities: [ "Start", CrawlProfessorSharif, StoreProfessorData, CrawlProfessorFromGoogleScholar, StoreGoogleScholarData, GoogleScholarPresentation, "End" ]
     WorkFlow6:
-      Importance: 2
+      Importance: 4
       Activities: [ "Start", CrawlProfessorSharif, StoreProfessorData, CrawlProfessorFromScimet, StoreScimetData, ScimetPresentation, "End" ]
     WorkFlow7:
-      Importance: 2
+      Importance: 3
       Activities: [ "Start", CrawlProfessorScienceAndTechnology, StoreProfessorData, ProfessorPresentation, "End" ]
     WorkFlow8:
-      Importance: 5
+      Importance: 2
       Activities: [ "Start", CrawlProfessorScienceAndTechnology, StoreProfessorData, CrawlProfessorFromGoogleScholar, StoreGoogleScholarData, GoogleScholarPresentation, "End" ]
     WorkFlow9:
       Importance: 2
       Activities: [ "Start", CrawlProfessorScienceAndTechnology, StoreProfessorData, CrawlProfessorFromScimet, StoreScimetData, ScimetPresentation, "End" ]
     WorkFlow10:
-      Importance: 2
+      Importance: 8
       Activities: [ "Start", Search, ProcessingSearchData, PresentationResult, "End" ]
   Missions:
     MissionNumbers: 4
     Mission1:
       Name: "Crawl Data Successfully"
       Activities: [ CrawlProfessorAmirkabir, CrawlProfessorSharif, CrawlProfessorScienceAndTechnology]
-      Importance: 3
+      Importance: 5
       Type: "Equal"
       Weights: []
     Mission2:
       Name: "Store Data Correctly"
       Activities: [ StoreProfessorData, StoreGoogleScholarData, StoreScimetData]
-      Importance: 2
+      Importance: 4
       Type: "Weighted"
       Weights: [0.3, 0.4, 0.3]
     Mission3:
       Name: "Search Data Correctly"
       Activities: [ ProcessingSearchData ]
-      Importance: 4
+      Importance: 5
       Type: "Equal"
       Weights: []
     Mission4:
       Name: "Presentation Without Problem"
       Activities: [ ProfessorPresentation, GoogleScholarPresentation, ScimetPresentation]
-      Importance: 4
+      Importance: 3
       Type: "Weighted"
       Weights: [ 0.6, 0.2, 0.2]
 

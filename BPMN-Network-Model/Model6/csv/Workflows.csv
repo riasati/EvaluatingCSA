@@ -1,7 +1,7 @@
 Importance,Activities
-5,Start SellerRegisterGoodsPage StoreGoods PresentGoodsData End
-2,Start BuyerSelectGoodsPage CalculatePriceAndData Purchase PresentPurchaseResult End
+4,Start SellerRegisterGoodsPage StoreGoods PresentGoodsData End
+5,Start BuyerSelectGoodsPage CalculatePriceAndData Purchase PresentPurchaseResult End
 5,Start BuyerSelectGoodsPage CalculatePriceAndData Purchase CreateNewOrder End
-2,Start SearchInGoods ProcessingSearch PresentingSearchData End
-2,Start PresentSignUpPage StoreSignUpData Authorization PresentUserPage End
-2,Start PresentLoginPage Authentication Authorization PresentUserPage End
+6,Start SearchInGoods ProcessingSearch PresentingSearchData End
+3,Start PresentSignUpPage StoreSignUpData Authorization PresentUserPage End
+3,Start PresentLoginPage Authentication Authorization PresentUserPage End

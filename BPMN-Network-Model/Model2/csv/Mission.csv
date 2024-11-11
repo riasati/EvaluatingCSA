@@ -1,5 +1,5 @@
 Name,Activities,Importance,Type,Weights
-Crawl Data Successfully,CrawlTwitterUsersData CrawlLinkedInUsersData CrawlInstagramUsersData CrawlFaceBookUsersData,3,Equal,
-Store Data Correctly,StoreTwitterData StoreLinkedInData StoreInstagramData StoreFaceBookData,2,Equal,
-Solving Problems Correctly,SolvingTwitterData SolvingLinkedInData SolvingInstagramData SolvingFaceBookData,4,Weighted,0.4 0.2 0.2 0.2
-Presentation Without Problem,SolvingPresentation DataPresentation,4,Weighted,0.4 0.6
+Crawl Data Successfully,CrawlTwitterUsersData CrawlLinkedInUsersData CrawlInstagramUsersData CrawlFaceBookUsersData,4,Equal,
+Store Data Correctly,StoreTwitterData StoreLinkedInData StoreInstagramData StoreFaceBookData,4,Equal,
+Solving Problems Correctly,SolvingTwitterData SolvingLinkedInData SolvingInstagramData SolvingFaceBookData,6,Weighted,0.4 0.2 0.2 0.2
+Presentation Without Problem,SolvingPresentation DataPresentation,3,Weighted,0.4 0.6

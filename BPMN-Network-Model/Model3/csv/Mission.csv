@@ -1,6 +1,6 @@
 Name,Activities,Importance,Type,Weights
-Crawl Data Successfully,CrawlCompanyJobinja CrawlCompanyJobVision CrawlCompanyEestekhdam CrawlPositionJobinja CrawlPositionJobVision CrawlPositionEestekhdam,3,Equal,
-Store Data Correctly,StoreCompanyData StorePositionData,2,Equal,
-Search Data Correctly,ProcessingSearchData,4,Equal,
-Wrapper Data Correctly,WrapperCompanyJobinja WrapperCompanyJobVision WrapperCompanyEestekhdam WrapperPositionJobinja WrapperPositionJobVision WrapperPositionEestekhdam,6,Equal,
-Presentation Without Problem,CompanyPresentation PositionPresentation,4,Weighted,0.4 0.6
+Crawl Data Successfully,CrawlCompanyJobinja CrawlCompanyJobVision CrawlCompanyEestekhdam CrawlPositionJobinja CrawlPositionJobVision CrawlPositionEestekhdam,4,Equal,
+Store Data Correctly,StoreCompanyData StorePositionData,3,Equal,
+Search Data Correctly,ProcessingSearchData,5,Equal,
+Wrapper Data Correctly,WrapperCompanyJobinja WrapperCompanyJobVision WrapperCompanyEestekhdam WrapperPositionJobinja WrapperPositionJobVision WrapperPositionEestekhdam,5,Equal,
+Presentation Without Problem,CompanyPresentation PositionPresentation,3,Weighted,0.4 0.6

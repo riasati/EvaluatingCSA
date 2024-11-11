@@ -22,43 +22,43 @@ digraph BPMN {
 	"end.9" [label=end color=orangered shape=doublecircle]
 	"start.10" [label=start color=palegreen1 shape=circle]
 	"end.10" [label=end color=orangered shape=doublecircle]
-	5.1 [label=5 color=gray]
+	4.1 [label=4 color=gray]
 	"CrawlProfessorAmirkabir.1" [label=CrawlProfessorAmirkabir]
 	"StoreProfessorData.1" [label=StoreProfessorData]
 	"ProfessorPresentation.1" [label=ProfessorPresentation]
-	2.2 [label=2 color=gray]
+	3.2 [label=3 color=gray]
 	"CrawlProfessorAmirkabir.2" [label=CrawlProfessorAmirkabir]
 	"StoreProfessorData.2" [label=StoreProfessorData]
 	"CrawlProfessorFromGoogleScholar.2" [label=CrawlProfessorFromGoogleScholar]
 	"StoreGoogleScholarData.2" [label=StoreGoogleScholarData]
 	"GoogleScholarPresentation.2" [label=GoogleScholarPresentation]
-	5.3 [label=5 color=gray]
+	3.3 [label=3 color=gray]
 	"CrawlProfessorAmirkabir.3" [label=CrawlProfessorAmirkabir]
 	"StoreProfessorData.3" [label=StoreProfessorData]
 	"CrawlProfessorFromScimet.3" [label=CrawlProfessorFromScimet]
 	"StoreScimetData.3" [label=StoreScimetData]
 	"ScimetPresentation.3" [label=ScimetPresentation]
-	2.4 [label=2 color=gray]
+	5.4 [label=5 color=gray]
 	"CrawlProfessorSharif.4" [label=CrawlProfessorSharif]
 	"StoreProfessorData.4" [label=StoreProfessorData]
 	"ProfessorPresentation.4" [label=ProfessorPresentation]
-	5.5 [label=5 color=gray]
+	4.5 [label=4 color=gray]
 	"CrawlProfessorSharif.5" [label=CrawlProfessorSharif]
 	"StoreProfessorData.5" [label=StoreProfessorData]
 	"CrawlProfessorFromGoogleScholar.5" [label=CrawlProfessorFromGoogleScholar]
 	"StoreGoogleScholarData.5" [label=StoreGoogleScholarData]
 	"GoogleScholarPresentation.5" [label=GoogleScholarPresentation]
-	2.6 [label=2 color=gray]
+	4.6 [label=4 color=gray]
 	"CrawlProfessorSharif.6" [label=CrawlProfessorSharif]
 	"StoreProfessorData.6" [label=StoreProfessorData]
 	"CrawlProfessorFromScimet.6" [label=CrawlProfessorFromScimet]
 	"StoreScimetData.6" [label=StoreScimetData]
 	"ScimetPresentation.6" [label=ScimetPresentation]
-	2.7 [label=2 color=gray]
+	3.7 [label=3 color=gray]
 	"CrawlProfessorScienceAndTechnology.7" [label=CrawlProfessorScienceAndTechnology]
 	"StoreProfessorData.7" [label=StoreProfessorData]
 	"ProfessorPresentation.7" [label=ProfessorPresentation]
-	5.8 [label=5 color=gray]
+	2.8 [label=2 color=gray]
 	"CrawlProfessorScienceAndTechnology.8" [label=CrawlProfessorScienceAndTechnology]
 	"StoreProfessorData.8" [label=StoreProfessorData]
 	"CrawlProfessorFromGoogleScholar.8" [label=CrawlProfessorFromGoogleScholar]
@@ -70,7 +70,7 @@ digraph BPMN {
 	"CrawlProfessorFromScimet.9" [label=CrawlProfessorFromScimet]
 	"StoreScimetData.9" [label=StoreScimetData]
 	"ScimetPresentation.9" [label=ScimetPresentation]
-	2.10 [label=2 color=gray]
+	8.10 [label=8 color=gray]
 	"Search.10" [label=Search]
 	"ProcessingSearchData.10" [label=ProcessingSearchData]
 	"PresentationResult.10" [label=PresentationResult]
@@ -82,17 +82,17 @@ digraph BPMN {
 	"(1,0).PresentationServer" [label="(1,0)"]
 	"(1,1).PresentationServer" [label="(1,1)"]
 	"(3,1).DB" [label="(3,1)"]
-	"3.Crawl Data Successfully" [label=3 color=gray]
+	"5.Crawl Data Successfully" [label=5 color=gray]
 	"CrawlProfessorAmirkabir.Crawl Data Successfully" [label=CrawlProfessorAmirkabir]
 	"CrawlProfessorSharif.Crawl Data Successfully" [label=CrawlProfessorSharif]
 	"CrawlProfessorScienceAndTechnology.Crawl Data Successfully" [label=CrawlProfessorScienceAndTechnology]
-	"2.Store Data Correctly" [label=2 color=gray]
+	"4.Store Data Correctly" [label=4 color=gray]
 	"StoreProfessorData.Store Data Correctly" [label=StoreProfessorData]
 	"StoreGoogleScholarData.Store Data Correctly" [label=StoreGoogleScholarData]
 	"StoreScimetData.Store Data Correctly" [label=StoreScimetData]
-	"4.Search Data Correctly" [label=4 color=gray]
+	"5.Search Data Correctly" [label=5 color=gray]
 	"ProcessingSearchData.Search Data Correctly" [label=ProcessingSearchData]
-	"4.Presentation Without Problem" [label=4 color=gray]
+	"3.Presentation Without Problem" [label=3 color=gray]
 	"ProfessorPresentation.Presentation Without Problem" [label=ProfessorPresentation]
 	"GoogleScholarPresentation.Presentation Without Problem" [label=GoogleScholarPresentation]
 	"ScimetPresentation.Presentation Without Problem" [label=ScimetPresentation]
@@ -118,16 +118,16 @@ digraph BPMN {
 		"end.9"
 		"start.10"
 		"end.10"
-		5.1
-		2.2
-		5.3
-		2.4
-		5.5
-		2.6
-		2.7
-		5.8
+		4.1
+		3.2
+		3.3
+		5.4
+		4.5
+		4.6
+		3.7
+		2.8
 		2.9
-		2.10
+		8.10
 		"CrawlProfessorAmirkabir.1"
 		"StoreProfessorData.1"
 		"ProfessorPresentation.1"
@@ -196,75 +196,75 @@ digraph BPMN {
 	}
 	subgraph cluster_mission1 {
 		label="Mission1\nCrawl Data Successfully" style=dotted
-		"3.Crawl Data Successfully"
+		"5.Crawl Data Successfully"
 		"CrawlProfessorAmirkabir.Crawl Data Successfully"
 		"CrawlProfessorSharif.Crawl Data Successfully"
 		"CrawlProfessorScienceAndTechnology.Crawl Data Successfully"
 	}
 	subgraph cluster_mission2 {
 		label="Mission2\nStore Data Correctly" style=dotted
-		"2.Store Data Correctly"
+		"4.Store Data Correctly"
 		"StoreProfessorData.Store Data Correctly"
 		"StoreGoogleScholarData.Store Data Correctly"
 		"StoreScimetData.Store Data Correctly"
 	}
 	subgraph cluster_mission3 {
 		label="Mission3\nSearch Data Correctly" style=dotted
-		"4.Search Data Correctly"
+		"5.Search Data Correctly"
 		"ProcessingSearchData.Search Data Correctly"
 	}
 	subgraph cluster_mission4 {
 		label="Mission4\nPresentation Without Problem" style=dotted
-		"4.Presentation Without Problem"
+		"3.Presentation Without Problem"
 		"ProfessorPresentation.Presentation Without Problem"
 		"GoogleScholarPresentation.Presentation Without Problem"
 		"ScimetPresentation.Presentation Without Problem"
 	}
-	"start.1" -> 5.1
-	5.1 -> "CrawlProfessorAmirkabir.1"
+	"start.1" -> 4.1
+	4.1 -> "CrawlProfessorAmirkabir.1"
 	"CrawlProfessorAmirkabir.1" -> "StoreProfessorData.1"
 	"StoreProfessorData.1" -> "ProfessorPresentation.1"
 	"ProfessorPresentation.1" -> "end.1"
-	"start.2" -> 2.2
-	2.2 -> "CrawlProfessorAmirkabir.2"
+	"start.2" -> 3.2
+	3.2 -> "CrawlProfessorAmirkabir.2"
 	"CrawlProfessorAmirkabir.2" -> "StoreProfessorData.2"
 	"StoreProfessorData.2" -> "CrawlProfessorFromGoogleScholar.2"
 	"CrawlProfessorFromGoogleScholar.2" -> "StoreGoogleScholarData.2"
 	"StoreGoogleScholarData.2" -> "GoogleScholarPresentation.2"
 	"GoogleScholarPresentation.2" -> "end.2"
-	"start.3" -> 5.3
-	5.3 -> "CrawlProfessorAmirkabir.3"
+	"start.3" -> 3.3
+	3.3 -> "CrawlProfessorAmirkabir.3"
 	"CrawlProfessorAmirkabir.3" -> "StoreProfessorData.3"
 	"StoreProfessorData.3" -> "CrawlProfessorFromScimet.3"
 	"CrawlProfessorFromScimet.3" -> "StoreScimetData.3"
 	"StoreScimetData.3" -> "ScimetPresentation.3"
 	"ScimetPresentation.3" -> "end.3"
-	"start.4" -> 2.4
-	2.4 -> "CrawlProfessorSharif.4"
+	"start.4" -> 5.4
+	5.4 -> "CrawlProfessorSharif.4"
 	"CrawlProfessorSharif.4" -> "StoreProfessorData.4"
 	"StoreProfessorData.4" -> "ProfessorPresentation.4"
 	"ProfessorPresentation.4" -> "end.4"
-	"start.5" -> 5.5
-	5.5 -> "CrawlProfessorSharif.5"
+	"start.5" -> 4.5
+	4.5 -> "CrawlProfessorSharif.5"
 	"CrawlProfessorSharif.5" -> "StoreProfessorData.5"
 	"StoreProfessorData.5" -> "CrawlProfessorFromGoogleScholar.5"
 	"CrawlProfessorFromGoogleScholar.5" -> "StoreGoogleScholarData.5"
 	"StoreGoogleScholarData.5" -> "GoogleScholarPresentation.5"
 	"GoogleScholarPresentation.5" -> "end.5"
-	"start.6" -> 2.6
-	2.6 -> "CrawlProfessorSharif.6"
+	"start.6" -> 4.6
+	4.6 -> "CrawlProfessorSharif.6"
 	"CrawlProfessorSharif.6" -> "StoreProfessorData.6"
 	"StoreProfessorData.6" -> "CrawlProfessorFromScimet.6"
 	"CrawlProfessorFromScimet.6" -> "StoreScimetData.6"
 	"StoreScimetData.6" -> "ScimetPresentation.6"
 	"ScimetPresentation.6" -> "end.6"
-	"start.7" -> 2.7
-	2.7 -> "CrawlProfessorScienceAndTechnology.7"
+	"start.7" -> 3.7
+	3.7 -> "CrawlProfessorScienceAndTechnology.7"
 	"CrawlProfessorScienceAndTechnology.7" -> "StoreProfessorData.7"
 	"StoreProfessorData.7" -> "ProfessorPresentation.7"
 	"ProfessorPresentation.7" -> "end.7"
-	"start.8" -> 5.8
-	5.8 -> "CrawlProfessorScienceAndTechnology.8"
+	"start.8" -> 2.8
+	2.8 -> "CrawlProfessorScienceAndTechnology.8"
 	"CrawlProfessorScienceAndTechnology.8" -> "StoreProfessorData.8"
 	"StoreProfessorData.8" -> "CrawlProfessorFromGoogleScholar.8"
 	"CrawlProfessorFromGoogleScholar.8" -> "StoreGoogleScholarData.8"
@@ -277,8 +277,8 @@ digraph BPMN {
 	"CrawlProfessorFromScimet.9" -> "StoreScimetData.9"
 	"StoreScimetData.9" -> "ScimetPresentation.9"
 	"ScimetPresentation.9" -> "end.9"
-	"start.10" -> 2.10
-	2.10 -> "Search.10"
+	"start.10" -> 8.10
+	8.10 -> "Search.10"
 	"Search.10" -> "ProcessingSearchData.10"
 	"ProcessingSearchData.10" -> "PresentationResult.10"
 	"PresentationResult.10" -> "end.10"

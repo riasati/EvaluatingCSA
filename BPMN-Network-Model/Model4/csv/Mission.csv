@@ -1,5 +1,5 @@
 Name,Activities,Importance,Type,Weights
-Crawl Data Successfully,CrawlProfessorAmirkabir CrawlProfessorSharif CrawlProfessorScienceAndTechnology,3,Equal,
-Store Data Correctly,StoreProfessorData StoreGoogleScholarData StoreScimetData,2,Weighted,0.3 0.4 0.3
-Search Data Correctly,ProcessingSearchData,4,Equal,
-Presentation Without Problem,ProfessorPresentation GoogleScholarPresentation ScimetPresentation,4,Weighted,0.6 0.2 0.2
+Crawl Data Successfully,CrawlProfessorAmirkabir CrawlProfessorSharif CrawlProfessorScienceAndTechnology,5,Equal,
+Store Data Correctly,StoreProfessorData StoreGoogleScholarData StoreScimetData,4,Weighted,0.3 0.4 0.3
+Search Data Correctly,ProcessingSearchData,5,Equal,
+Presentation Without Problem,ProfessorPresentation GoogleScholarPresentation ScimetPresentation,3,Weighted,0.6 0.2 0.2

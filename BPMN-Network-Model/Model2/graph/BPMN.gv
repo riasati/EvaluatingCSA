@@ -26,12 +26,12 @@ digraph BPMN {
 	"StoreTwitterData.1" [label=StoreTwitterData]
 	"SolvingTwitterData.1" [label=SolvingTwitterData]
 	"SolvingPresentation.1" [label=SolvingPresentation]
-	2.2 [label=2 color=gray]
+	4.2 [label=4 color=gray]
 	"CreateTwitterProject.2" [label=CreateTwitterProject]
 	"CrawlTwitterUsersData.2" [label=CrawlTwitterUsersData]
 	"StoreTwitterData.2" [label=StoreTwitterData]
 	"DataPresentation.2" [label=DataPresentation]
-	5.3 [label=5 color=gray]
+	3.3 [label=3 color=gray]
 	"CreateLinkedInProject.3" [label=CreateLinkedInProject]
 	"CrawlLinkedInUsersData.3" [label=CrawlLinkedInUsersData]
 	"StoreLinkedInData.3" [label=StoreLinkedInData]
@@ -42,29 +42,29 @@ digraph BPMN {
 	"CrawlLinkedInUsersData.4" [label=CrawlLinkedInUsersData]
 	"StoreLinkedInData.4" [label=StoreLinkedInData]
 	"DataPresentation.4" [label=DataPresentation]
-	5.5 [label=5 color=gray]
+	4.5 [label=4 color=gray]
 	"CreateInstagramProject.5" [label=CreateInstagramProject]
 	"CrawlInstagramUsersData.5" [label=CrawlInstagramUsersData]
 	"StoreInstagramData.5" [label=StoreInstagramData]
 	"SolvingInstagramData.5" [label=SolvingInstagramData]
 	"SolvingPresentation.5" [label=SolvingPresentation]
-	2.6 [label=2 color=gray]
+	3.6 [label=3 color=gray]
 	"CreateInstagramProject.6" [label=CreateInstagramProject]
 	"CrawlInstagramUsersData.6" [label=CrawlInstagramUsersData]
 	"StoreInstagramData.6" [label=StoreInstagramData]
 	"DataPresentation.6" [label=DataPresentation]
-	5.7 [label=5 color=gray]
+	2.7 [label=2 color=gray]
 	"CreateFaceBookProject.7" [label=CreateFaceBookProject]
 	"CrawlFaceBookUsersData.7" [label=CrawlFaceBookUsersData]
 	"StoreFaceBookData.7" [label=StoreFaceBookData]
 	"SolvingFaceBookData.7" [label=SolvingFaceBookData]
 	"SolvingPresentation.7" [label=SolvingPresentation]
-	2.8 [label=2 color=gray]
+	1.8 [label=1 color=gray]
 	"CreateFaceBookProject.8" [label=CreateFaceBookProject]
 	"CrawlFaceBookUsersData.8" [label=CrawlFaceBookUsersData]
 	"StoreFaceBookData.8" [label=StoreFaceBookData]
 	"DataPresentation.8" [label=DataPresentation]
-	2.9 [label=2 color=gray]
+	6.9 [label=6 color=gray]
 	"Search.9" [label=Search]
 	"ProcessingSearchData.9" [label=ProcessingSearchData]
 	"ProcessingResult.9" [label=ProcessingResult]
@@ -77,22 +77,22 @@ digraph BPMN {
 	"(1,0).PresentationServer" [label="(1,0)"]
 	"(2,0).DB" [label="(2,0)"]
 	"(2,1).DB" [label="(2,1)"]
-	"3.Crawl Data Successfully" [label=3 color=gray]
+	"4.Crawl Data Successfully" [label=4 color=gray]
 	"CrawlTwitterUsersData.Crawl Data Successfully" [label=CrawlTwitterUsersData]
 	"CrawlLinkedInUsersData.Crawl Data Successfully" [label=CrawlLinkedInUsersData]
 	"CrawlInstagramUsersData.Crawl Data Successfully" [label=CrawlInstagramUsersData]
 	"CrawlFaceBookUsersData.Crawl Data Successfully" [label=CrawlFaceBookUsersData]
-	"2.Store Data Correctly" [label=2 color=gray]
+	"4.Store Data Correctly" [label=4 color=gray]
 	"StoreTwitterData.Store Data Correctly" [label=StoreTwitterData]
 	"StoreLinkedInData.Store Data Correctly" [label=StoreLinkedInData]
 	"StoreInstagramData.Store Data Correctly" [label=StoreInstagramData]
 	"StoreFaceBookData.Store Data Correctly" [label=StoreFaceBookData]
-	"4.Solving Problems Correctly" [label=4 color=gray]
+	"6.Solving Problems Correctly" [label=6 color=gray]
 	"SolvingTwitterData.Solving Problems Correctly" [label=SolvingTwitterData]
 	"SolvingLinkedInData.Solving Problems Correctly" [label=SolvingLinkedInData]
 	"SolvingInstagramData.Solving Problems Correctly" [label=SolvingInstagramData]
 	"SolvingFaceBookData.Solving Problems Correctly" [label=SolvingFaceBookData]
-	"4.Presentation Without Problem" [label=4 color=gray]
+	"3.Presentation Without Problem" [label=3 color=gray]
 	"SolvingPresentation.Presentation Without Problem" [label=SolvingPresentation]
 	"DataPresentation.Presentation Without Problem" [label=DataPresentation]
 	subgraph cluster_workflow {
@@ -116,14 +116,14 @@ digraph BPMN {
 		"start.9"
 		"end.9"
 		5.1
-		2.2
-		5.3
+		4.2
+		3.3
 		2.4
-		5.5
-		2.6
-		5.7
-		2.8
-		2.9
+		4.5
+		3.6
+		2.7
+		1.8
+		6.9
 		"CreateTwitterProject.1"
 		"CrawlTwitterUsersData.1"
 		"StoreTwitterData.1"
@@ -190,7 +190,7 @@ digraph BPMN {
 	}
 	subgraph cluster_mission1 {
 		label="Mission1\nCrawl Data Successfully" style=dotted
-		"3.Crawl Data Successfully"
+		"4.Crawl Data Successfully"
 		"CrawlTwitterUsersData.Crawl Data Successfully"
 		"CrawlLinkedInUsersData.Crawl Data Successfully"
 		"CrawlInstagramUsersData.Crawl Data Successfully"
@@ -198,7 +198,7 @@ digraph BPMN {
 	}
 	subgraph cluster_mission2 {
 		label="Mission2\nStore Data Correctly" style=dotted
-		"2.Store Data Correctly"
+		"4.Store Data Correctly"
 		"StoreTwitterData.Store Data Correctly"
 		"StoreLinkedInData.Store Data Correctly"
 		"StoreInstagramData.Store Data Correctly"
@@ -206,7 +206,7 @@ digraph BPMN {
 	}
 	subgraph cluster_mission3 {
 		label="Mission3\nSolving Problems Correctly" style=dotted
-		"4.Solving Problems Correctly"
+		"6.Solving Problems Correctly"
 		"SolvingTwitterData.Solving Problems Correctly"
 		"SolvingLinkedInData.Solving Problems Correctly"
 		"SolvingInstagramData.Solving Problems Correctly"
@@ -214,7 +214,7 @@ digraph BPMN {
 	}
 	subgraph cluster_mission4 {
 		label="Mission4\nPresentation Without Problem" style=dotted
-		"4.Presentation Without Problem"
+		"3.Presentation Without Problem"
 		"SolvingPresentation.Presentation Without Problem"
 		"DataPresentation.Presentation Without Problem"
 	}
@@ -225,14 +225,14 @@ digraph BPMN {
 	"StoreTwitterData.1" -> "SolvingTwitterData.1"
 	"SolvingTwitterData.1" -> "SolvingPresentation.1"
 	"SolvingPresentation.1" -> "end.1"
-	"start.2" -> 2.2
-	2.2 -> "CreateTwitterProject.2"
+	"start.2" -> 4.2
+	4.2 -> "CreateTwitterProject.2"
 	"CreateTwitterProject.2" -> "CrawlTwitterUsersData.2"
 	"CrawlTwitterUsersData.2" -> "StoreTwitterData.2"
 	"StoreTwitterData.2" -> "DataPresentation.2"
 	"DataPresentation.2" -> "end.2"
-	"start.3" -> 5.3
-	5.3 -> "CreateLinkedInProject.3"
+	"start.3" -> 3.3
+	3.3 -> "CreateLinkedInProject.3"
 	"CreateLinkedInProject.3" -> "CrawlLinkedInUsersData.3"
 	"CrawlLinkedInUsersData.3" -> "StoreLinkedInData.3"
 	"StoreLinkedInData.3" -> "SolvingLinkedInData.3"
@@ -244,34 +244,34 @@ digraph BPMN {
 	"CrawlLinkedInUsersData.4" -> "StoreLinkedInData.4"
 	"StoreLinkedInData.4" -> "DataPresentation.4"
 	"DataPresentation.4" -> "end.4"
-	"start.5" -> 5.5
-	5.5 -> "CreateInstagramProject.5"
+	"start.5" -> 4.5
+	4.5 -> "CreateInstagramProject.5"
 	"CreateInstagramProject.5" -> "CrawlInstagramUsersData.5"
 	"CrawlInstagramUsersData.5" -> "StoreInstagramData.5"
 	"StoreInstagramData.5" -> "SolvingInstagramData.5"
 	"SolvingInstagramData.5" -> "SolvingPresentation.5"
 	"SolvingPresentation.5" -> "end.5"
-	"start.6" -> 2.6
-	2.6 -> "CreateInstagramProject.6"
+	"start.6" -> 3.6
+	3.6 -> "CreateInstagramProject.6"
 	"CreateInstagramProject.6" -> "CrawlInstagramUsersData.6"
 	"CrawlInstagramUsersData.6" -> "StoreInstagramData.6"
 	"StoreInstagramData.6" -> "DataPresentation.6"
 	"DataPresentation.6" -> "end.6"
-	"start.7" -> 5.7
-	5.7 -> "CreateFaceBookProject.7"
+	"start.7" -> 2.7
+	2.7 -> "CreateFaceBookProject.7"
 	"CreateFaceBookProject.7" -> "CrawlFaceBookUsersData.7"
 	"CrawlFaceBookUsersData.7" -> "StoreFaceBookData.7"
 	"StoreFaceBookData.7" -> "SolvingFaceBookData.7"
 	"SolvingFaceBookData.7" -> "SolvingPresentation.7"
 	"SolvingPresentation.7" -> "end.7"
-	"start.8" -> 2.8
-	2.8 -> "CreateFaceBookProject.8"
+	"start.8" -> 1.8
+	1.8 -> "CreateFaceBookProject.8"
 	"CreateFaceBookProject.8" -> "CrawlFaceBookUsersData.8"
 	"CrawlFaceBookUsersData.8" -> "StoreFaceBookData.8"
 	"StoreFaceBookData.8" -> "DataPresentation.8"
 	"DataPresentation.8" -> "end.8"
-	"start.9" -> 2.9
-	2.9 -> "Search.9"
+	"start.9" -> 6.9
+	6.9 -> "Search.9"
 	"Search.9" -> "ProcessingSearchData.9"
 	"ProcessingSearchData.9" -> "ProcessingResult.9"
 	"ProcessingResult.9" -> "end.9"

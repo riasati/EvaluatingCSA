@@ -10,6 +10,7 @@ from ClassModels.NetworkState import NetworkState
 from ClassModels.Attacker import Attacker
 from pprint import pprint
 from tqdm import tqdm
+from itertools import pairwise
 
 
 def import_yml_files_to_json():
@@ -60,11 +61,9 @@ def fill_current_attack_path(attacker, number):
     attacker.fill_current_attack_path(attack_paths_list[number])
 
 
-def one_stage_attack(attacker, network, csa_list: list, file, record):
+def one_stage_attack(attacker, network, csa_list: list, record):
     network_hosts = network.real_change_in_network(attacker, attacker.current_first_node, attacker.current_second_node)
-    #print(f"Attack Stage From {attacker.current_first_node} to {attacker.current_second_node}", file=file)
     business_factor = network.calculate_business_factor_with_state()
-    #print(f"real business factor: {round(business_factor, 2)}", file=file)
     record["RealBusinessFactor"] = round(business_factor, 2)
     record["State"] = network_hosts
     for i in range(len(csa_list)):
@@ -75,10 +74,8 @@ def one_stage_attack(attacker, network, csa_list: list, file, record):
         predict_attack_graph = csa_list[i].report_project_attack_graph()
         string_attack_path = json.dumps(predict_attack_graph).replace("\\", "").replace('"[', "[").replace(']"', "]").replace('"', "'")
         if future_real_business_factor is not None:
-            #print(f"future real business factor: {round(future_real_business_factor, 2)}", file=file)
             record["FutureRealBusinessFactor"] = round(future_real_business_factor, 2)
         else:
-            #print(f"future real business factor: {None}", file=file)
             record["FutureRealBusinessFactor"] = None
 
         record[f"CSA{i + 1}"] = {"BusinessFactor": round(csa_current_business_factor, 2),
@@ -90,10 +87,6 @@ def one_stage_attack(attacker, network, csa_list: list, file, record):
             record[f"CSA{i + 1}"]["FutureBusinessFactor"] = round(csa_future_business_factor, 2)
         else:
             record[f"CSA{i + 1}"]["FutureBusinessFactor"] = None
-        #record[f"BusinessFactorCSA{i + 1}"] = round(csa_current_business_factor, 2)
-        #print(f"business factor of csa number {i + 1}: {round(csa_current_business_factor, 2)}", file=file)
-        #record[f"FutureBusinessFactorCSA{i + 1}"] = round(csa_future_business_factor, 2)
-        #print(f"future business factor of csa number {i + 1}: {round(csa_future_business_factor, 2)}", file=file)
     mongo_helper.add_one_record(record)
 
 
@@ -115,7 +108,30 @@ def evaluate_csa_s(mongo, one_model_json):
         return return_list
 
     def difference_of_two_attack_path(first_attack_path, second_attack_path):
-        return 1
+        first_attack_path_list = json.loads(first_attack_path.replace("'", '"'))
+        second_attack_path = json.loads(second_attack_path.replace("'", '"'))
+        exclude_node_numbers = 0
+        for node in first_attack_path_list:
+            node = node.split(":")[0]
+            if node not in second_attack_path:
+                if node == "None" or node == "None:S" or node == "None:F": continue
+                exclude_node_numbers += 1
+        for node in second_attack_path:
+            node = node.split(":")[0]
+            if node not in first_attack_path_list:
+                if node == "None" or node == "None:S" or node == "None:F": continue
+                exclude_node_numbers += 1
+
+        exclude_edge_numbers = 0
+        for edge in pairwise(first_attack_path_list):
+            if edge not in pairwise(second_attack_path):
+                exclude_edge_numbers += 1
+
+        for edge in pairwise(second_attack_path):
+            if edge not in pairwise(first_attack_path_list):
+                exclude_edge_numbers += 1
+
+        return exclude_node_numbers * 0.5 + exclude_edge_numbers * 1
 
     csa_list_raw_data = []
     for i in range(csa_numbers):
@@ -186,7 +202,7 @@ def evaluate_csa_s(mongo, one_model_json):
     return [evaluate_csa_attacker, evaluate_csa_list_with_zero, evaluate_csa_list_without_zero, evaluate_csa_list_with_zero_normalized, evaluate_csa_list_without_zero_normalized]
 
 
-def run_simulation(mongo, one_model_json, attack_path_file_address: str, csa_result_file_address: str):
+def run_simulation(mongo, one_model_json, attack_path_file_address: str):
 
     def progress_bar(curr, N, width=10, bars=u'▉▊▋▌▍▎▏ '[::-1],
                    full='█', empty=' '):
@@ -204,11 +220,7 @@ def run_simulation(mongo, one_model_json, attack_path_file_address: str, csa_res
     if os.path.exists(attack_path_file_address):
         os.remove(attack_path_file_address)
 
-    # if os.path.exists(csa_result_file_address):
-    #     os.remove(csa_result_file_address)
-
     attack_path_file = open(attack_path_file_address, "a")
-    #csa_result_file = open(csa_result_file_address, "a")
 
     bpmn, network, attacker = initialize_elements(one_model_json)
     csa_list = initialize_csa_s(attacker, network)
@@ -233,7 +245,6 @@ def run_simulation(mongo, one_model_json, attack_path_file_address: str, csa_res
         fill_current_attack_path(attacker, i)
         string_attack_path = json.dumps(attack_path_list[i]).replace("\\", "").replace('"[', "[").replace(']"', "]")
         for j in range(attacker.attack_path_list_object[string_attack_path]):
-            #print(f"Attack Path Is: {string_attack_path} And Number Is: {j + 1}", file=csa_result_file)
             attacker.current_current_attack_path = []
             network.initial_state_network()
             for csa in csa_list:
@@ -245,12 +256,10 @@ def run_simulation(mongo, one_model_json, attack_path_file_address: str, csa_res
                 attacker.current_second_node = attacker.current_attack_path[k + 1]
                 record["FirstNode"] = attacker.current_first_node
                 record["SecondNode"] = attacker.current_second_node
-                #one_stage_attack(attacker, network, csa_list, csa_result_file, record)
-                one_stage_attack(attacker, network, csa_list, None, record)
+                one_stage_attack(attacker, network, csa_list, record)
                 attacker.current_current_attack_path.append(attacker.current_first_node)
             pbar.set_postfix_str(progress_bar(j, attacker.attack_path_list_object[string_attack_path]))
 
-    #csa_result_file.close()
 
 
 mongo_helper = MongoHelper()
@@ -258,8 +267,7 @@ jsons = import_yml_files_to_json()
 
 for one_json in jsons:
     attack_path_address = os.path.join(one_json["DirectoryPath"], "AttackPath.txt")
-    csa_detailed_result_address = os.path.join(one_json["DirectoryPath"], "CSADetailedResult.txt")
     csa_result_address = os.path.join(one_json["DirectoryPath"], "CSAResult.txt")
-    run_simulation(mongo_helper, one_json, attack_path_address, csa_detailed_result_address)
+    run_simulation(mongo_helper, one_json, attack_path_address)
     result = evaluate_csa_s(mongo_helper, one_json)
     print(json.dumps(result), file=open(csa_result_address, "w"))

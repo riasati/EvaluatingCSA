@@ -1,6 +1,6 @@
 Name,Activities,Importance,Type,Weights
-Store Data Correctly,StoreGoods,2,Equal,
+Store Data Correctly,StoreGoods,3,Equal,
 Search Data Correctly,ProcessingSearch,4,Equal,
-Presentation Without Problem,PresentGoodsData PresentPurchaseResult,4,Weighted,0.4 0.6
-Purchase Goods Correctly,CalculatePriceAndData Purchase,4,Related,
+Presentation Without Problem,PresentGoodsData PresentPurchaseResult,2,Weighted,0.4 0.6
+Purchase Goods Correctly,CalculatePriceAndData Purchase,5,Related,
 Authentication and Authorization Correctly,Authorization Authentication,4,Related,

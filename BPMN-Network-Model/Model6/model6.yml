@@ -77,29 +77,29 @@ BPMN:
   WorkFlows:
     WorkFlowNumbers: 6
     WorkFlow1:
-      Importance: 5
+      Importance: 4
       Activities: [ "Start", SellerRegisterGoodsPage, StoreGoods, PresentGoodsData, "End" ]
     WorkFlow2:
-      Importance: 2
+      Importance: 5
       Activities: [ "Start", BuyerSelectGoodsPage, CalculatePriceAndData, Purchase, PresentPurchaseResult, "End" ]
     WorkFlow3:
       Importance: 5
       Activities: [ "Start", BuyerSelectGoodsPage, CalculatePriceAndData, Purchase, CreateNewOrder, "End" ]
     WorkFlow4:
-      Importance: 2
+      Importance: 6
       Activities: [ "Start", SearchInGoods, ProcessingSearch, PresentingSearchData, "End" ]
     WorkFlow5:
-      Importance: 2
+      Importance: 3
       Activities: [ "Start", PresentSignUpPage, StoreSignUpData, Authorization, PresentUserPage, "End" ]
     WorkFlow6:
-      Importance: 2
+      Importance: 3
       Activities: [ "Start", PresentLoginPage, Authentication, Authorization, PresentUserPage, "End" ]
   Missions:
     MissionNumbers: 5
     Mission1:
       Name: "Store Data Correctly"
       Activities: [ StoreGoods ]
-      Importance: 2
+      Importance: 3
       Type: "Equal"
       Weights: []
     Mission2:
@@ -111,13 +111,13 @@ BPMN:
     Mission3:
       Name: "Presentation Without Problem"
       Activities: [ PresentGoodsData, PresentPurchaseResult]
-      Importance: 4
+      Importance: 2
       Type: "Weighted"
       Weights: [ 0.4, 0.6 ]
     Mission4:
       Name: "Purchase Goods Correctly"
       Activities: [ CalculatePriceAndData, Purchase ]
-      Importance: 4
+      Importance: 5
       Type: "Related"
       Weights: [ ]
     Mission5:

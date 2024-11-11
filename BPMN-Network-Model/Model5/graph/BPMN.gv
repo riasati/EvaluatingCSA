@@ -24,27 +24,27 @@ digraph BPMN {
 	"end.10" [label=end color=orangered shape=doublecircle]
 	"start.11" [label=start color=palegreen1 shape=circle]
 	"end.11" [label=end color=orangered shape=doublecircle]
-	5.1 [label=5 color=gray]
+	3.1 [label=3 color=gray]
 	"EmployeeCollectInternalPlaneData.1" [label=EmployeeCollectInternalPlaneData]
 	"StoreInternalPlaneData.1" [label=StoreInternalPlaneData]
 	"PresentingInternalPlaneData.1" [label=PresentingInternalPlaneData]
-	2.2 [label=2 color=gray]
+	4.2 [label=4 color=gray]
 	"SearchInInternalPlane.2" [label=SearchInInternalPlane]
 	"ProcessingInternalPlaneSearch.2" [label=ProcessingInternalPlaneSearch]
 	"PresentingInternalPlaneData.2" [label=PresentingInternalPlaneData]
-	5.3 [label=5 color=gray]
+	4.3 [label=4 color=gray]
 	"EmployeeCollectExternalPlaneData.3" [label=EmployeeCollectExternalPlaneData]
 	"StoreExternalPlaneData.3" [label=StoreExternalPlaneData]
 	"PresentingExternalPlaneData.3" [label=PresentingExternalPlaneData]
-	2.4 [label=2 color=gray]
+	5.4 [label=5 color=gray]
 	"SearchInExternalPlane.4" [label=SearchInExternalPlane]
 	"ProcessingExternalPlaneSearch.4" [label=ProcessingExternalPlaneSearch]
 	"PresentingExternalPlaneData.4" [label=PresentingExternalPlaneData]
-	5.5 [label=5 color=gray]
+	2.5 [label=2 color=gray]
 	"EmployeeCollectTrainData.5" [label=EmployeeCollectTrainData]
 	"StoreTrainData.5" [label=StoreTrainData]
 	"PresentingTrainData.5" [label=PresentingTrainData]
-	2.6 [label=2 color=gray]
+	3.6 [label=3 color=gray]
 	"SearchInTrain.6" [label=SearchInTrain]
 	"ProcessingTrainSearch.6" [label=ProcessingTrainSearch]
 	"PresentingTrainData.6" [label=PresentingTrainData]
@@ -52,7 +52,7 @@ digraph BPMN {
 	"EmployeeCollectBusData.7" [label=EmployeeCollectBusData]
 	"StoreBusData.7" [label=StoreBusData]
 	"PresentingBusData.7" [label=PresentingBusData]
-	5.8 [label=5 color=gray]
+	3.8 [label=3 color=gray]
 	"SearchInBus.8" [label=SearchInBus]
 	"ProcessingBusSearch.8" [label=ProcessingBusSearch]
 	"PresentingBusData.8" [label=PresentingBusData]
@@ -66,7 +66,7 @@ digraph BPMN {
 	"Authentication.10" [label=Authentication]
 	"Authorization.10" [label=Authorization]
 	"PresentUserPage.10" [label=PresentUserPage]
-	2.11 [label=2 color=gray]
+	6.11 [label=6 color=gray]
 	"SelectTicketPage.11" [label=SelectTicketPage]
 	"CalculatePriceAndData.11" [label=CalculatePriceAndData]
 	"Purchase.11" [label=Purchase]
@@ -80,13 +80,13 @@ digraph BPMN {
 	"(1,0).PresentationServer" [label="(1,0)"]
 	"(1,1).PresentationServer" [label="(1,1)"]
 	"(3,0).DB" [label="(3,0)"]
-	"2.Store Data Correctly" [label=2 color=gray]
+	"5.Store Data Correctly" [label=5 color=gray]
 	"StoreInternalPlaneData.Store Data Correctly" [label=StoreInternalPlaneData]
 	"StoreExternalPlaneData.Store Data Correctly" [label=StoreExternalPlaneData]
 	"StoreTrainData.Store Data Correctly" [label=StoreTrainData]
 	"StoreBusData.Store Data Correctly" [label=StoreBusData]
 	"StoreSignUpData.Store Data Correctly" [label=StoreSignUpData]
-	"4.Search Data Correctly" [label=4 color=gray]
+	"6.Search Data Correctly" [label=6 color=gray]
 	"ProcessingInternalPlaneSearch.Search Data Correctly" [label=ProcessingInternalPlaneSearch]
 	"ProcessingExternalPlaneSearch.Search Data Correctly" [label=ProcessingExternalPlaneSearch]
 	"ProcessingTrainSearch.Search Data Correctly" [label=ProcessingTrainSearch]
@@ -98,10 +98,10 @@ digraph BPMN {
 	"PresentingBusData.Presentation Without Problem" [label=PresentingBusData]
 	"PresentUserPage.Presentation Without Problem" [label=PresentUserPage]
 	"PresentPurchaseResult.Presentation Without Problem" [label=PresentPurchaseResult]
-	"4.Purchase Ticket Correctly" [label=4 color=gray]
+	"7.Purchase Ticket Correctly" [label=7 color=gray]
 	"CalculatePriceAndData.Purchase Ticket Correctly" [label=CalculatePriceAndData]
 	"Purchase.Purchase Ticket Correctly" [label=Purchase]
-	"4.Authentication and Authorization Correctly" [label=4 color=gray]
+	"6.Authentication and Authorization Correctly" [label=6 color=gray]
 	"Authorization.Authentication and Authorization Correctly" [label=Authorization]
 	"Authentication.Authentication and Authorization Correctly" [label=Authentication]
 	"4.Collecting Data Correctly" [label=4 color=gray]
@@ -133,17 +133,17 @@ digraph BPMN {
 		"end.10"
 		"start.11"
 		"end.11"
-		5.1
-		2.2
-		5.3
-		2.4
-		5.5
-		2.6
+		3.1
+		4.2
+		4.3
+		5.4
+		2.5
+		3.6
 		2.7
-		5.8
+		3.8
 		2.9
 		2.10
-		2.11
+		6.11
 		"EmployeeCollectInternalPlaneData.1"
 		"StoreInternalPlaneData.1"
 		"PresentingInternalPlaneData.1"
@@ -207,7 +207,7 @@ digraph BPMN {
 	}
 	subgraph cluster_mission1 {
 		label="Mission1\nStore Data Correctly" style=dotted
-		"2.Store Data Correctly"
+		"5.Store Data Correctly"
 		"StoreInternalPlaneData.Store Data Correctly"
 		"StoreExternalPlaneData.Store Data Correctly"
 		"StoreTrainData.Store Data Correctly"
@@ -216,7 +216,7 @@ digraph BPMN {
 	}
 	subgraph cluster_mission2 {
 		label="Mission2\nSearch Data Correctly" style=dotted
-		"4.Search Data Correctly"
+		"6.Search Data Correctly"
 		"ProcessingInternalPlaneSearch.Search Data Correctly"
 		"ProcessingExternalPlaneSearch.Search Data Correctly"
 		"ProcessingTrainSearch.Search Data Correctly"
@@ -234,13 +234,13 @@ digraph BPMN {
 	}
 	subgraph cluster_mission4 {
 		label="Mission4\nPurchase Ticket Correctly" style=dotted
-		"4.Purchase Ticket Correctly"
+		"7.Purchase Ticket Correctly"
 		"CalculatePriceAndData.Purchase Ticket Correctly"
 		"Purchase.Purchase Ticket Correctly"
 	}
 	subgraph cluster_mission5 {
 		label="Mission5\nAuthentication and Authorization Correctly" style=dotted
-		"4.Authentication and Authorization Correctly"
+		"6.Authentication and Authorization Correctly"
 		"Authorization.Authentication and Authorization Correctly"
 		"Authentication.Authentication and Authorization Correctly"
 	}
@@ -252,33 +252,33 @@ digraph BPMN {
 		"EmployeeCollectTrainData.Collecting Data Correctly"
 		"EmployeeCollectBusData.Collecting Data Correctly"
 	}
-	"start.1" -> 5.1
-	5.1 -> "EmployeeCollectInternalPlaneData.1"
+	"start.1" -> 3.1
+	3.1 -> "EmployeeCollectInternalPlaneData.1"
 	"EmployeeCollectInternalPlaneData.1" -> "StoreInternalPlaneData.1"
 	"StoreInternalPlaneData.1" -> "PresentingInternalPlaneData.1"
 	"PresentingInternalPlaneData.1" -> "end.1"
-	"start.2" -> 2.2
-	2.2 -> "SearchInInternalPlane.2"
+	"start.2" -> 4.2
+	4.2 -> "SearchInInternalPlane.2"
 	"SearchInInternalPlane.2" -> "ProcessingInternalPlaneSearch.2"
 	"ProcessingInternalPlaneSearch.2" -> "PresentingInternalPlaneData.2"
 	"PresentingInternalPlaneData.2" -> "end.2"
-	"start.3" -> 5.3
-	5.3 -> "EmployeeCollectExternalPlaneData.3"
+	"start.3" -> 4.3
+	4.3 -> "EmployeeCollectExternalPlaneData.3"
 	"EmployeeCollectExternalPlaneData.3" -> "StoreExternalPlaneData.3"
 	"StoreExternalPlaneData.3" -> "PresentingExternalPlaneData.3"
 	"PresentingExternalPlaneData.3" -> "end.3"
-	"start.4" -> 2.4
-	2.4 -> "SearchInExternalPlane.4"
+	"start.4" -> 5.4
+	5.4 -> "SearchInExternalPlane.4"
 	"SearchInExternalPlane.4" -> "ProcessingExternalPlaneSearch.4"
 	"ProcessingExternalPlaneSearch.4" -> "PresentingExternalPlaneData.4"
 	"PresentingExternalPlaneData.4" -> "end.4"
-	"start.5" -> 5.5
-	5.5 -> "EmployeeCollectTrainData.5"
+	"start.5" -> 2.5
+	2.5 -> "EmployeeCollectTrainData.5"
 	"EmployeeCollectTrainData.5" -> "StoreTrainData.5"
 	"StoreTrainData.5" -> "PresentingTrainData.5"
 	"PresentingTrainData.5" -> "end.5"
-	"start.6" -> 2.6
-	2.6 -> "SearchInTrain.6"
+	"start.6" -> 3.6
+	3.6 -> "SearchInTrain.6"
 	"SearchInTrain.6" -> "ProcessingTrainSearch.6"
 	"ProcessingTrainSearch.6" -> "PresentingTrainData.6"
 	"PresentingTrainData.6" -> "end.6"
@@ -287,8 +287,8 @@ digraph BPMN {
 	"EmployeeCollectBusData.7" -> "StoreBusData.7"
 	"StoreBusData.7" -> "PresentingBusData.7"
 	"PresentingBusData.7" -> "end.7"
-	"start.8" -> 5.8
-	5.8 -> "SearchInBus.8"
+	"start.8" -> 3.8
+	3.8 -> "SearchInBus.8"
 	"SearchInBus.8" -> "ProcessingBusSearch.8"
 	"ProcessingBusSearch.8" -> "PresentingBusData.8"
 	"PresentingBusData.8" -> "end.8"
@@ -304,8 +304,8 @@ digraph BPMN {
 	"Authentication.10" -> "Authorization.10"
 	"Authorization.10" -> "PresentUserPage.10"
 	"PresentUserPage.10" -> "end.10"
-	"start.11" -> 2.11
-	2.11 -> "SelectTicketPage.11"
+	"start.11" -> 6.11
+	6.11 -> "SelectTicketPage.11"
 	"SelectTicketPage.11" -> "CalculatePriceAndData.11"
 	"CalculatePriceAndData.11" -> "Purchase.11"
 	"Purchase.11" -> "PresentPurchaseResult.11"

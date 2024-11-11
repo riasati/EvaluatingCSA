@@ -14,11 +14,11 @@ digraph BPMN {
 	"end.5" [label=end color=orangered shape=doublecircle]
 	"start.6" [label=start color=palegreen1 shape=circle]
 	"end.6" [label=end color=orangered shape=doublecircle]
-	5.1 [label=5 color=gray]
+	4.1 [label=4 color=gray]
 	"SellerRegisterGoodsPage.1" [label=SellerRegisterGoodsPage]
 	"StoreGoods.1" [label=StoreGoods]
 	"PresentGoodsData.1" [label=PresentGoodsData]
-	2.2 [label=2 color=gray]
+	5.2 [label=5 color=gray]
 	"BuyerSelectGoodsPage.2" [label=BuyerSelectGoodsPage]
 	"CalculatePriceAndData.2" [label=CalculatePriceAndData]
 	"Purchase.2" [label=Purchase]
@@ -28,16 +28,16 @@ digraph BPMN {
 	"CalculatePriceAndData.3" [label=CalculatePriceAndData]
 	"Purchase.3" [label=Purchase]
 	"CreateNewOrder.3" [label=CreateNewOrder]
-	2.4 [label=2 color=gray]
+	6.4 [label=6 color=gray]
 	"SearchInGoods.4" [label=SearchInGoods]
 	"ProcessingSearch.4" [label=ProcessingSearch]
 	"PresentingSearchData.4" [label=PresentingSearchData]
-	2.5 [label=2 color=gray]
+	3.5 [label=3 color=gray]
 	"PresentSignUpPage.5" [label=PresentSignUpPage]
 	"StoreSignUpData.5" [label=StoreSignUpData]
 	"Authorization.5" [label=Authorization]
 	"PresentUserPage.5" [label=PresentUserPage]
-	2.6 [label=2 color=gray]
+	3.6 [label=3 color=gray]
 	"PresentLoginPage.6" [label=PresentLoginPage]
 	"Authentication.6" [label=Authentication]
 	"Authorization.6" [label=Authorization]
@@ -47,14 +47,14 @@ digraph BPMN {
 	"(4,0).PurchaseServer" [label="(4,0)"]
 	"(1,0).PresentationServer" [label="(1,0)"]
 	"(5,0).DB" [label="(5,0)"]
-	"2.Store Data Correctly" [label=2 color=gray]
+	"3.Store Data Correctly" [label=3 color=gray]
 	"StoreGoods.Store Data Correctly" [label=StoreGoods]
 	"4.Search Data Correctly" [label=4 color=gray]
 	"ProcessingSearch.Search Data Correctly" [label=ProcessingSearch]
-	"4.Presentation Without Problem" [label=4 color=gray]
+	"2.Presentation Without Problem" [label=2 color=gray]
 	"PresentGoodsData.Presentation Without Problem" [label=PresentGoodsData]
 	"PresentPurchaseResult.Presentation Without Problem" [label=PresentPurchaseResult]
-	"4.Purchase Goods Correctly" [label=4 color=gray]
+	"5.Purchase Goods Correctly" [label=5 color=gray]
 	"CalculatePriceAndData.Purchase Goods Correctly" [label=CalculatePriceAndData]
 	"Purchase.Purchase Goods Correctly" [label=Purchase]
 	"4.Authentication and Authorization Correctly" [label=4 color=gray]
@@ -74,12 +74,12 @@ digraph BPMN {
 		"end.5"
 		"start.6"
 		"end.6"
-		5.1
-		2.2
+		4.1
+		5.2
 		5.3
-		2.4
-		2.5
-		2.6
+		6.4
+		3.5
+		3.6
 		"SellerRegisterGoodsPage.1"
 		"StoreGoods.1"
 		"PresentGoodsData.1"
@@ -125,7 +125,7 @@ digraph BPMN {
 	}
 	subgraph cluster_mission1 {
 		label="Mission1\nStore Data Correctly" style=dotted
-		"2.Store Data Correctly"
+		"3.Store Data Correctly"
 		"StoreGoods.Store Data Correctly"
 	}
 	subgraph cluster_mission2 {
@@ -135,13 +135,13 @@ digraph BPMN {
 	}
 	subgraph cluster_mission3 {
 		label="Mission3\nPresentation Without Problem" style=dotted
-		"4.Presentation Without Problem"
+		"2.Presentation Without Problem"
 		"PresentGoodsData.Presentation Without Problem"
 		"PresentPurchaseResult.Presentation Without Problem"
 	}
 	subgraph cluster_mission4 {
 		label="Mission4\nPurchase Goods Correctly" style=dotted
-		"4.Purchase Goods Correctly"
+		"5.Purchase Goods Correctly"
 		"CalculatePriceAndData.Purchase Goods Correctly"
 		"Purchase.Purchase Goods Correctly"
 	}
@@ -151,13 +151,13 @@ digraph BPMN {
 		"Authorization.Authentication and Authorization Correctly"
 		"Authentication.Authentication and Authorization Correctly"
 	}
-	"start.1" -> 5.1
-	5.1 -> "SellerRegisterGoodsPage.1"
+	"start.1" -> 4.1
+	4.1 -> "SellerRegisterGoodsPage.1"
 	"SellerRegisterGoodsPage.1" -> "StoreGoods.1"
 	"StoreGoods.1" -> "PresentGoodsData.1"
 	"PresentGoodsData.1" -> "end.1"
-	"start.2" -> 2.2
-	2.2 -> "BuyerSelectGoodsPage.2"
+	"start.2" -> 5.2
+	5.2 -> "BuyerSelectGoodsPage.2"
 	"BuyerSelectGoodsPage.2" -> "CalculatePriceAndData.2"
 	"CalculatePriceAndData.2" -> "Purchase.2"
 	"Purchase.2" -> "PresentPurchaseResult.2"
@@ -168,19 +168,19 @@ digraph BPMN {
 	"CalculatePriceAndData.3" -> "Purchase.3"
 	"Purchase.3" -> "CreateNewOrder.3"
 	"CreateNewOrder.3" -> "end.3"
-	"start.4" -> 2.4
-	2.4 -> "SearchInGoods.4"
+	"start.4" -> 6.4
+	6.4 -> "SearchInGoods.4"
 	"SearchInGoods.4" -> "ProcessingSearch.4"
 	"ProcessingSearch.4" -> "PresentingSearchData.4"
 	"PresentingSearchData.4" -> "end.4"
-	"start.5" -> 2.5
-	2.5 -> "PresentSignUpPage.5"
+	"start.5" -> 3.5
+	3.5 -> "PresentSignUpPage.5"
 	"PresentSignUpPage.5" -> "StoreSignUpData.5"
 	"StoreSignUpData.5" -> "Authorization.5"
 	"Authorization.5" -> "PresentUserPage.5"
 	"PresentUserPage.5" -> "end.5"
-	"start.6" -> 2.6
-	2.6 -> "PresentLoginPage.6"
+	"start.6" -> 3.6
+	3.6 -> "PresentLoginPage.6"
 	"PresentLoginPage.6" -> "Authentication.6"
 	"Authentication.6" -> "Authorization.6"
 	"Authorization.6" -> "PresentUserPage.6"

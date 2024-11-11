@@ -16,37 +16,37 @@ digraph BPMN {
 	"end.6" [label=end color=orangered shape=doublecircle]
 	"start.7" [label=start color=palegreen1 shape=circle]
 	"end.7" [label=end color=orangered shape=doublecircle]
-	5.1 [label=5 color=gray]
+	4.1 [label=4 color=gray]
 	"CrawlCompanyJobinja.1" [label=CrawlCompanyJobinja]
 	"WrapperCompanyJobinja.1" [label=WrapperCompanyJobinja]
 	"StoreCompanyData.1" [label=StoreCompanyData]
 	"CompanyPresentation.1" [label=CompanyPresentation]
-	2.2 [label=2 color=gray]
+	4.2 [label=4 color=gray]
 	"CrawlCompanyJobVision.2" [label=CrawlCompanyJobVision]
 	"WrapperCompanyJobVision.2" [label=WrapperCompanyJobVision]
 	"StoreCompanyData.2" [label=StoreCompanyData]
 	"CompanyPresentation.2" [label=CompanyPresentation]
-	5.3 [label=5 color=gray]
+	4.3 [label=4 color=gray]
 	"CrawlCompanyEestekhdam.3" [label=CrawlCompanyEestekhdam]
 	"WrapperCompanyEestekhdam.3" [label=WrapperCompanyEestekhdam]
 	"StoreCompanyData.3" [label=StoreCompanyData]
 	"CompanyPresentation.3" [label=CompanyPresentation]
-	2.4 [label=2 color=gray]
+	3.4 [label=3 color=gray]
 	"CrawlPositionJobinja.4" [label=CrawlPositionJobinja]
 	"WrapperPositionJobinja.4" [label=WrapperPositionJobinja]
 	"StorePositionData.4" [label=StorePositionData]
 	"PositionPresentation.4" [label=PositionPresentation]
-	5.5 [label=5 color=gray]
+	3.5 [label=3 color=gray]
 	"CrawlPositionJobVision.5" [label=CrawlPositionJobVision]
 	"WrapperPositionJobVision.5" [label=WrapperPositionJobVision]
 	"StorePositionData.5" [label=StorePositionData]
 	"PositionPresentation.5" [label=PositionPresentation]
-	2.6 [label=2 color=gray]
+	3.6 [label=3 color=gray]
 	"CrawlPositionEestekhdam.6" [label=CrawlPositionEestekhdam]
 	"WrapperPositionEestekhdam.6" [label=WrapperPositionEestekhdam]
 	"StorePositionData.6" [label=StorePositionData]
 	"PositionPresentation.6" [label=PositionPresentation]
-	2.7 [label=2 color=gray]
+	6.7 [label=6 color=gray]
 	"Search.7" [label=Search]
 	"ProcessingSearchData.7" [label=ProcessingSearchData]
 	"PresentationResult.7" [label=PresentationResult]
@@ -56,26 +56,26 @@ digraph BPMN {
 	"(2,0).Server" [label="(2,0)"]
 	"(1,0).PresentationServer" [label="(1,0)"]
 	"(4,0).DB" [label="(4,0)"]
-	"3.Crawl Data Successfully" [label=3 color=gray]
+	"4.Crawl Data Successfully" [label=4 color=gray]
 	"CrawlCompanyJobinja.Crawl Data Successfully" [label=CrawlCompanyJobinja]
 	"CrawlCompanyJobVision.Crawl Data Successfully" [label=CrawlCompanyJobVision]
 	"CrawlCompanyEestekhdam.Crawl Data Successfully" [label=CrawlCompanyEestekhdam]
 	"CrawlPositionJobinja.Crawl Data Successfully" [label=CrawlPositionJobinja]
 	"CrawlPositionJobVision.Crawl Data Successfully" [label=CrawlPositionJobVision]
 	"CrawlPositionEestekhdam.Crawl Data Successfully" [label=CrawlPositionEestekhdam]
-	"2.Store Data Correctly" [label=2 color=gray]
+	"3.Store Data Correctly" [label=3 color=gray]
 	"StoreCompanyData.Store Data Correctly" [label=StoreCompanyData]
 	"StorePositionData.Store Data Correctly" [label=StorePositionData]
-	"4.Search Data Correctly" [label=4 color=gray]
+	"5.Search Data Correctly" [label=5 color=gray]
 	"ProcessingSearchData.Search Data Correctly" [label=ProcessingSearchData]
-	"6.Wrapper Data Correctly" [label=6 color=gray]
+	"5.Wrapper Data Correctly" [label=5 color=gray]
 	"WrapperCompanyJobinja.Wrapper Data Correctly" [label=WrapperCompanyJobinja]
 	"WrapperCompanyJobVision.Wrapper Data Correctly" [label=WrapperCompanyJobVision]
 	"WrapperCompanyEestekhdam.Wrapper Data Correctly" [label=WrapperCompanyEestekhdam]
 	"WrapperPositionJobinja.Wrapper Data Correctly" [label=WrapperPositionJobinja]
 	"WrapperPositionJobVision.Wrapper Data Correctly" [label=WrapperPositionJobVision]
 	"WrapperPositionEestekhdam.Wrapper Data Correctly" [label=WrapperPositionEestekhdam]
-	"4.Presentation Without Problem" [label=4 color=gray]
+	"3.Presentation Without Problem" [label=3 color=gray]
 	"CompanyPresentation.Presentation Without Problem" [label=CompanyPresentation]
 	"PositionPresentation.Presentation Without Problem" [label=PositionPresentation]
 	subgraph cluster_workflow {
@@ -94,13 +94,13 @@ digraph BPMN {
 		"end.6"
 		"start.7"
 		"end.7"
-		5.1
-		2.2
-		5.3
-		2.4
-		5.5
-		2.6
-		2.7
+		4.1
+		4.2
+		4.3
+		3.4
+		3.5
+		3.6
+		6.7
 		"CrawlCompanyJobinja.1"
 		"WrapperCompanyJobinja.1"
 		"StoreCompanyData.1"
@@ -152,7 +152,7 @@ digraph BPMN {
 	}
 	subgraph cluster_mission1 {
 		label="Mission1\nCrawl Data Successfully" style=dotted
-		"3.Crawl Data Successfully"
+		"4.Crawl Data Successfully"
 		"CrawlCompanyJobinja.Crawl Data Successfully"
 		"CrawlCompanyJobVision.Crawl Data Successfully"
 		"CrawlCompanyEestekhdam.Crawl Data Successfully"
@@ -162,18 +162,18 @@ digraph BPMN {
 	}
 	subgraph cluster_mission2 {
 		label="Mission2\nStore Data Correctly" style=dotted
-		"2.Store Data Correctly"
+		"3.Store Data Correctly"
 		"StoreCompanyData.Store Data Correctly"
 		"StorePositionData.Store Data Correctly"
 	}
 	subgraph cluster_mission3 {
 		label="Mission3\nSearch Data Correctly" style=dotted
-		"4.Search Data Correctly"
+		"5.Search Data Correctly"
 		"ProcessingSearchData.Search Data Correctly"
 	}
 	subgraph cluster_mission4 {
 		label="Mission4\nWrapper Data Correctly" style=dotted
-		"6.Wrapper Data Correctly"
+		"5.Wrapper Data Correctly"
 		"WrapperCompanyJobinja.Wrapper Data Correctly"
 		"WrapperCompanyJobVision.Wrapper Data Correctly"
 		"WrapperCompanyEestekhdam.Wrapper Data Correctly"
@@ -183,48 +183,48 @@ digraph BPMN {
 	}
 	subgraph cluster_mission5 {
 		label="Mission5\nPresentation Without Problem" style=dotted
-		"4.Presentation Without Problem"
+		"3.Presentation Without Problem"
 		"CompanyPresentation.Presentation Without Problem"
 		"PositionPresentation.Presentation Without Problem"
 	}
-	"start.1" -> 5.1
-	5.1 -> "CrawlCompanyJobinja.1"
+	"start.1" -> 4.1
+	4.1 -> "CrawlCompanyJobinja.1"
 	"CrawlCompanyJobinja.1" -> "WrapperCompanyJobinja.1"
 	"WrapperCompanyJobinja.1" -> "StoreCompanyData.1"
 	"StoreCompanyData.1" -> "CompanyPresentation.1"
 	"CompanyPresentation.1" -> "end.1"
-	"start.2" -> 2.2
-	2.2 -> "CrawlCompanyJobVision.2"
+	"start.2" -> 4.2
+	4.2 -> "CrawlCompanyJobVision.2"
 	"CrawlCompanyJobVision.2" -> "WrapperCompanyJobVision.2"
 	"WrapperCompanyJobVision.2" -> "StoreCompanyData.2"
 	"StoreCompanyData.2" -> "CompanyPresentation.2"
 	"CompanyPresentation.2" -> "end.2"
-	"start.3" -> 5.3
-	5.3 -> "CrawlCompanyEestekhdam.3"
+	"start.3" -> 4.3
+	4.3 -> "CrawlCompanyEestekhdam.3"
 	"CrawlCompanyEestekhdam.3" -> "WrapperCompanyEestekhdam.3"
 	"WrapperCompanyEestekhdam.3" -> "StoreCompanyData.3"
 	"StoreCompanyData.3" -> "CompanyPresentation.3"
 	"CompanyPresentation.3" -> "end.3"
-	"start.4" -> 2.4
-	2.4 -> "CrawlPositionJobinja.4"
+	"start.4" -> 3.4
+	3.4 -> "CrawlPositionJobinja.4"
 	"CrawlPositionJobinja.4" -> "WrapperPositionJobinja.4"
 	"WrapperPositionJobinja.4" -> "StorePositionData.4"
 	"StorePositionData.4" -> "PositionPresentation.4"
 	"PositionPresentation.4" -> "end.4"
-	"start.5" -> 5.5
-	5.5 -> "CrawlPositionJobVision.5"
+	"start.5" -> 3.5
+	3.5 -> "CrawlPositionJobVision.5"
 	"CrawlPositionJobVision.5" -> "WrapperPositionJobVision.5"
 	"WrapperPositionJobVision.5" -> "StorePositionData.5"
 	"StorePositionData.5" -> "PositionPresentation.5"
 	"PositionPresentation.5" -> "end.5"
-	"start.6" -> 2.6
-	2.6 -> "CrawlPositionEestekhdam.6"
+	"start.6" -> 3.6
+	3.6 -> "CrawlPositionEestekhdam.6"
 	"CrawlPositionEestekhdam.6" -> "WrapperPositionEestekhdam.6"
 	"WrapperPositionEestekhdam.6" -> "StorePositionData.6"
 	"StorePositionData.6" -> "PositionPresentation.6"
 	"PositionPresentation.6" -> "end.6"
-	"start.7" -> 2.7
-	2.7 -> "Search.7"
+	"start.7" -> 6.7
+	6.7 -> "Search.7"
 	"Search.7" -> "ProcessingSearchData.7"
 	"ProcessingSearchData.7" -> "PresentationResult.7"
 	"PresentationResult.7" -> "end.7"
