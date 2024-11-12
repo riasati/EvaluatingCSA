@@ -52,4 +52,5 @@ for i in tqdm(range(len(jsons))):
     DataConvertor.create_sub_attack_path_graph(one_json["DirectoryPath"], one_json["ModelNumber"], attacker)
     DataConvertor.create_table_pictures(one_json["DirectoryPath"])
 
+DataConvertor.create_table_of_all(jsons, 4)
     #DataConvertor.create_graph_from_file(one_json["DirectoryPath"])

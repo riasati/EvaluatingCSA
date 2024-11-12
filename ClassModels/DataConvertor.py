@@ -420,54 +420,58 @@ class DataConvertor:
 
         dot.render(directory=graph_path, view=False).replace('\\', '/')
 
-        os.remove(os.path.join(model_path, "AttackPath.txt"))
+        #os.remove(os.path.join(model_path, "AttackPath.txt"))
+
+    @staticmethod
+    def create_table(title_text, column_header, row_header, data, output_path):
+        cell_text = []
+        for row in data:
+            cell_text.append([f'{x}' for x in row])
+
+        rcolors = plt.cm.BuPu(np.full(len(row_header), 0.1))
+        ccolors = plt.cm.BuPu(np.full(len(column_header), 0.1))
+
+        plt.figure(linewidth=2,
+                   tight_layout={'pad': 1},
+                   figsize=(5, 3)
+                   )
+
+        the_table = plt.table(cellText=cell_text,
+                              rowLabels=row_header,
+                              rowColours=rcolors,
+                              rowLoc='left',
+                              colColours=ccolors,
+                              colLabels=column_header,
+                              cellLoc='center',
+                              loc='center')
+
+        the_table.scale(1, 1.5)
+
+        ax = plt.gca()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+        plt.box(on=None)
+
+        plt.suptitle(title_text)
+
+        plt.draw()
+
+        fig = plt.gcf()
+        plt.savefig(output_path,
+                    bbox_inches='tight',
+                    dpi=150
+                    )
+        plt.close(fig)
 
     @staticmethod
     def create_table_pictures(model_path: str):
 
-        def create_table(title_text, column_header, row_header, data, output_path):
-            cell_text = []
-            for row in data:
-                cell_text.append([f'{x}' for x in row])
-
-            rcolors = plt.cm.BuPu(np.full(len(row_header), 0.1))
-            ccolors = plt.cm.BuPu(np.full(len(column_header), 0.1))
-
-            plt.figure(linewidth=2,
-                       tight_layout={'pad': 1},
-                       figsize=(5, 3)
-                       )
-
-            the_table = plt.table(cellText=cell_text,
-                                  rowLabels=row_header,
-                                  rowColours=rcolors,
-                                  rowLoc='left',
-                                  colColours=ccolors,
-                                  colLabels=column_header,
-                                  cellLoc='center',
-                                  loc='center')
-
-            the_table.scale(1, 1.5)
-
-            ax = plt.gca()
-            ax.get_xaxis().set_visible(False)
-            ax.get_yaxis().set_visible(False)
-            plt.box(on=None)
-
-            plt.suptitle(title_text)
-
-            plt.draw()
-
-            fig = plt.gcf()
-            plt.savefig(output_path,
-                        bbox_inches='tight',
-                        dpi=150
-                        )
-            plt.close(fig)
-
         if not os.path.exists(os.path.join(model_path, "CSAResult.txt")):
             print("File Doesn't Exist")
             return
+
+        if not os.path.exists(os.path.join(model_path, 'table')):
+            os.mkdir(os.path.join(model_path, 'table'))
 
         csa_list_list = json.load(open(os.path.join(model_path, "CSAResult.txt"), mode='r'))
 
@@ -479,7 +483,7 @@ class DataConvertor:
             data_list = [csa_list_list[0][i]["evaluate_first_node_correctness"], csa_list_list[0][i]["evaluate_second_node_correctness"], csa_list_list[0][i]["evaluate_attack_path"]]
             data.append(data_list)
 
-        create_table(title_text, column_header, row_header, data, os.path.join(model_path, "graph", "EvaluateAttack.png"))
+        DataConvertor.create_table(title_text, column_header, row_header, data, os.path.join(model_path, "table", "EvaluateAttack.png"))
 
         title_text = 'Evaluate State'
         column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
@@ -490,7 +494,7 @@ class DataConvertor:
                          csa_list_list[1][i]["evaluate_future"]]
             data.append(data_list)
 
-        create_table(title_text, column_header, row_header, data, os.path.join(model_path, "graph", "EvaluateState.png"))
+        DataConvertor.create_table(title_text, column_header, row_header, data, os.path.join(model_path, "table", "EvaluateState.png"))
 
 
         title_text = 'Evaluate State Without Zero Difference'
@@ -502,8 +506,8 @@ class DataConvertor:
                          csa_list_list[2][i]["evaluate_future"]]
             data.append(data_list)
 
-        create_table(title_text, column_header, row_header, data,
-                     os.path.join(model_path, "graph", "EvaluateStateWithoutZeroDifference.png"))
+        DataConvertor.create_table(title_text, column_header, row_header, data,
+                     os.path.join(model_path, "table", "EvaluateStateWithoutZeroDifference.png"))
 
         title_text = 'Evaluate State Percentage'
         column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
@@ -514,8 +518,8 @@ class DataConvertor:
                          csa_list_list[3][i]["evaluate_future"]]
             data.append(data_list)
 
-        create_table(title_text, column_header, row_header, data,
-                     os.path.join(model_path, "graph", "EvaluateStatePercentage.png"))
+        DataConvertor.create_table(title_text, column_header, row_header, data,
+                     os.path.join(model_path, "table", "EvaluateStatePercentage.png"))
 
         title_text = 'Evaluate State Without Zero Difference Percentage'
         column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
@@ -526,12 +530,119 @@ class DataConvertor:
                          csa_list_list[4][i]["evaluate_future"]]
             data.append(data_list)
 
-        create_table(title_text, column_header, row_header, data,
-                     os.path.join(model_path, "graph", "EvaluateStateWithoutZeroDifferencePercentage.png"))
+        DataConvertor.create_table(title_text, column_header, row_header, data,
+                     os.path.join(model_path, "table", "EvaluateStateWithoutZeroDifferencePercentage.png"))
 
-        os.remove(os.path.join(model_path, "CSAResult.txt"))
+        # os.remove(os.path.join(model_path, "CSAResult.txt"))
 
 
+    @staticmethod
+    def create_table_of_all(jsons_list, csa_numbers):
+        model_paths = [ x["DirectoryPath"] for x in jsons_list]
+        csa_list_list_of_all = []
+        for model_path in model_paths:
+            csa_list_list_of_all.append(json.load(open(os.path.join(model_path, "CSAResult.txt"), mode='r')))
+
+        if not os.path.exists('table'):
+            os.mkdir('table')
+
+        title_text = 'Evaluate Attack'
+        column_header = ["Evaluate First Node", "Evaluate Second Node", "Evaluate Attack Path"]
+        row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
+        data = []
+
+        for i in range(csa_numbers):
+            evaluate_first_node_correctness = 0
+            evaluate_second_node_correctness = 0
+            evaluate_attack_path = 0
+            for j in range(len(csa_list_list_of_all)):
+                evaluate_first_node_correctness += csa_list_list_of_all[j][0][i]["evaluate_first_node_correctness"]
+                evaluate_second_node_correctness += csa_list_list_of_all[j][0][i]["evaluate_second_node_correctness"]
+                evaluate_attack_path += csa_list_list_of_all[j][0][i]["evaluate_attack_path"]
+            evaluate_first_node_correctness = evaluate_first_node_correctness / len(csa_list_list_of_all)
+            evaluate_second_node_correctness = evaluate_second_node_correctness / len(csa_list_list_of_all)
+            evaluate_attack_path = evaluate_attack_path / len(csa_list_list_of_all)
+            data_list = [evaluate_first_node_correctness, evaluate_second_node_correctness, evaluate_attack_path]
+            data.append(data_list)
+
+
+        DataConvertor.create_table(title_text, column_header, row_header, data, os.path.join("table", "EvaluateAttack.png"))
+
+        title_text = 'Evaluate State'
+        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
+        data = []
+
+        for i in range(csa_numbers):
+            evaluate_now = 0
+            evaluate_future = 0
+            for j in range(len(csa_list_list_of_all)):
+                evaluate_now += csa_list_list_of_all[j][1][i]["evaluate_now"]
+                evaluate_future += csa_list_list_of_all[j][1][i]["evaluate_future"]
+            evaluate_now = evaluate_now / len(csa_list_list_of_all)
+            evaluate_future = evaluate_future / len(csa_list_list_of_all)
+            data_list = [evaluate_now, evaluate_future]
+            data.append(data_list)
+
+        DataConvertor.create_table(title_text, column_header, row_header, data,
+                                   os.path.join("table", "EvaluateState.png"))
+
+        title_text = 'Evaluate State Without Zero Difference'
+        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
+        data = []
+
+        for i in range(csa_numbers):
+            evaluate_now = 0
+            evaluate_future = 0
+            for j in range(len(csa_list_list_of_all)):
+                evaluate_now += csa_list_list_of_all[j][2][i]["evaluate_now"]
+                evaluate_future += csa_list_list_of_all[j][2][i]["evaluate_future"]
+            evaluate_now = evaluate_now / len(csa_list_list_of_all)
+            evaluate_future = evaluate_future / len(csa_list_list_of_all)
+            data_list = [evaluate_now, evaluate_future]
+            data.append(data_list)
+
+        DataConvertor.create_table(title_text, column_header, row_header, data,
+                                   os.path.join("table", "EvaluateStateWithoutZeroDifference.png"))
+
+        title_text = 'Evaluate State Percentage'
+        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
+        data = []
+
+        for i in range(csa_numbers):
+            evaluate_now = 0
+            evaluate_future = 0
+            for j in range(len(csa_list_list_of_all)):
+                evaluate_now += csa_list_list_of_all[j][3][i]["evaluate_now"]
+                evaluate_future += csa_list_list_of_all[j][3][i]["evaluate_future"]
+            evaluate_now = evaluate_now / len(csa_list_list_of_all)
+            evaluate_future = evaluate_future / len(csa_list_list_of_all)
+            data_list = [evaluate_now, evaluate_future]
+            data.append(data_list)
+
+        DataConvertor.create_table(title_text, column_header, row_header, data,
+                                   os.path.join("table", "EvaluateStatePercentage.png"))
+
+        title_text = 'Evaluate State Without Zero Difference Percentage'
+        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
+        data = []
+
+        for i in range(csa_numbers):
+            evaluate_now = 0
+            evaluate_future = 0
+            for j in range(len(csa_list_list_of_all)):
+                evaluate_now += csa_list_list_of_all[j][4][i]["evaluate_now"]
+                evaluate_future += csa_list_list_of_all[j][4][i]["evaluate_future"]
+            evaluate_now = evaluate_now / len(csa_list_list_of_all)
+            evaluate_future = evaluate_future / len(csa_list_list_of_all)
+            data_list = [evaluate_now, evaluate_future]
+            data.append(data_list)
+
+        DataConvertor.create_table(title_text, column_header, row_header, data,
+                                   os.path.join("table", "EvaluateStateWithoutZeroDifferencePercentage.png"))
 
     @staticmethod
     def create_graph_from_file(model_path: str):
