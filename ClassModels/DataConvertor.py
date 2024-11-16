@@ -136,7 +136,7 @@ class DataConvertor:
         records = mongo_helper.find_all_record_of_model()
         one_record = records[0]
 
-        result_key = ["AttackPath", "AttackPathNumber", "FirstNode", "SecondNode", "RealBusinessFactor",
+        result_key = ["CurrentAttackPath","AttackPath", "AttackPathNumber", "FirstNode", "SecondNode", "RealBusinessFactor",
                       "FutureRealBusinessFactor"]
 
         for i in range(len(one_record["State"])):
@@ -154,7 +154,7 @@ class DataConvertor:
         result_value = []
 
         for record in records:
-            result_field = [record["AttackPath"].replace(",", ""), record["AttackPathNumber"], record["FirstNode"],
+            result_field = [record["CurrentAttackPath"].replace(",", "").replace('"',"'"), record["AttackPath"].replace(",", ""), record["AttackPathNumber"], record["FirstNode"],
                             record["SecondNode"], record["RealBusinessFactor"], record["FutureRealBusinessFactor"]]
 
             for i in range(len(record["State"])):
@@ -568,43 +568,43 @@ class DataConvertor:
 
         DataConvertor.create_table(title_text, column_header, row_header, data, os.path.join("table", "EvaluateAttack.png"))
 
-        title_text = 'Evaluate State'
-        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
-        row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
-        data = []
-
-        for i in range(csa_numbers):
-            evaluate_now = 0
-            evaluate_future = 0
-            for j in range(len(csa_list_list_of_all)):
-                evaluate_now += csa_list_list_of_all[j][1][i]["evaluate_now"]
-                evaluate_future += csa_list_list_of_all[j][1][i]["evaluate_future"]
-            evaluate_now = evaluate_now / len(csa_list_list_of_all)
-            evaluate_future = evaluate_future / len(csa_list_list_of_all)
-            data_list = [evaluate_now, evaluate_future]
-            data.append(data_list)
-
-        DataConvertor.create_table(title_text, column_header, row_header, data,
-                                   os.path.join("table", "EvaluateState.png"))
-
-        title_text = 'Evaluate State Without Zero Difference'
-        column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
-        row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
-        data = []
-
-        for i in range(csa_numbers):
-            evaluate_now = 0
-            evaluate_future = 0
-            for j in range(len(csa_list_list_of_all)):
-                evaluate_now += csa_list_list_of_all[j][2][i]["evaluate_now"]
-                evaluate_future += csa_list_list_of_all[j][2][i]["evaluate_future"]
-            evaluate_now = evaluate_now / len(csa_list_list_of_all)
-            evaluate_future = evaluate_future / len(csa_list_list_of_all)
-            data_list = [evaluate_now, evaluate_future]
-            data.append(data_list)
-
-        DataConvertor.create_table(title_text, column_header, row_header, data,
-                                   os.path.join("table", "EvaluateStateWithoutZeroDifference.png"))
+        # title_text = 'Evaluate State'
+        # column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        # row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
+        # data = []
+        #
+        # for i in range(csa_numbers):
+        #     evaluate_now = 0
+        #     evaluate_future = 0
+        #     for j in range(len(csa_list_list_of_all)):
+        #         evaluate_now += csa_list_list_of_all[j][1][i]["evaluate_now"]
+        #         evaluate_future += csa_list_list_of_all[j][1][i]["evaluate_future"]
+        #     evaluate_now = evaluate_now / len(csa_list_list_of_all)
+        #     evaluate_future = evaluate_future / len(csa_list_list_of_all)
+        #     data_list = [evaluate_now, evaluate_future]
+        #     data.append(data_list)
+        #
+        # DataConvertor.create_table(title_text, column_header, row_header, data,
+        #                            os.path.join("table", "EvaluateState.png"))
+        #
+        # title_text = 'Evaluate State Without Zero Difference'
+        # column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
+        # row_header = [f"CSA{i + 1}" for i in range(csa_numbers)]
+        # data = []
+        #
+        # for i in range(csa_numbers):
+        #     evaluate_now = 0
+        #     evaluate_future = 0
+        #     for j in range(len(csa_list_list_of_all)):
+        #         evaluate_now += csa_list_list_of_all[j][2][i]["evaluate_now"]
+        #         evaluate_future += csa_list_list_of_all[j][2][i]["evaluate_future"]
+        #     evaluate_now = evaluate_now / len(csa_list_list_of_all)
+        #     evaluate_future = evaluate_future / len(csa_list_list_of_all)
+        #     data_list = [evaluate_now, evaluate_future]
+        #     data.append(data_list)
+        #
+        # DataConvertor.create_table(title_text, column_header, row_header, data,
+        #                            os.path.join("table", "EvaluateStateWithoutZeroDifference.png"))
 
         title_text = 'Evaluate State Percentage'
         column_header = ["Evaluate After Attack State", "Evaluate After Two Attack State"]
