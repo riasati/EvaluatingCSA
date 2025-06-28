@@ -6,18 +6,18 @@ from ClassModels.NetworkState import NetworkState
 
 
 class CSA:
-    def __init__(self, attacker: Attacker, network_state: NetworkState, csa_correctness: float, probabilities: list, is_random_csa: bool):
+    def __init__(self, attacker: Attacker, network_state: NetworkState, csa_correctness: float, is_random_csa: bool):
         self.attacker = attacker
         self.network_state = network_state
         self.network_state_simulator = copy.deepcopy(network_state)
         self.csa_correctness = csa_correctness
-        self.probabilities = probabilities
+        # self.probabilities = probabilities
         self.is_random_csa = is_random_csa
         self.current_attack_path = []
         self.prediction_of_first_node = ""
         self.prediction_of_second_node = ""
-        if len(self.probabilities) != 4:
-            raise Exception("you have to provide four probabilities for creating fake change in one host.")
+        # if len(self.probabilities) != 4:
+        #     raise Exception("you have to provide four probabilities for creating fake change in one host.")
 
     def initialize_state(self, network_state: NetworkState):
         self.network_state = network_state
@@ -145,19 +145,16 @@ class CSA:
             else:
                 success_node = self.attacker.get_success_attack_node(self.current_attack_path[-1])
                 failure_node = self.attacker.get_failure_attack_node(self.current_attack_path[-1])
-                if random.random() > self.csa_correctness:
-                    if random.random() > 0.5:
-                        if success_node == failure_node:
-                            self.prediction_of_first_node = success_node + ":S"
-                        else:
-                            self.prediction_of_first_node = success_node
+                if random.random() > 0.5:
+                    if success_node == failure_node:
+                        self.prediction_of_first_node = success_node + ":S"
                     else:
-                        if success_node == failure_node:
-                            self.prediction_of_first_node = failure_node + ":F"
-                        else:
-                            self.prediction_of_first_node = failure_node
+                        self.prediction_of_first_node = success_node
                 else:
-                    self.prediction_of_first_node = self.attacker.current_first_node
+                    if success_node == failure_node:
+                        self.prediction_of_first_node = failure_node + ":F"
+                    else:
+                        self.prediction_of_first_node = failure_node
 
         else:
             self.prediction_of_first_node = self.attacker.current_first_node
@@ -167,19 +164,16 @@ class CSA:
         if random.random() > self.csa_correctness:
             success_node = self.attacker.get_success_attack_node(self.current_attack_path[-1])
             failure_node = self.attacker.get_failure_attack_node(self.current_attack_path[-1])
-            if random.random() > self.csa_correctness:
-                if random.random() > 0.5:
-                    if success_node == failure_node:
-                        self.prediction_of_second_node = success_node + ":S"
-                    else:
-                        self.prediction_of_second_node = success_node
+            if random.random() > 0.5:
+                if success_node == failure_node:
+                    self.prediction_of_second_node = success_node + ":S"
                 else:
-                    if success_node == failure_node:
-                        self.prediction_of_second_node = failure_node + ":F"
-                    else:
-                        self.prediction_of_second_node = failure_node
+                    self.prediction_of_second_node = success_node
             else:
-                self.prediction_of_second_node = self.attacker.current_second_node
+                if success_node == failure_node:
+                    self.prediction_of_second_node = failure_node + ":F"
+                else:
+                    self.prediction_of_second_node = failure_node
         else:
             self.prediction_of_second_node = self.attacker.current_second_node
 

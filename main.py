@@ -45,10 +45,10 @@ def initialize_elements(one_json):
 
 
 def initialize_csa_s(attacker, network):
-    csa1 = CSA(attacker, network, 0.3, [0.5, 0.5, 0.5, 0.5], False)
-    csa2 = CSA(attacker, network, 0.5, [0.5, 0.5, 0.5, 0.5], False)
-    csa3 = CSA(attacker, network, 0.7, [0.5, 0.5, 0.5, 0.5], False)
-    csa4 = CSA(attacker, network, 0.5, [0.5, 0.5, 0.5, 0.5], True)
+    csa1 = CSA(attacker, network, 0.3, False)
+    csa2 = CSA(attacker, network, 0.5, False)
+    csa3 = CSA(attacker, network, 0.7, False)
+    csa4 = CSA(attacker, network, 0.5, True)
     return [csa1, csa2, csa3, csa4]
 
 

@@ -144,17 +144,28 @@ class NetworkState:
         business_factor = 0.0
         for host in self.hosts:
             if host["Termination"] != 0:
-                difference = (((self.terminated_factor * host["Termination"]) + self.data_leaked_with_complete_compromise_factor) * host["Importance"])
+                factor = ((self.terminated_factor * host["Termination"]) + self.data_leaked_with_complete_compromise_factor)
+                if factor > 1.0:
+                    factor = 1.0
+                difference = (factor * host["Importance"])
                 change_current_importance_of_related_host(host, difference)
                 host["CurrentImportance"] = host["Importance"] - difference
                 continue
             if host["DataLeakage"] != 0 and host["IsCompromisedCompletely"]:
-                difference = (((self.data_leaked_with_complete_compromise_factor * host["DataLeakage"]) + self.data_leaked_without_complete_compromise_factor) * host["Importance"])
+                factor = ((self.data_leaked_with_complete_compromise_factor * host[
+                    "DataLeakage"]) + self.data_leaked_without_complete_compromise_factor)
+                if factor > 1.0:
+                    factor = 1.0
+                difference = (factor * host["Importance"])
                 change_current_importance_of_related_host(host, difference)
                 host["CurrentImportance"] = host["Importance"] - difference
                 continue
             if host["DataLeakage"] != 0 and host["IsCompromised"]:
-                difference = (((self.data_leaked_without_complete_compromise_factor * host["DataLeakage"]) + self.compromised_completely_factor) * host["Importance"])
+                factor = ((self.data_leaked_without_complete_compromise_factor * host[
+                    "DataLeakage"]) + self.compromised_completely_factor)
+                if factor > 1.0:
+                    factor = 1.0
+                difference = (factor * host["Importance"])
                 change_current_importance_of_related_host(host, difference)
                 host["CurrentImportance"] = host["Importance"] - difference
                 continue
